@@ -48,18 +48,10 @@ def gen_inserts(params, inserts_number, spacing):
     elif inserts_number % 2 == 0:
         # 嵌件为偶数
         mid_line = vertical_mid_line - stand_width / 2, vertical_mid_line + stand_width / 2
-
-        for line in mid_line:
-            for i in range(1, int(inserts_number / 2) + 1):
-                if i == 1:
-                    content += gen_circle(line + spacing / 2, stand_setback, horizontal_mid_line)
-                else:
-                    content += gen_circle(line + spacing / 2 + spacing * (i - 1), stand_setback, horizontal_mid_line)
-
-            for i in range(1, int(inserts_number / 2) + 1):
-                if i == 1:
-                    content += gen_circle(line - spacing / 2, stand_setback, horizontal_mid_line)
-                else:
-                    content += gen_circle(line - spacing * (i - 1) - spacing / 2, stand_setback, horizontal_mid_line)
+        left_start = mid_line[0] - spacing / 2 - spacing * int(inserts_number / 2)
+        right_start = mid_line[1] - spacing / 2 - spacing * int(inserts_number / 2)
+        for i in range(inserts_number):
+            content += gen_circle(left_start + spacing * i, stand_setback, horizontal_mid_line)
+            content += gen_circle(right_start + spacing * i, stand_setback, horizontal_mid_line)
 
     return content

@@ -5,18 +5,25 @@
 # Desc: 嵌件组生成
 
 
-def gen_circle(left_start_cx, setback, horizontal_mid_line):
+def gen_circle(cx, setback, horizontal_mid_line):
+    """
+
+    :param cx: 圆心 x坐标
+    :param setback: 嵌件组水平偏移量(+:整体向右, -:整体向左)
+    :param horizontal_mid_line:
+    :return:
+    """
     content = ""
-    left_start_cx += setback
+    cx += setback
     for i in [horizontal_mid_line - 20, horizontal_mid_line + 20]:
         content += ("""<circle cx="{}" cy="{}" r="10" stroke="black"
-                                stroke-width="1" fill="blue" fill-opacity="0.25" />""".format(left_start_cx, i))
+                                stroke-width="1" fill="blue" fill-opacity="0.25" />""".format(cx, i))
         content += ("""<circle cx="{}" cy="{}" r="18" stroke="black"
-                        stroke-width="1" fill="blue" fill-opacity="0.25"  />""".format(left_start_cx, i))
+                        stroke-width="1" fill="blue" fill-opacity="0.25"  />""".format(cx, i))
 
         # 圆心
         content += (
-            """<circle cx="{}" cy="{}" r="1" fill-opacity="1" stroke-width="1" />""".format(left_start_cx, i))
+            """<circle cx="{}" cy="{}" r="1" fill-opacity="1" stroke-width="1" />""".format(cx, i))
     return content
 
 
@@ -30,6 +37,7 @@ def gen_inserts(params, inserts_number, spacing):
     """
     content = ""
     stand_width = params.get("stand_width")
+    half_stand_width = stand_width / 2
     stand_setback = params.get("stand_setback")
     # 竖直中线
     vertical_mid_line = params.get("half_overall_length")
@@ -39,17 +47,16 @@ def gen_inserts(params, inserts_number, spacing):
 
     if inserts_number % 2 == 1:
         # 嵌件为奇数
-        mid_line = vertical_mid_line - stand_width / 2, vertical_mid_line + stand_width / 2
-        for line in mid_line:
-            for i in range(int((inserts_number - 1) / 2) + 1):
-                content += gen_circle(line + spacing * i, stand_setback, horizontal_mid_line)
-                content += gen_circle(line - spacing * i, stand_setback, horizontal_mid_line)
+        left_start = vertical_mid_line - half_stand_width - spacing * int(inserts_number / 2)
+        right_start = vertical_mid_line + half_stand_width - spacing * int(inserts_number / 2)
+        for i in range(inserts_number):
+            content += gen_circle(left_start + spacing * i, stand_setback, horizontal_mid_line)
+            content += gen_circle(right_start + spacing * i, stand_setback, horizontal_mid_line)
 
     elif inserts_number % 2 == 0:
         # 嵌件为偶数
-        mid_line = vertical_mid_line - stand_width / 2, vertical_mid_line + stand_width / 2
-        left_start = mid_line[0] - spacing / 2 - spacing * int(inserts_number / 2)
-        right_start = mid_line[1] - spacing / 2 - spacing * int(inserts_number / 2)
+        left_start = vertical_mid_line - half_stand_width - spacing / 2 - spacing * int(inserts_number / 2)
+        right_start = vertical_mid_line + half_stand_width - spacing / 2 - spacing * int(inserts_number / 2)
         for i in range(inserts_number):
             content += gen_circle(left_start + spacing * i, stand_setback, horizontal_mid_line)
             content += gen_circle(right_start + spacing * i, stand_setback, horizontal_mid_line)

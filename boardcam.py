@@ -21,7 +21,7 @@ if __name__ == "__main__":
     sidecut_radius = 10000
     stand_setback = 10
     stand_width = 550
-    inserts_number = 4
+    inserts_number = 5
     half_overall_length = overall_length / 2
 
     left_points = ((0, half_nose_width), (50, 140), (90, 180), (nose_length, 0))

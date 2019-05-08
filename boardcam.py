@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# Author: Zheng <me@zxyle.cn>
+# Author: Zheng <me@boardcam.org>
 # Date: 2019-05-07
 # Desc: bezier curve -> SVG
 
@@ -9,11 +9,8 @@ from math import pow, fsum
 
 import numpy as np
 
-
-def write_code(code):
-    with open("test2.svg", mode="a") as file:
-        file.write(code)
-
+from inserts import gen_inserts
+from svg_export import write_code
 
 # 计算步骤
 STEP = 0.01
@@ -86,9 +83,19 @@ if __name__ == "__main__":
     sidecut_radius = 10000
     setback = None
     stand_width = None
-    inserts_number =6
+    inserts_number = 4
 
     left_points = ((0, 150), (50, 140), (90, 180), (180, 0))
+    params = {
+        "overall_length": overall_length,
+        "half_overall_length": overall_length / 2,
+        "nose_width": nose_width,
+        "half_nose_width": nose_width / 2,
+        "half_tail_width": tail_width / 2,
+        "tail_width": tail_width,
+        "nose_length": nose_length,
+        "tail_length": tail_length,
+    }
 
     # 1390,10 1480,10
     # M1340,0 C1390,10 1480,10 1520,150
@@ -149,28 +156,8 @@ stroke-width="1" fill="none"/>""".format(overall_length / 2, -cal_waist_width(ru
                                              cal_waist_width(running_length, sidecut_radius) + nose_width,
                                              sidecut_radius))
 
-    # 左边螺孔
-    top_cx = 515
-    bottom_cx = 885
-    for i in range(inserts_number):
-        for j in [110, 190]:
-            write_code("""<circle cx="{}" cy="{}" r="10" stroke="black"
-                        stroke-width="0" fill="none"/>""".format(top_cx, j))
-            write_code("""<circle cx="{}" cy="{}" r="10" stroke="black"
-                    stroke-width="1" fill="blue" fill-opacity="0.25" />""".format(top_cx, j))
-            write_code("""<circle cx="{}" cy="{}" r="18" stroke="black"
-                        stroke-width="1" fill="blue" fill-opacity="0.25"  />""".format(top_cx, j))
-            write_code("""<circle cx="{}" cy="{}" r="1" fill-opacity="1" stroke-width="1" />""".format(top_cx, j))
-
-            write_code("""<circle cx="{}" cy="{}" r="10" stroke="black"
-                                        stroke-width="0" fill="none"/>""".format(bottom_cx, j))
-            write_code("""<circle cx="{}" cy="{}" r="10" stroke="black"
-                                    stroke-width="1" fill="blue" fill-opacity="0.25" />""".format(bottom_cx, j))
-            write_code("""<circle cx="{}" cy="{}" r="18" stroke="black"
-                                        stroke-width="1" fill="blue" fill-opacity="0.25"  />""".format(bottom_cx, j))
-            write_code("""<circle cx="{}" cy="{}" r="1" fill-opacity="1" stroke-width="1" />""".format(bottom_cx, j))
-
-        top_cx += 40
-        bottom_cx += 40
+    # 嵌件生成
+    inserts_svg = gen_inserts(params, 4, 50, 80)
+    write_code(inserts_svg)
 
     write_code("""</g></svg>""")

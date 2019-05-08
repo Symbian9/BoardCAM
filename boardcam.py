@@ -4,30 +4,16 @@
 # Date: 2019-05-07
 # Desc: bezier curve -> SVG
 
-import math
 from math import pow, fsum
 
 import numpy as np
 
+from arc import gen_arc
 from inserts import gen_inserts
 from svg_export import write_code
 
 # 计算步骤
 STEP = 0.01
-
-
-def cal_waist_width(running_length, sidecut_radius):
-    """
-    根据侧切半径和行程长度计算板腰宽度和有效边刃
-    :param running_length: 行程长度
-    :param sidecut_radius: 侧切半径
-    :return:
-    """
-    # TODO 增加板头板尾的宽度控制
-    # print(waist_remain)
-    # waist_width = nose_width - waist_remain * 2
-    # print(round(waist_width, 3))
-    return math.sqrt(math.pow(sidecut_radius, 2) - math.pow(running_length / 2, 2))
 
 
 def common_bezier(points):
@@ -89,12 +75,14 @@ if __name__ == "__main__":
     params = {
         "overall_length": overall_length,
         "half_overall_length": overall_length / 2,
+        "running_length": running_length,
         "nose_width": nose_width,
         "half_nose_width": nose_width / 2,
         "half_tail_width": tail_width / 2,
         "tail_width": tail_width,
         "nose_length": nose_length,
         "tail_length": tail_length,
+        "sidecut_radius": sidecut_radius,
     }
 
     # 1390,10 1480,10
@@ -140,21 +128,9 @@ style="stroke:#000000;stroke-width:1"/>""")
                                                                                             overall_length / 2,
                                                                                             nose_width))
 
-    # write_code(
-    #     """<rect x="0" y="0" width="{}" height="{}" style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9" />""".format(
-    #         overall_length, nose_width
-    #     ))
-
-    # 上圆弧
-    write_code("""<circle cx="{}" cy="{}" r="{}" stroke="black"
-stroke-width="1" fill="none"/>""".format(overall_length / 2, -cal_waist_width(running_length, sidecut_radius),
-                                         sidecut_radius))
-
-    # 下圆弧
-    write_code("""<circle cx="{}" cy="{}" r="{}" stroke="black"
-    stroke-width="1" fill="none"/>""".format(overall_length / 2,
-                                             cal_waist_width(running_length, sidecut_radius) + nose_width,
-                                             sidecut_radius))
+    # 有效边刃生成
+    arc_svg = gen_arc(params)
+    write_code(arc_svg)
 
     # 嵌件生成
     inserts_svg = gen_inserts(params, 4, 50, 80)

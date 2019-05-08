@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# Author: Zheng <zhengxiang@boardcam.org>
+# Author: Zheng <zhengxiang@BoardCAM.org>
 # Desc board param calculator
 
 import math

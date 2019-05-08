@@ -5,7 +5,7 @@
 # Desc: 
 import requests
 
-url = "https://asia-northeast1-boardcam.cloudfunctions.net/say_hello"
+url = "https://asia-northeast1-BoardCAM.cloudfunctions.net/say_hello"
 
 data = {
     "message": "郑翔"

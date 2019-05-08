@@ -7,7 +7,7 @@
 from arc import gen_arc
 from inserts import gen_inserts
 from math_tools import gen_bezier
-from svg_export import write_code
+from svg_export import write_code, init_svg, start_tag, close_tag
 
 if __name__ == "__main__":
     # P0和P3是endpoints, P1和P2是control points
@@ -40,11 +40,7 @@ if __name__ == "__main__":
     # 1390,10 1480,10
     # M1340,0 C1390,10 1480,10 1520,150
     right_points = ((1520, 150), (5190, 30), (4480, 30), (1340, 0))
-    svg_title = "Cubic Bézier curve"
-    write_code(
-        """<svg width="" height="" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">""")
-    write_code("""<g>""")
-    write_code("""<title>{}</title>""".format(svg_title))
+    start_tag()
 
     # 板头&板尾生成
     left_bezier_svg = gen_bezier(left_points)
@@ -52,21 +48,8 @@ if __name__ == "__main__":
     right_bezier_svg = gen_bezier(right_points)
     write_code(right_bezier_svg)
 
-    # 辅助线 框架
-    write_code("""<line x1="180" y1="0" x2="1380" y2="0"
-style="stroke:#000000;stroke-width:1"/>""")
-    write_code("""<line x1="{}" y1="{}" x2="{}" y2="{}"
-        style="stroke:#000000;stroke-width:1"/>""".format(0, nose_width / 2, overall_length, nose_width / 2))
-    write_code("""<line x1="{}" y1="{}" x2="{}" y2="{}"
-            style="stroke:#000000;stroke-width:1"/>""".format(nose_length, 0, nose_length, nose_width))
-    write_code("""<line x1="{}" y1="{}" x2="{}" y2="{}"
-               style="stroke:#000000;stroke-width:1"/>""".format(nose_length + running_length, 0,
-                                                                 nose_length + running_length, tail_width))
-
-    write_code("""<line x1="{}" y1="{}" x2="{}" y2="{}"
-                   style="stroke:#000000;stroke-width:1" stroke-dasharray="5,5"/>""".format(overall_length / 2, 0,
-                                                                                            overall_length / 2,
-                                                                                            nose_width))
+    #
+    init_svg(params)
 
     # 有效边刃生成
     arc_svg = gen_arc(params)
@@ -76,4 +59,4 @@ style="stroke:#000000;stroke-width:1"/>""")
     inserts_svg = gen_inserts(params, 4, 50, 80)
     write_code(inserts_svg)
 
-    write_code("""</g></svg>""")
+    close_tag()

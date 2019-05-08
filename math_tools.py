@@ -43,12 +43,10 @@ def gen_bezier(points):
             x_value = point[0] * pow(1 - t, points_no - index) * pow(t, index)
             x_list.append(x_value)
             y_value = point[1] * pow(1 - t, points_no - index) * pow(t, index)
-            # y_sym.append(300 - y_value)
             y_list.append(y_value)
 
         x = fsum(x_list)
         y = fsum(y_list)
-        # y_ = fsum(y_sym)
         print("Step{}: {} {}".format(i, x, y))
         if i == 1:
             # moveto
@@ -58,10 +56,8 @@ def gen_bezier(points):
             code += "L{} {} ".format(x, y)
 
         if i == 1:
-            # moveto
             code_sym += "M{} {} ".format(x, 300 - y)
         else:
-            # lineto
             code_sym += "L{} {} ".format(x, 300 - y)
 
     content += ("""<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(code))

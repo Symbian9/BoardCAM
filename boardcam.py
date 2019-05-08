@@ -4,58 +4,10 @@
 # Date: 2019-05-07
 # Desc: bezier curve -> SVG
 
-from math import pow, fsum
-
-import numpy as np
-
 from arc import gen_arc
 from inserts import gen_inserts
+from math_tools import gen_bezier
 from svg_export import write_code
-
-# 计算步骤
-STEP = 0.01
-
-
-def common_bezier(points):
-    """
-    参考通用贝塞尔通用计算公式
-    :param points:
-    :return:
-    """
-    code = ""
-    code_sym = ""
-
-    # 所有点的个数P0 P1... Pn
-    points_no = len(points) - 1
-    for i, t in enumerate(np.arange(0, 1.00 + STEP, STEP), start=1):
-        x_list, y_list, y_sym = [], [], []
-        for index, point in enumerate(points):
-            x_value = point[0] * pow(1 - t, points_no - index) * pow(t, index)
-            x_list.append(x_value)
-            y_value = point[1] * pow(1 - t, points_no - index) * pow(t, index)
-            # y_sym.append(300 - y_value)
-            y_list.append(y_value)
-
-        x = fsum(x_list)
-        y = fsum(y_list)
-        # y_ = fsum(y_sym)
-        print("Step{}: {} {}".format(i, x, y))
-        if i == 1:
-            # moveto
-            code += "M{} {} ".format(x, y)
-        else:
-            # lineto
-            code += "L{} {} ".format(x, y)
-
-        if i == 1:
-            # moveto
-            code_sym += "M{} {} ".format(x, 300 - y)
-        else:
-            # lineto
-            code_sym += "L{} {} ".format(x, 300 - y)
-
-    return code, code_sym
-
 
 if __name__ == "__main__":
     # P0和P3是endpoints, P1和P2是control points
@@ -93,26 +45,14 @@ if __name__ == "__main__":
         """<svg width="" height="" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">""")
     write_code("""<g>""")
     write_code("""<title>{}</title>""".format(svg_title))
-    # 左上角贝塞尔
-    write_code(
-        """<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(
-            common_bezier(left_points)[0]))
 
-    # 左下贝塞尔
-    write_code(
-        """<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(
-            common_bezier(left_points)[1]))
+    # 板头&板尾生成
+    left_bezier_svg = gen_bezier(left_points)
+    write_code(left_bezier_svg)
+    right_bezier_svg = gen_bezier(right_points)
+    write_code(right_bezier_svg)
 
-    # 右上贝塞尔
-    write_code(
-        """<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(
-            common_bezier(right_points)[0]))
-
-    # 右下贝塞尔
-    write_code(
-        """<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(
-            common_bezier(right_points)[1]))
-
+    # 辅助线 框架
     write_code("""<line x1="180" y1="0" x2="1380" y2="0"
 style="stroke:#000000;stroke-width:1"/>""")
     write_code("""<line x1="{}" y1="{}" x2="{}" y2="{}"

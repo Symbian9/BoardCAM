@@ -21,7 +21,7 @@ if __name__ == "__main__":
     sidecut_radius = 10000
     stand_setback = 10
     stand_width = 550
-    inserts_number = 6
+    inserts_number = 4
     half_overall_length = overall_length / 2
 
     left_points = ((0, half_nose_width), (50, 140), (90, 180), (nose_length, 0))
@@ -57,7 +57,7 @@ if __name__ == "__main__":
     write_code(arc_svg)
 
     # 嵌件生成
-    inserts_svg = gen_inserts2(params, inserts_number, 40, 60)
+    inserts_svg = gen_inserts2(params, inserts_number, 40)
     write_code(inserts_svg)
 
     # 结束SVG文件

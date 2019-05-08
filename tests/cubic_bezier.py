@@ -7,7 +7,7 @@
 
 from reportlab.graphics import renderPDF
 from svglib.svglib import svg2rlg
-from svgpathtools import Path, CubicBezier, wsvg, Arc, smoothed_path, kinks
+from svgpathtools import Path, CubicBezier, wsvg, Arc, smoothed_path, kinks, Line
 
 from tests.board_cal import cal_waist_width
 
@@ -17,15 +17,15 @@ nose_length = 180
 tail_length = 180
 half_nose_width = 149
 half_tail_width = 149
-sidecut_radius = 10000
+sidecut_radius = 7000
 
 # 板头&板尾贝塞尔控制点
 tail_curve = nose_curve = (0, 60), (90-50, 75+80)
 # tail_curve = (0, 70), (90, 160)
 
 # 计算出来的参数
-waist_remain = cal_waist_width(running_length, sidecut_radius)
-half_running_length = running_length / 2
+waist_remain = cal_waist_width(running_length-20, sidecut_radius)
+half_running_length = (running_length-20) / 2
 
 # 滑雪板总长度 又叫Board Length
 overall_length = nose_length + running_length + tail_length
@@ -36,7 +36,9 @@ origin = 0
 seg1 = CubicBezier(origin, complex(nose_curve[0][0], -nose_curve[0][1]), complex(nose_curve[1][0], -nose_curve[1][1]),
                    complex(nose_length, -half_nose_width))
 
-seg2 = Arc(start=complex(nose_length, -half_nose_width), radius=complex(half_running_length, waist_remain),
+seg1_5 = Line(start=complex(nose_length, -half_nose_width), end=complex(nose_length+10, -half_nose_width))
+
+seg2 = Arc(start=complex(nose_length+10, -half_nose_width), radius=complex(half_running_length, waist_remain),
            end=complex((nose_length + running_length), -half_tail_width), rotation=0, large_arc=1, sweep=0)
 
 seg3 = CubicBezier(complex((nose_length + running_length), -half_tail_width),
@@ -57,17 +59,17 @@ seg5 = Arc(start=complex((nose_length + running_length), half_tail_width),
 seg6 = CubicBezier(complex(nose_length, half_nose_width), complex(nose_curve[1][0], nose_curve[1][1]),
                    complex(nose_curve[0][0], nose_curve[0][1]), origin)
 
-path = Path(seg1, seg2, seg3, seg4, seg5, seg6)
+path = Path(seg1, seg1_5, seg2, seg3)
 print("steel_edge_length: {}mm.".format(path.length()))
-spath = smoothed_path(path)
-print("spath contains non-differentiable points? ", len(kinks(spath)) > 0)
-print(spath)
+# spath = smoothed_path(path)
+# print("spath contains non-differentiable points? ", len(kinks(path)) > 0)
+print(path)
 
 # 面积暂时计算不出来 Arc' object has no attribute 'poly'
 # print("board_area: {}".format(path.area()))
 
-wsvg(path, filename='output2.svg')
+wsvg(path, filename='output99.svg')
 
 # 生成PDF
-drawing = svg2rlg("output2.svg")
-renderPDF.drawToFile(drawing, "file2.pdf")
+drawing = svg2rlg("output99.svg")
+renderPDF.drawToFile(drawing, "file99.pdf")

@@ -6,7 +6,7 @@
 
 from arc import gen_arc
 from inserts import gen_inserts
-from math_tools import gen_bezier
+from bezier import gen_bezier
 from svg_export import write_code, init_svg, start_tag, close_tag
 
 if __name__ == "__main__":

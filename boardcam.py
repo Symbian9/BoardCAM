@@ -5,7 +5,7 @@
 # Desc: bezier curve -> SVG
 
 from arc import gen_arc
-from inserts import gen_inserts, gen_inserts2
+from inserts import gen_inserts
 from bezier import gen_bezier
 from svg_export import write_code, init_svg, start_tag, close_tag
 
@@ -57,7 +57,7 @@ if __name__ == "__main__":
     write_code(arc_svg)
 
     # 嵌件生成
-    inserts_svg = gen_inserts2(params, inserts_number, 40)
+    inserts_svg = gen_inserts(params, inserts_number, 40)
     write_code(inserts_svg)
 
     # 结束SVG文件

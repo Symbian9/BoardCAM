@@ -13,5 +13,5 @@
 * sidecut_radius: 侧切半径
 * sidecut_depth: 侧切深度
 
-* setback: 
-* stand_width: 
+* stand_setback: 站位偏移
+* stand_width: 建议间距

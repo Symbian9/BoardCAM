@@ -10,6 +10,7 @@ from bezier import gen_bezier
 from svg_export import write_code, init_svg, start_tag, close_tag
 
 if __name__ == "__main__":
+    # 参数含义参考docs/Configuration.md
     nose_width = 300
     half_nose_width = nose_width / 2
     nose_length = 180
@@ -21,7 +22,7 @@ if __name__ == "__main__":
     sidecut_radius = 10000
     stand_setback = 10
     stand_width = 550
-    inserts_number = 5
+    inserts_number = 4
     half_overall_length = overall_length / 2
 
     left_points = ((0, half_nose_width), (50, 140), (90, 180), (nose_length, 0))

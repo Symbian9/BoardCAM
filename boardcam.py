@@ -4,7 +4,10 @@
 # Date: 2019-05-07
 # Desc: bezier curve -> SVG
 
-from arc import gen_arc
+from math import sqrt
+
+import numpy as np
+
 from inserts import gen_inserts
 from math_tools import gen_bezier
 from svg_export import write_code, init_svg, start_tag, close_tag
@@ -22,6 +25,7 @@ if __name__ == "__main__":
     setback = None
     stand_width = None
     inserts_number = 4
+    half_overall_length = overall_length / 2
 
     left_points = ((0, 150), (50, 140), (90, 180), (180, 0))
     params = {
@@ -39,7 +43,7 @@ if __name__ == "__main__":
 
     # 1390,10 1480,10
     # M1340,0 C1390,10 1480,10 1520,150
-    right_points = ((1520, 150), (5190, 30), (4480, 30), (1340, 0))
+    right_points = ((1520, 150), (5090, 30), (4080, 60), (1340, 0))
     start_tag()
 
     # 板头&板尾生成
@@ -52,11 +56,35 @@ if __name__ == "__main__":
     init_svg(params)
 
     # 有效边刃生成
-    arc_svg = gen_arc(params)
-    write_code(arc_svg)
+    # arc_svg = gen_arc(params)
+    # write_code(arc_svg)
+    step = 1
+    content = ""
+    code = ""
+    code2 = ""
+    offset = 0
+    for i, x in enumerate(np.arange(180, 1340.00 + step, step), start=1):
+        y = sqrt(pow(sidecut_radius, 2) - pow(half_overall_length - x, 2))
+        y = 10000 - y
+        if i == 1:
+            offset = 300 - y
+            y = offset + y
+            print(y)
+            code += "M{} {} ".format(x, y)
+            code2 += "M{} {} ".format(x, 300 - y)
+        else:
+            y += offset
+            code += "L{} {} ".format(x, y)
+            code2 += "L{} {} ".format(x, 300 - y)
+
+    content += ("""<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(code))
+    write_code(content)
+
+    content += ("""<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(code2))
+    write_code(content)
 
     # 嵌件生成
-    inserts_svg = gen_inserts(params, 4, 50, 80)
+    inserts_svg = gen_inserts(params, 4, 50, 60)
     write_code(inserts_svg)
 
     close_tag()

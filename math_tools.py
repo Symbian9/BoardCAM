@@ -63,3 +63,53 @@ def gen_bezier(points):
     content += ("""<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(code))
     content += ("""<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(code_sym))
     return content
+
+
+# def ci(radius, _x, a, b):
+#     """
+#     圆的标准方程: (x - a)²+(y - b)²=r² => (y - b)² = r² - (x - a)²
+#     :return:
+#     """
+#     # return sqrt(pow(radius, 2) - pow(_x - a, 2)) + b
+#     return sqrt(pow(radius, 2) - pow(half_overall_length - x, 2))
+
+
+if __name__ == "__main__":
+    nose_width = 300
+    nose_length = 180
+    overall_length = 1520
+    tail_width = 300
+    tail_length = 180
+    running_length = overall_length - tail_length - nose_length
+    sidecut_radius = 10000
+    setback = None
+    stand_width = None
+    inserts_number = 4
+    half_overall_length = overall_length / 2
+
+    left_points = ((0, 150), (50, 140), (90, 180), (180, 0))
+    params = {
+        "overall_length": overall_length,
+        "half_overall_length": overall_length / 2,
+        "running_length": running_length,
+        "nose_width": nose_width,
+        "half_nose_width": nose_width / 2,
+        "half_tail_width": tail_width / 2,
+        "tail_width": tail_width,
+        "nose_length": nose_length,
+        "tail_length": tail_length,
+        "sidecut_radius": sidecut_radius,
+    }
+    step = 0.1
+    content = ""
+    code = ""
+    for i, x in enumerate(np.arange(180, 1340.00 + step, step), start=1):
+        # y = ci(sidecut_radius, x, overall_length / 2, cal_waist_width(running_length, sidecut_radius)+nose_width)
+        y = sqrt(pow(sidecut_radius, 2) - pow(half_overall_length - x, 2))
+        print(x)
+        if i == 1:
+            code += "M{} {} ".format(x, y)
+        else:
+            code += "L{} {} ".format(x, y)
+
+    content += ("""<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(code))

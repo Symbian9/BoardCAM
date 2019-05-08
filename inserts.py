@@ -47,4 +47,3 @@ def gen_inserts(params, inserts_number, spacing, offset):
             content += ("""<circle cx="{}" cy="{}" r="1" fill-opacity="1" stroke-width="1" />""".format(right_cx, j))
 
     return content
-

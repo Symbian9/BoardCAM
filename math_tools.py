@@ -4,8 +4,9 @@
 # Date: 2019-05-07
 # Desc: 常用数学函数封装
 
-import numpy as np
 from math import sqrt, pow, fsum
+
+import numpy as np
 
 
 def cal_waist_width(running_length, sidecut_radius):

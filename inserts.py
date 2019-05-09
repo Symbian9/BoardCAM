@@ -8,7 +8,7 @@
 def gen_circle(cx, setback, horizontal_mid_line):
     """
 
-    :param cx: 圆心 x坐标
+    :param cx: 圆心 X坐标
     :param setback: 嵌件组水平偏移量(+:整体向右, -:整体向左)
     :param horizontal_mid_line:
     :return:
@@ -46,7 +46,7 @@ def gen_inserts(params, inserts_number, spacing):
     horizontal_mid_line = params.get("half_nose_width")
 
     if inserts_number % 2 == 1:
-        # 嵌件为奇数
+        # 嵌件个数为奇数
         left_start = vertical_mid_line - half_stand_width - spacing * int(inserts_number / 2)
         right_start = vertical_mid_line + half_stand_width - spacing * int(inserts_number / 2)
         for i in range(inserts_number):
@@ -54,9 +54,9 @@ def gen_inserts(params, inserts_number, spacing):
             content += gen_circle(right_start + spacing * i, stand_setback, horizontal_mid_line)
 
     elif inserts_number % 2 == 0:
-        # 嵌件为偶数
-        left_start = vertical_mid_line - half_stand_width - spacing / 2 - spacing * int(inserts_number / 2)
-        right_start = vertical_mid_line + half_stand_width - spacing / 2 - spacing * int(inserts_number / 2)
+        # 嵌件个数为偶数
+        left_start = vertical_mid_line - half_stand_width - spacing / 2 - spacing * (int(inserts_number / 2) - 1)
+        right_start = vertical_mid_line + half_stand_width - spacing / 2 - spacing * (int(inserts_number / 2) - 1)
         for i in range(inserts_number):
             content += gen_circle(left_start + spacing * i, stand_setback, horizontal_mid_line)
             content += gen_circle(right_start + spacing * i, stand_setback, horizontal_mid_line)

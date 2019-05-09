@@ -4,8 +4,9 @@
 # Date: 2019-05-07
 # Desc: 贝塞尔曲线点
 
-import numpy as np
 from math import fsum
+
+import numpy as np
 
 
 def gen_bezier(points):

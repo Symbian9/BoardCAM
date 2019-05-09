@@ -24,6 +24,7 @@ if __name__ == "__main__":
     stand_width = 550
     inserts_number = 4
     half_overall_length = overall_length / 2
+    spacing = 40
 
     params = {
         "overall_length": overall_length,
@@ -38,8 +39,9 @@ if __name__ == "__main__":
         "sidecut_radius": sidecut_radius,
         "stand_width": stand_width,
         "stand_setback": stand_setback,
+        "spacing": spacing,
         "left_points": ((0, half_nose_width), (50, 140), (90, 180), (nose_length, 0)),
-        "right_points": ((overall_length, half_tail_width), (4590, 10), (4080, 70), (overall_length - tail_length, 0)),
+        "right_points": ((overall_length, half_tail_width), (4570, 100), (4180, 50), (overall_length - tail_length, 0)),
     }
 
     # 板头&板尾曲线路径生成
@@ -53,6 +55,6 @@ if __name__ == "__main__":
     arc_svg = gen_arc(params)
 
     # 嵌件路径生成
-    inserts_svg = gen_inserts(params, inserts_number, 40)
+    inserts_svg = gen_inserts(params, inserts_number, spacing)
 
     pack_svg(left_bezier_svg + right_bezier_svg + init_svg + arc_svg + inserts_svg)

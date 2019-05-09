@@ -1,6 +1,6 @@
 # Configuration
 
-滑雪板参数
+滑雪板参数(单位: mm)
 * overall_length: 总长度
 * running_length: 行程长度
 * nose width: 板头宽度
@@ -15,3 +15,4 @@
 
 * stand_setback: 站位偏移
 * stand_width: 建议间距
+* spacing: 相邻嵌件之间的间距

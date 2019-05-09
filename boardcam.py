@@ -7,7 +7,7 @@
 from arc import gen_arc
 from bezier import gen_bezier
 from inserts import gen_inserts
-from svg_export import write_code, init_svg, start_tag, close_tag
+from svg_export import init_svg, pack_svg
 
 if __name__ == "__main__":
     # 参数含义参考docs/Configuration.md
@@ -42,24 +42,17 @@ if __name__ == "__main__":
         "stand_setback": stand_setback,
     }
 
-    start_tag()
-
     # 板头&板尾曲线生成
     left_bezier_svg = gen_bezier(left_points)
-    write_code(left_bezier_svg)
     right_bezier_svg = gen_bezier(right_points)
-    write_code(right_bezier_svg)
 
     # 初始化SVG文件
-    init_svg(params)
+    init_svg = init_svg(params)
 
     # 有效边刃生成
     arc_svg = gen_arc(params)
-    write_code(arc_svg)
 
     # 嵌件生成
     inserts_svg = gen_inserts(params, inserts_number, 40)
-    write_code(inserts_svg)
 
-    # 结束SVG文件
-    close_tag()
+    pack_svg(left_bezier_svg + right_bezier_svg + init_svg + arc_svg + inserts_svg)

@@ -4,6 +4,8 @@
 # Date: 2019-05-07
 # Desc: bezier curve -> SVG
 
+import os
+
 from arc import gen_arc
 from bezier import gen_bezier
 from inserts import gen_inserts
@@ -27,6 +29,7 @@ if __name__ == "__main__":
     half_overall_length = overall_length / 2
     spacing = 40
 
+    os.remove("board_profile.svg")
     params = {
         "overall_length": overall_length,
         "half_overall_length": overall_length / 2,
@@ -41,13 +44,14 @@ if __name__ == "__main__":
         "stand_width": stand_width,
         "stand_setback": stand_setback,
         "spacing": spacing,
-        "left_points": ((0, half_nose_width), (50, 140), (90, 180), (nose_length, 0)),
+        "left_points": ((0, half_nose_width), (10, 250), (50, 40), (nose_length, 0)),
+        # "left_points": ((0, 0), (550, 450), (180, 150), (180, 150)),
         "right_points": ((overall_length, half_tail_width), (4570, 100), (4180, 50), (overall_length - tail_length, 0)),
     }
 
     # 板头&板尾曲线路径生成
     left_bezier_svg = gen_bezier(params.get("left_points"))
-    right_bezier_svg = gen_bezier(params.get("right_points"))
+    # right_bezier_svg = gen_bezier(params.get("right_points"))
 
     # 初始化SVG文件
     init_svg = init_svg(params)
@@ -58,4 +62,4 @@ if __name__ == "__main__":
     # 嵌件路径生成
     inserts_svg = gen_inserts(params, inserts_number, spacing)
 
-    pack_svg(left_bezier_svg + right_bezier_svg + init_svg + arc_svg + inserts_svg)
+    pack_svg(left_bezier_svg + init_svg + arc_svg + inserts_svg)

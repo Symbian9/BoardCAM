@@ -53,11 +53,12 @@ def init_svg(params):
                                                                                                 half_overall_length,
                                                                                                 nose_width - 20)
     # 版权信息
-    init_content += """<text x="800" y="200" fill="black" fill-opacity="0.7">
-                            <a href="https://BoardCAM.org/" target="new">
-                                © BoardCAM
-                            </a>
-                       </text>"""
+    init_content += """
+    <text x="800" y="200" fill="black" fill-opacity="0.6">
+      <a href="https://BoardCAM.org" target="new">
+        © BoardCAM
+      </a>
+    </text>"""
     return init_content
 
 

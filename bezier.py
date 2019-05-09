@@ -38,15 +38,12 @@ def gen_bezier(points):
         if i == 1:
             # moveto
             code += "M{} {} ".format(x, y)
+            code_sym += "M{} {} ".format(x, 300 - y)
         else:
             # lineto
             code += "L{} {} ".format(x, y)
-
-        if i == 1:
-            code_sym += "M{} {} ".format(x, 300 - y)
-        else:
             code_sym += "L{} {} ".format(x, 300 - y)
 
-    content += ("""<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(code))
-    content += ("""<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(code_sym))
+    content += ("""<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>\
+                  <path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(code, code_sym))
     return content

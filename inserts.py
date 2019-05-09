@@ -9,21 +9,19 @@ def gen_circle(cx, setback, horizontal_mid_line):
     """
 
     :param cx: 圆心 X坐标
-    :param setback: 嵌件组水平偏移量(+:整体向右, -:整体向左)
+    :param setback: 嵌件组水平偏移量(+:整体向后, -:整体向前)
     :param horizontal_mid_line:
     :return:
     """
-    content = ""
+    content = """<g style="stroke-width:1;">"""
     cx += setback
     for i in [horizontal_mid_line - 20, horizontal_mid_line + 20]:
-        content += ("""<circle cx="{}" cy="{}" r="10" stroke="black"
-                                stroke-width="1" fill="blue" fill-opacity="0.25" />""".format(cx, i))
-        content += ("""<circle cx="{}" cy="{}" r="18" stroke="black"
-                        stroke-width="1" fill="blue" fill-opacity="0.25"  />""".format(cx, i))
+        content += ("""<circle cx="{}" cy="{}" r="10" stroke="black" fill="red" fill-opacity="0.25" />""".format(cx, i))
+        content += ("""<circle cx="{}" cy="{}" r="18" stroke="black" fill="red" fill-opacity="0.25" />""".format(cx, i))
 
         # 圆心
-        content += (
-            """<circle cx="{}" cy="{}" r="1" fill-opacity="1" stroke-width="1" />""".format(cx, i))
+        content += ("""<circle cx="{}" cy="{}" r="1" fill-opacity="1" />""".format(cx, i))
+    content += "</g>"
     return content
 
 

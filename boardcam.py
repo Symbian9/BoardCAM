@@ -11,6 +11,7 @@ from svg_export import init_svg, pack_svg
 
 if __name__ == "__main__":
     # 参数含义参考docs/Configuration.md
+    origin = (0, 0)
     nose_width = 300
     half_nose_width = nose_width / 2
     nose_length = 180

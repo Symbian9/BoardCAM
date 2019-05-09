@@ -26,30 +26,38 @@ def init_svg(params):
     tail_width = params.get("tail_width")
     init_content = """"""
 
-    # write_code("""<line x1="180" y1="0" x2="1380" y2="0" style="stroke:#000000;stroke-width:1"/>""")
-
-    # 水平中线虚线
-    init_content += ("""<line x1="{}" y1="{}" x2="{}" y2="{}"
-            style="stroke:#000000;stroke-width:1"  stroke-dasharray="5,5"/>""".format(0, half_nose_width,
-                                                                                      overall_length, half_nose_width))
+    # init_content += """<rect width="1600" height="350" style="fill:none;stroke-width:1;stroke:rgb(0,0,0)" />"""
 
     # 板头虚线
-    init_content += ("""<line x1="{}" y1="{}" x2="{}" y2="{}"
-                style="stroke:#000000;stroke-width:1" stroke-dasharray="5,5"/>""".format(nose_length, 0, nose_length,
-                                                                                         nose_width))
+    init_content += """<line x1="{}" y1="{}" x2="{}" y2="{}"
+                style="stroke:#000000;stroke-width:1" stroke-dasharray="5,5"/>""".format(nose_length, 0 + 5,
+                                                                                         nose_length,
+                                                                                         nose_width - 5)
 
     # 板尾虚线
-    init_content += ("""<line x1="{}" y1="{}" x2="{}" y2="{}"
+    init_content += """<line x1="{}" y1="{}" x2="{}" y2="{}"
                    style="stroke:#000000;stroke-width:1" stroke-dasharray="5,5"/>""".format(
-        nose_length + running_length, 0,
-        nose_length + running_length, tail_width))
+        nose_length + running_length, 0 + 5,
+        nose_length + running_length, tail_width - 5)
 
     # TODO 超过部分裁剪掉
+    # 水平中线虚线
+    init_content += """<line x1="{}" y1="{}" x2="{}" y2="{}"
+                style="stroke:#000000;stroke-width:1"  stroke-dasharray="5,5"/>""".format(0, half_nose_width,
+                                                                                          overall_length,
+                                                                                          half_nose_width)
     # 竖直中线虚线
-    init_content += ("""<line x1="{}" y1="{}" x2="{}" y2="{}"
-                       style="stroke:#000000;stroke-width:1" stroke-dasharray="5,5"/>""".format(half_overall_length, 0,
+    init_content += """<line x1="{}" y1="{}" x2="{}" y2="{}"
+                       style="stroke:#000000;stroke-width:1" stroke-dasharray="5,5"/>""".format(half_overall_length,
+                                                                                                0 + 20,
                                                                                                 half_overall_length,
-                                                                                                nose_width))
+                                                                                                nose_width - 20)
+    # 版权信息
+    init_content += """<text x="800" y="200" fill="black" fill-opacity="0.7">
+                            <a href="https://BoardCAM.org/" target="new">
+                                © BoardCAM
+                            </a>
+                       </text>"""
     return init_content
 
 

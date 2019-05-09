@@ -22,7 +22,7 @@ if __name__ == "__main__":
     half_tail_width = tail_width / 2
     tail_length = 180
     running_length = overall_length - tail_length - nose_length
-    sidecut_radius = 10000
+    sidecut_radius = 8000
     stand_setback = 10
     stand_width = 550
     inserts_number = 4

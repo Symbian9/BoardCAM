@@ -1,18 +1,18 @@
 # Configuration
 
 滑雪板参数(单位: mm)
-* overall_length: 总长度
-* running_length: 行程长度
-* nose width: 板头宽度
-* nose length: 板头长度
+* Overall Length: 总长度
+* Running Length: 行程长度
+* Nose Width: 板头宽度
+* Nose Length: 板头长度
 
-* tail width: 板尾宽度
-* tail length: 板尾长度
+* Tail Width: 板尾宽度
+* Tail Length: 板尾长度
 
-* waist width: 板腰宽度
-* sidecut_radius: 侧切半径
-* sidecut_depth: 侧切深度
+* Waist Width: 板腰宽度
+* Sidecut Radius: 侧切半径 此参数越小,转弯半径越小
+* Sidecut Depth: 侧切深度
 
-* stand_setback: 站位偏移
-* stand_width: 建议间距
-* spacing: 相邻嵌件之间的间距
+* Stand Setback: 站位偏移
+* Stand Width: 建议间距
+* Spacing: 相邻嵌件之间的间距

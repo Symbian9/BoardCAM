@@ -6,7 +6,7 @@
 
 
 def write_code(code):
-    with open("board_profile.svg", mode="a") as file:
+    with open("board_profile.svg", mode="a", encoding="utf-8") as file:
         file.write(code)
 
 

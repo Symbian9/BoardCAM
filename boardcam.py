@@ -25,8 +25,6 @@ if __name__ == "__main__":
     inserts_number = 4
     half_overall_length = overall_length / 2
 
-    left_points = ((0, half_nose_width), (50, 140), (90, 180), (nose_length, 0))
-    right_points = ((overall_length, half_tail_width), (4590, 10), (4080, 70), (overall_length - tail_length, 0))
     params = {
         "overall_length": overall_length,
         "half_overall_length": overall_length / 2,
@@ -40,19 +38,21 @@ if __name__ == "__main__":
         "sidecut_radius": sidecut_radius,
         "stand_width": stand_width,
         "stand_setback": stand_setback,
+        "left_points": ((0, half_nose_width), (50, 140), (90, 180), (nose_length, 0)),
+        "right_points": ((overall_length, half_tail_width), (4590, 10), (4080, 70), (overall_length - tail_length, 0)),
     }
 
-    # 板头&板尾曲线生成
-    left_bezier_svg = gen_bezier(left_points)
-    right_bezier_svg = gen_bezier(right_points)
+    # 板头&板尾曲线路径生成
+    left_bezier_svg = gen_bezier(params.get("left_points"))
+    right_bezier_svg = gen_bezier(params.get("right_points"))
 
     # 初始化SVG文件
     init_svg = init_svg(params)
 
-    # 有效边刃生成
+    # 有效边刃路径生成
     arc_svg = gen_arc(params)
 
-    # 嵌件生成
+    # 嵌件路径生成
     inserts_svg = gen_inserts(params, inserts_number, 40)
 
     pack_svg(left_bezier_svg + right_bezier_svg + init_svg + arc_svg + inserts_svg)

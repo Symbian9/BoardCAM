@@ -1,5 +1,5 @@
 # BoardCAM
-A ski/snowboard CAD/CAE software for DIYer.
+A ski/snowboard [CAD](https://zh.wikipedia.org/zh-hans/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BE%85%E5%8A%A9%E8%AE%BE%E8%AE%A1) /[CAM](https://zh.wikipedia.org/wiki/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BE%85%E5%8A%A9%E5%88%B6%E9%80%A0) software for DIYer.
 
 ## Getting Started
 

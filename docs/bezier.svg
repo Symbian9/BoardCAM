@@ -1,3 +1,5 @@
-<svg width="" height="" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
-    <path d="M1520,150 C1480,10, 1390,10 1340,0" stroke="#000000" fill="none" style="stroke-width: 1px;" />
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <g>
+        <text x="30" y="30" fill="black" font-size="20" font-family="Times-Italic">Slogan: design it. build it. enjoy it</text>
+    </g>
 </svg>

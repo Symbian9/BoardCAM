@@ -8,5 +8,5 @@ setup(
     license='MIT',
     author='Xiang Zheng',
     author_email='me@BoardCAM.org',
-    description='snowboard ski splitboard cad/cam software'
+    description='snowboard ski splitboard CAD/CAM software'
 )

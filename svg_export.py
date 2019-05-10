@@ -75,7 +75,7 @@ def init_svg(params):
 
     # Slogan
     init_content += """
-    <text x="800" y="220" fill="black" font-size="10" font-family="Times-Italic">design it. build it. enjoy it</text>
+    <text x="805" y="215" fill="black" font-size="9" font-family="Times-Italic">design it. build it. enjoy it</text>
     """
     return init_content
 

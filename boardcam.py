@@ -29,6 +29,12 @@ if __name__ == "__main__":
     half_overall_length = overall_length / 2
     spacing = 40
 
+    # profile
+    nose_tip_radius = 300
+    camber = 15
+    camber_setback = 0
+    tail_tip_radius = 300
+
     os.remove("board_profile.svg")
     params = {
         "overall_length": overall_length,

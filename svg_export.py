@@ -59,6 +59,24 @@ def init_svg(params):
         © BoardCAM
       </a>
     </text>"""
+
+    # 比例尺
+    init_content += """
+    <g>
+        <text x="12" y="8" fill="black" font-size="3">1cm</text>
+        <line x1="10" y1="8" x2="10" y2="10" style="stroke:black;stroke-width:0.3"/>
+        <line x1="10" y1="12" x2="10" y2="10" style="stroke:black;stroke-width:0.3"/>
+        <line x1="10" y1="10" x2="20" y2="10" style="stroke:black;stroke-width:1"/>
+        <line x1="20" y1="8" x2="20" y2="10" style="stroke:black;stroke-width:0.3"/>
+        <line x1="20" y1="12" x2="20" y2="10" style="stroke:black;stroke-width:0.3"/>
+    </g>
+    
+    """
+
+    # Slogan
+    init_content += """
+    <text x="800" y="220" fill="black" font-size="10" font-family="Times-Italic">design it. build it. enjoy it</text>
+    """
     return init_content
 
 

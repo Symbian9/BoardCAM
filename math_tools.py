@@ -32,8 +32,15 @@ def cal_radius(running_length, camber):
     print(half_running_length)
 
     radius = (pow(half_running_length, 2) - pow(camber, 2)) / (2 * camber)
-    print(radius)
+    # print(radius)
+    return radius
 
 
 if __name__ == "__main__":
-    cal_radius(1260, 12)
+    from svg_export import pack_svg
+    r = cal_radius(1260, 12)
+
+    SVG_code = """<circle cx="{}" cy="{}" r="{}" stroke="black" fill="blue" fill-opacity="0.25" />""".format(630,
+                                                                                                             300 + r, r)
+    pack_svg(SVG_code)
+

@@ -4,8 +4,9 @@
 # Date: 2019-05-07
 # Desc: 贝塞尔曲线点
 
-import numpy as np
 from math import fsum
+
+import numpy as np
 
 
 def gen_bezier(points):
@@ -40,17 +41,18 @@ def gen_bezier(points):
             # moveto
             upper_left += "M{} {} ".format(x, y)
             lower_left += "M{} {} ".format(x, 300 - y)
-            upper_right += "M{} {} ".format(180 - x+1340, y)
-            lower_right += "M{} {} ".format(180-x+1340, 300 - y)
+            upper_right += "M{} {} ".format(180 - x + 1340, y)
+            lower_right += "M{} {} ".format(180 - x + 1340, 300 - y)
         else:
             # lineto
             upper_left += "L{} {} ".format(x, y)
             lower_left += "L{} {} ".format(x, 300 - y)
-            upper_right += "L{} {} ".format(180 - x+1340, y)
-            lower_right += "L{} {} ".format(180 - x+1340, 300 - y)
+            upper_right += "L{} {} ".format(180 - x + 1340, y)
+            lower_right += "L{} {} ".format(180 - x + 1340, 300 - y)
 
     content += ("""<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>\
-                  <path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(upper_left, lower_left))
+                  <path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(upper_left,
+                                                                                                    lower_left))
     content += ("""<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(upper_right))
     content += ("""<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(lower_right))
     return content

@@ -99,8 +99,7 @@ startxref
 449 
 """
     end_Of_file = "%%EOF"
-    all = header + obj + xref + trailer + end_Of_file
-    new = all
-    print(all[452])
+    new = header + obj + xref + trailer + end_Of_file
+    print(new[452])
     print(new.find("xref"))
-    # write_pdf(header + obj + xref + trailer + end_Of_file)
+    write_pdf(new)

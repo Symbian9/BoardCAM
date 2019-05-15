@@ -26,6 +26,8 @@ def gen_arc(params):
     code = ""
     code2 = ""
     offset = 0
+    top_list = []
+    bottom_list = []
     for i, x in enumerate(np.arange(nose_length, nose_length + running_length + step, step), start=1):
         y = sqrt(pow(sidecut_radius, 2) - pow(half_overall_length - x, 2))
         y = sidecut_radius - y
@@ -36,10 +38,13 @@ def gen_arc(params):
             code2 += "M{} {} ".format(x, nose_width - y)
         else:
             y += offset
+            top_list.append([x, y])
+            bottom_list.append([x, nose_width - y])
             code += "L{} {} ".format(x, y)
             code2 += "L{} {} ".format(x, nose_width - y)
 
     content += ("""<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>\
                 <path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(code, code2))
 
-    return content
+    print("top_list", top_list)
+    return content, top_list, bottom_list

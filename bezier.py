@@ -18,9 +18,13 @@ def gen_bezier(points):
     """
     content = ""
     upper_left = ""
+    upper_left_list = []
     lower_left = ""
+    lower_left_list = []
     upper_right = ""
+    upper_right_list = []
     lower_right = ""
+    lower_right_list = []
     # 计算步骤
     step = 0.01
 
@@ -37,6 +41,11 @@ def gen_bezier(points):
         x = fsum(x_list)
         y = fsum(y_list)
         print("Step{}: {} {}".format(i, x, y))
+        upper_left_list.append([x, y])
+        lower_left_list.append([x, 300 - y])
+
+        upper_right_list.append([180 - x + 1340, y])
+        lower_right_list.append([180 - x + 1340, 300 - y])
         if i == 1:
             # moveto
             upper_left += "M{} {} ".format(x, y)
@@ -55,4 +64,4 @@ def gen_bezier(points):
                                                                                                     lower_left))
     content += ("""<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(upper_right))
     content += ("""<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(lower_right))
-    return content
+    return content, upper_left_list, lower_left_list, upper_right_list, lower_right_list

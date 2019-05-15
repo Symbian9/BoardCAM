@@ -4,12 +4,30 @@
 # Date: 2019-05-07
 # Desc: bezier curve -> SVG
 
-import os
+import io
+
+from reportlab.lib.units import mm
+from reportlab.pdfgen import canvas
 
 from arc import gen_arc
 from bezier import gen_bezier
 from inserts import gen_inserts
 from svg_export import init_svg, pack_svg
+
+
+def draw_insert(canvas, x, y):
+    """
+    绘制嵌件位置
+    :param canvas:
+    :param x:
+    :param y:
+    :return:
+    """
+    canvas.circle(x * mm, y * mm, 18 * mm)
+    canvas.circle(x * mm, y * mm, 10 * mm)
+    canvas.circle(x * mm, y * mm, 0.5 * mm)
+    return canvas
+
 
 if __name__ == "__main__":
     # 参数含义参考docs/Configuration.md
@@ -35,7 +53,7 @@ if __name__ == "__main__":
     camber_setback = 0
     tail_tip_radius = 300
 
-    os.remove("board_profile.svg")
+    # os.remove("board_profile.svg")
     params = {
         "overall_length": overall_length,
         "half_overall_length": overall_length / 2,
@@ -54,15 +72,65 @@ if __name__ == "__main__":
     }
 
     # 板头&板尾曲线路径生成
-    bezier_svg = gen_bezier(params.get("bezier_points"))
+    bezier_svg, a, b, c, d = gen_bezier(params.get("bezier_points"))
 
     # 初始化SVG文件
     init_svg = init_svg(params)
 
     # 有效边刃路径生成
-    arc_svg = gen_arc(params)
+    points = []
+    arc_svg, top_list, bottom_list = gen_arc(params)
+    points.extend(b)
+
+    points.extend(top_list)
+    points.extend(d[::-1])
+    points.extend(c)
+    points.extend(bottom_list[::-1])
+    points.extend(a[::-1])
+
+    print(points)
+
+    buffer = io.BytesIO()
+
+    # Create the PDF object, using the buffer as its "file."
+    canvas = canvas.Canvas(buffer, pagesize=(1520 * mm, 330 * mm))
+    canvas.setLineWidth(4)
+    canvas.setPageCompression(0)
+    canvas._filename = "board_profile.pdf"
+    canvas.setDash(10, 3)
+    canvas.setStrokeAlpha(0.3)
+    canvas.setLineWidth(0.5)
+
+    # 虚线辅助线
+    canvas.line(0, 150 * mm, 1520 * mm, 150 * mm)
+    canvas.line(180 * mm, 0 * mm, 180 * mm, 300 * mm)
+    canvas.line(760 * mm, 0 * mm, 760 * mm, 300 * mm)
+    canvas.line(1340 * mm, 0 * mm, 1340 * mm, 300 * mm)
+
+    path = canvas.beginPath()
+    for index, point in enumerate(points, start=1):
+        print(point)
+        x = point[0]
+        y = point[1]
+        if index == 1:
+            path.moveTo(x * mm, y * mm)
+        else:
+            path.lineTo(x * mm, y * mm)
+            # path.close()
+
+    canvas.setDash()
+    canvas.setStrokeAlpha(1)
+    canvas.setLineWidth(1)
+    canvas.drawPath(path, stroke=1, fill=0)
 
     # 嵌件路径生成
-    inserts_svg = gen_inserts(params, inserts_number, spacing)
+    inserts_svg, insert_coordinate_list = gen_inserts(params, inserts_number, spacing)
+    for insert in insert_coordinate_list:
+        x = insert[0]
+        y = insert[1]
+        draw_insert(canvas, x, y)
+
+    canvas.showPage()
+    canvas.save()
 
     pack_svg(bezier_svg + init_svg + arc_svg + inserts_svg)

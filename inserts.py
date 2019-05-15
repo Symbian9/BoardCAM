@@ -43,11 +43,17 @@ def gen_inserts(params, inserts_number, spacing):
     # 水平中线
     horizontal_mid_line = params.get("half_nose_width")
 
+    insert_coordinate_list = []
+
     if inserts_number % 2 == 1:
         # 嵌件个数为奇数
         left_start = vertical_mid_line - half_stand_width - spacing * int(inserts_number / 2)
         right_start = vertical_mid_line + half_stand_width - spacing * int(inserts_number / 2)
         for i in range(inserts_number):
+            insert_coordinate_list.append([left_start + spacing * i+stand_setback, horizontal_mid_line-20])
+            insert_coordinate_list.append([left_start + spacing * i + stand_setback, horizontal_mid_line + 20])
+            insert_coordinate_list.append([right_start + spacing * i + stand_setback, horizontal_mid_line - 20])
+            insert_coordinate_list.append([right_start + spacing * i + stand_setback, horizontal_mid_line + 20])
             content += gen_circle(left_start + spacing * i, stand_setback, horizontal_mid_line)
             content += gen_circle(right_start + spacing * i, stand_setback, horizontal_mid_line)
 
@@ -58,5 +64,9 @@ def gen_inserts(params, inserts_number, spacing):
         for i in range(inserts_number):
             content += gen_circle(left_start + spacing * i, stand_setback, horizontal_mid_line)
             content += gen_circle(right_start + spacing * i, stand_setback, horizontal_mid_line)
+            insert_coordinate_list.append([left_start + spacing * i + stand_setback, horizontal_mid_line - 20])
+            insert_coordinate_list.append([left_start + spacing * i + stand_setback, horizontal_mid_line + 20])
+            insert_coordinate_list.append([right_start + spacing * i + stand_setback, horizontal_mid_line - 20])
+            insert_coordinate_list.append([right_start + spacing * i + stand_setback, horizontal_mid_line + 20])
 
-    return content
+    return content, insert_coordinate_list

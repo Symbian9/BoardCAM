@@ -5,7 +5,7 @@
 # Desc: PDF
 
 
-filename = "test.pdf"
+filename = "board_profile.pdf"
 
 
 def gen_trailer():

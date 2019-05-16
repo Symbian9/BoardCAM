@@ -80,7 +80,7 @@ if __name__ == "__main__":
 
     # 有效边刃路径生成
     points = []
-    arc_svg, top_list, bottom_list = gen_arc(params)
+    top_list, bottom_list = gen_arc(params)
     points.extend(lower_left_list)
 
     points.extend(top_list)
@@ -90,16 +90,16 @@ if __name__ == "__main__":
     points.extend(upper_left_list[::-1])
 
     print(points)
-    bezier_path = ""
+    profile_path = ""
     for index, point in enumerate(points, start=1):
         print(point)
         x = point[0]
         y = point[1]
         if index == 1:
-            bezier_path += "M {} {}".format(x, y)
+            profile_path += "M {} {}".format(x, y)
         else:
-            bezier_path += "L {} {}".format(x, y)
-    bezier_path = """<path stroke="#000000" id="svg_3" stroke-width="1" fill="none" d="{}" />""".format(bezier_path)
+            profile_path += "L {} {}".format(x, y)
+    profile_path = """<path stroke="#000000" id="svg_3" stroke-width="1" fill="none" d="{}" />""".format(profile_path)
 
     buffer = io.BytesIO()
 
@@ -144,5 +144,5 @@ if __name__ == "__main__":
     canvas.showPage()
     canvas.save()
 
-    pack_svg(bezier_path + init_svg + arc_svg + inserts_svg)
+    pack_svg(profile_path + init_svg + inserts_svg)
     print(len(points))

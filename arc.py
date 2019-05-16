@@ -18,11 +18,8 @@ def gen_arc(params):
     nose_length = params.get("nose_length")
     running_length = params.get("running_length")
     nose_width = params.get("nose_width")
-    content = ""
 
     step = 10
-    code = ""
-    code2 = ""
     offset = 0
     top_list = []
     bottom_list = []
@@ -32,17 +29,9 @@ def gen_arc(params):
         if i == 1:
             offset = nose_width - y
             y = offset + y
-            code += "M{} {} ".format(x, y)
-            code2 += "M{} {} ".format(x, nose_width - y)
         else:
             y += offset
             top_list.append([x, y])
             bottom_list.append([x, nose_width - y])
-            code += "L{} {} ".format(x, y)
-            code2 += "L{} {} ".format(x, nose_width - y)
 
-    content += ("""<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>\
-                <path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(code, code2))
-
-    print("top_list", top_list)
-    return content, top_list, bottom_list
+    return top_list, bottom_list

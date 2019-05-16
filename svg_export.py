@@ -5,7 +5,7 @@
 # Desc: SVG生成
 
 
-from inserts import gen_inserts
+from inserts import gen_circle
 
 
 def write_code(code):
@@ -93,15 +93,14 @@ def pack_svg(content):
     {}</svg>""".format(content))
 
 
-def draw_svg(params, points):
+def draw_svg(params, points, insert_coordinate_list):
     """
 
     :param params:
     :param points:
+    :param insert_coordinate_list
     :return:
     """
-    inserts_number = params.get("inserts_number")
-    spacing = params.get("spacing")
     profile_path = ""
     for index, point in enumerate(points, start=1):
         print(point)
@@ -114,6 +113,6 @@ def draw_svg(params, points):
     profile_path = """<path stroke="#000000" id="svg_3" stroke-width="1" fill="none" d="{}" />""".format(profile_path)
 
     # 嵌件路径生成
-    inserts_svg, insert_coordinate_list = gen_inserts(params, inserts_number, spacing)
+    inserts_svg = gen_circle(insert_coordinate_list)
 
     pack_svg(profile_path + init_svg(params) + inserts_svg)

@@ -9,7 +9,7 @@ from arc import gen_arc
 from bezier import gen_bezier
 from inserts import gen_inserts
 from pdf_export import draw_pdf
-from svg_export import init_svg, draw_svg
+from svg_export import draw_svg
 
 if __name__ == "__main__":
     # 参数含义参考docs/Configuration.md
@@ -57,9 +57,6 @@ if __name__ == "__main__":
     # 板头&板尾曲线路径生成
     upper_left_list, lower_left_list, upper_right_list, lower_right_list = gen_bezier(params)
 
-    # 初始化SVG文件
-    init_svg = init_svg(params)
-
     # 有效边刃路径生成
     points = []
     top_list, bottom_list = gen_arc(params)
@@ -72,7 +69,7 @@ if __name__ == "__main__":
     points.extend(upper_left_list[::-1])
 
     # 嵌件路径生成
-    inserts_svg, insert_coordinate_list = gen_inserts(params, inserts_number, spacing)
+    insert_coordinate_list = gen_inserts(params, inserts_number, spacing)
     draw_pdf(points, insert_coordinate_list)
 
-    draw_svg(params, points)
+    draw_svg(params, points, insert_coordinate_list)

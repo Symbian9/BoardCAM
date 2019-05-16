@@ -14,14 +14,9 @@ def gen_bezier(points):
     :param points:
     :return:
     """
-    content = ""
-    upper_left = ""
     upper_left_list = []
-    lower_left = ""
     lower_left_list = []
-    upper_right = ""
     upper_right_list = []
-    lower_right = ""
     lower_right_list = []
     # 计算步骤
     step = 0.01
@@ -47,22 +42,5 @@ def gen_bezier(points):
 
         upper_right_list.append([180 - x + 1340, y])
         lower_right_list.append([180 - x + 1340, 300 - y])
-        if i == 1:
-            # moveto
-            upper_left += "M{} {} ".format(x, y)
-            lower_left += "M{} {} ".format(x, 300 - y)
-            upper_right += "M{} {} ".format(180 - x + 1340, y)
-            lower_right += "M{} {} ".format(180 - x + 1340, 300 - y)
-        else:
-            # lineto
-            upper_left += "L{} {} ".format(x, y)
-            lower_left += "L{} {} ".format(x, 300 - y)
-            upper_right += "L{} {} ".format(180 - x + 1340, y)
-            lower_right += "L{} {} ".format(180 - x + 1340, 300 - y)
 
-    content += ("""<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>\
-                  <path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(upper_left,
-                                                                                                    lower_left))
-    content += ("""<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(upper_right))
-    content += ("""<path stroke="#000000" id="svg_3" d="{}" stroke-width="1" fill="none"/>""".format(lower_right))
-    return content, upper_left_list, lower_left_list, upper_right_list, lower_right_list
+    return upper_left_list, lower_left_list, upper_right_list, lower_right_list

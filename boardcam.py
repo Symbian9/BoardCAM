@@ -19,13 +19,14 @@ def draw_insert(canvas, x, y):
     """
     绘制嵌件位置
     :param canvas:
-    :param x:
-    :param y:
+    :param x: 圆心X坐标
+    :param y: 圆心Y坐标
     :return:
     """
-    canvas.circle(x * mm, y * mm, 18 * mm)
-    canvas.circle(x * mm, y * mm, 10 * mm)
-    canvas.circle(x * mm, y * mm, 0.5 * mm)
+    # r=0.5作为圆心
+    radius = [0.5, 10, 18]
+    for r in radius:
+        canvas.circle(x * mm, y * mm, r * mm)
     return canvas
 
 
@@ -72,7 +73,7 @@ if __name__ == "__main__":
     }
 
     # 板头&板尾曲线路径生成
-    bezier_svg, a, b, c, d = gen_bezier(params.get("bezier_points"))
+    a, b, c, d = gen_bezier(params.get("bezier_points"))
 
     # 初始化SVG文件
     init_svg = init_svg(params)
@@ -89,6 +90,16 @@ if __name__ == "__main__":
     points.extend(a[::-1])
 
     print(points)
+    bezier_path = ""
+    for index, point in enumerate(points, start=1):
+        print(point)
+        x = point[0]
+        y = point[1]
+        if index == 1:
+            bezier_path += "M {} {}".format(x, y)
+        else:
+            bezier_path += "L {} {}".format(x, y)
+    bezier_path = """<path stroke="#000000" id="svg_3" stroke-width="1" fill="none" d="{}" />""".format(bezier_path)
 
     buffer = io.BytesIO()
 
@@ -133,4 +144,5 @@ if __name__ == "__main__":
     canvas.showPage()
     canvas.save()
 
-    pack_svg(bezier_svg + init_svg + arc_svg + inserts_svg)
+    pack_svg(bezier_path + init_svg + arc_svg + inserts_svg)
+    print(len(points))

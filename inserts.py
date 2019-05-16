@@ -11,12 +11,13 @@ def gen_circle(insert_coordinate_list):
     :param insert_coordinate_list: 每个嵌件位置的坐标
     :return:
     """
-    content = """<g style="stroke-width:1;">"""
+    content = """<g style="stroke-width:1;stroke:black;">"""
     for insert in insert_coordinate_list:
         cx = insert[0]
         cy = insert[1]
         for r in ["1", "10", "18"]:
-            content += ("""<circle cx="{}" cy="{}" r="{}" stroke="black" fill="blue" fill-opacity="0.25" />""".format(cx, cy, r))
+            content += (
+                """<circle cx="{}" cy="{}" r="{}" style="fill:blue;fill-opacity:0.25" />""".format(cx, cy, r))
     content += "</g>"
     return content
 
@@ -27,7 +28,7 @@ def gen_inserts(params, inserts_number, spacing):
     :param params:
     :param inserts_number: 单侧单排嵌件个数
     :param spacing: 上下左右相邻嵌件之间的间距
-    :return: 嵌件组SVG代码
+    :return: 每个嵌件的坐标List
     """
     stand_width = params.get("stand_width")
     half_stand_width = stand_width / 2
@@ -40,24 +41,20 @@ def gen_inserts(params, inserts_number, spacing):
 
     insert_coordinate_list = []
 
+    left_start, right_start = 0, 0
     if inserts_number % 2 == 1:
         # 嵌件个数为奇数
         left_start = vertical_mid_line - half_stand_width - spacing * int(inserts_number / 2)
         right_start = vertical_mid_line + half_stand_width - spacing * int(inserts_number / 2)
-        for i in range(inserts_number):
-            insert_coordinate_list.append([left_start + spacing * i + stand_setback, horizontal_mid_line - 20])
-            insert_coordinate_list.append([left_start + spacing * i + stand_setback, horizontal_mid_line + 20])
-            insert_coordinate_list.append([right_start + spacing * i + stand_setback, horizontal_mid_line - 20])
-            insert_coordinate_list.append([right_start + spacing * i + stand_setback, horizontal_mid_line + 20])
-
     elif inserts_number % 2 == 0:
         # 嵌件个数为偶数
         left_start = vertical_mid_line - half_stand_width - spacing / 2 - spacing * (int(inserts_number / 2) - 1)
         right_start = vertical_mid_line + half_stand_width - spacing / 2 - spacing * (int(inserts_number / 2) - 1)
-        for i in range(inserts_number):
-            insert_coordinate_list.append([left_start + spacing * i + stand_setback, horizontal_mid_line - 20])
-            insert_coordinate_list.append([left_start + spacing * i + stand_setback, horizontal_mid_line + 20])
-            insert_coordinate_list.append([right_start + spacing * i + stand_setback, horizontal_mid_line - 20])
-            insert_coordinate_list.append([right_start + spacing * i + stand_setback, horizontal_mid_line + 20])
+
+    for i in range(inserts_number):
+        insert_coordinate_list.append([left_start + spacing * i + stand_setback, horizontal_mid_line - 20])
+        insert_coordinate_list.append([left_start + spacing * i + stand_setback, horizontal_mid_line + 20])
+        insert_coordinate_list.append([right_start + spacing * i + stand_setback, horizontal_mid_line - 20])
+        insert_coordinate_list.append([right_start + spacing * i + stand_setback, horizontal_mid_line + 20])
 
     return insert_coordinate_list

@@ -6,8 +6,6 @@
 
 from math import fsum
 
-import numpy as np
-
 
 def gen_bezier(points):
     """
@@ -27,10 +25,13 @@ def gen_bezier(points):
     lower_right_list = []
     # 计算步骤
     step = 0.01
+    end = 1
+    step_count = int(end / step)
 
     # 所有点的个数P0 P1... Pn
     points_no = len(points) - 1
-    for i, t in enumerate(np.arange(0, 1.00 + step, step), start=1):
+    for i, t in enumerate(range(step_count + 1), start=1):
+        t *= step
         x_list, y_list, y_sym = [], [], []
         for index, point in enumerate(points):
             x_value = point[0] * pow(1 - t, points_no - index) * pow(t, index)

@@ -6,8 +6,6 @@
 
 from math import sqrt
 
-import numpy as np
-
 
 def gen_arc(params):
     """
@@ -22,13 +20,14 @@ def gen_arc(params):
     nose_width = params.get("nose_width")
     content = ""
 
-    step = 1
+    step = 10
     code = ""
     code2 = ""
     offset = 0
     top_list = []
     bottom_list = []
-    for i, x in enumerate(np.arange(nose_length, nose_length + running_length + step, step), start=1):
+    for i, x in enumerate(range(nose_length, running_length + nose_length + step, step), start=1):
+    # for i, x in enumerate(np.arange(nose_length, nose_length + running_length + step, step), start=1):
         y = sqrt(pow(sidecut_radius, 2) - pow(half_overall_length - x, 2))
         y = sidecut_radius - y
         if i == 1:

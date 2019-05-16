@@ -5,13 +5,17 @@
 # Desc: 贝塞尔曲线点
 
 
-def gen_bezier(points):
+def gen_bezier(params):
     """
     P0和P3是endpoints, P1和P2是control points
     参考通用贝塞尔通用计算公式
-    :param points:
+    :param params:
     :return:
     """
+    points = params.get("bezier_points")
+    nose_width = params.get("nose_width")
+    nose_length = params.get("nose_length")
+    overall_length = params.get("overall_length")
     upper_left_list = []
     lower_left_list = []
     upper_right_list = []
@@ -33,9 +37,10 @@ def gen_bezier(points):
             y += y_value
 
         print("Step{}: {} {}".format(step_count, x, y))
+        # 分别进行X轴 y轴变换
         upper_left_list.append([x, y])
-        lower_left_list.append([x, 300 - y])
-        upper_right_list.append([180 - x + 1340, y])
-        lower_right_list.append([180 - x + 1340, 300 - y])
+        lower_left_list.append([x, nose_width - y])
+        upper_right_list.append([nose_length - x + overall_length-nose_length, y])
+        lower_right_list.append([nose_length - x + overall_length-nose_length, nose_width - y])
 
     return upper_left_list, lower_left_list, upper_right_list, lower_right_list

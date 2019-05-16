@@ -73,7 +73,7 @@ if __name__ == "__main__":
     }
 
     # 板头&板尾曲线路径生成
-    upper_left_list, lower_left_list, upper_right_list, lower_right_list = gen_bezier(params.get("bezier_points"))
+    upper_left_list, lower_left_list, upper_right_list, lower_right_list = gen_bezier(params)
 
     # 初始化SVG文件
     init_svg = init_svg(params)

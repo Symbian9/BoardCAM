@@ -5,6 +5,9 @@
 # Desc: SVG生成
 
 
+from inserts import gen_inserts
+
+
 def write_code(code):
     with open("board_profile.svg", mode="a", encoding="utf-8") as file:
         file.write(code)
@@ -88,3 +91,29 @@ def pack_svg(content):
     """
     write_code("""<svg width="" height="" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
     {}</svg>""".format(content))
+
+
+def draw_svg(params, points):
+    """
+
+    :param params:
+    :param points:
+    :return:
+    """
+    inserts_number = params.get("inserts_number")
+    spacing = params.get("spacing")
+    profile_path = ""
+    for index, point in enumerate(points, start=1):
+        print(point)
+        x = point[0]
+        y = point[1]
+        if index == 1:
+            profile_path += "M {} {}".format(x, y)
+        else:
+            profile_path += "L {} {}".format(x, y)
+    profile_path = """<path stroke="#000000" id="svg_3" stroke-width="1" fill="none" d="{}" />""".format(profile_path)
+
+    # 嵌件路径生成
+    inserts_svg, insert_coordinate_list = gen_inserts(params, inserts_number, spacing)
+
+    pack_svg(profile_path + init_svg(params) + inserts_svg)

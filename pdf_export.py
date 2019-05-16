@@ -4,8 +4,78 @@
 # Date: 2019-05-10
 # Desc: PDF
 
+import io
+
+from reportlab.lib.units import mm
+from reportlab.pdfgen import canvas as c
 
 filename = "board_profile.pdf"
+
+
+def draw_insert(canvas, x, y):
+    """
+    绘制嵌件位置
+    :param canvas:
+    :param x: 圆心X坐标
+    :param y: 圆心Y坐标
+    :return:
+    """
+    # r=0.5作为圆心
+    radius = [0.5, 10, 18]
+    for r in radius:
+        canvas.circle(x * mm, y * mm, r * mm)
+    return canvas
+
+
+def draw_pdf(points, insert_coordinate_list):
+    """
+
+    :param points:
+    :param insert_coordinate_list:
+    :param insert_coordinate_list:
+    :return:
+    """
+
+    buffer = io.BytesIO()
+    # Create the PDF object, using the buffer as its "file."
+    canvas = c.Canvas(buffer, pagesize=(1520 * mm, 330 * mm))
+    canvas.setLineWidth(4)
+    canvas.setPageCompression(0)
+    canvas._filename = "board_profile.pdf"
+    canvas.setDash(10, 3)
+    canvas.setStrokeAlpha(0.3)
+    canvas.setLineWidth(0.5)
+
+    # 虚线辅助线
+    canvas.line(0, 150 * mm, 1520 * mm, 150 * mm)
+    canvas.line(180 * mm, 0 * mm, 180 * mm, 300 * mm)
+    canvas.line(760 * mm, 0 * mm, 760 * mm, 300 * mm)
+    canvas.line(1340 * mm, 0 * mm, 1340 * mm, 300 * mm)
+
+    path = canvas.beginPath()
+    for index, point in enumerate(points, start=1):
+        print(point)
+        x = point[0]
+        y = point[1]
+        if index == 1:
+            path.moveTo(x * mm, y * mm)
+        else:
+            path.lineTo(x * mm, y * mm)
+            # path.close()
+
+    canvas.setDash()
+    canvas.setStrokeAlpha(1)
+    canvas.setLineWidth(1)
+    canvas.drawPath(path, stroke=1, fill=0)
+
+    # 嵌件路径生成
+    for insert in insert_coordinate_list:
+        x = insert[0]
+        y = insert[1]
+        draw_insert(canvas, x, y)
+
+    canvas.showPage()
+    canvas.save()
 
 
 def gen_trailer():

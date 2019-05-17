@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Author: Zheng <me@BoardCAM.org>
+# Date: 2019-05-17
+# Desc: gcode
+# Preview: https://ncviewer.com/
+
 filename = "demo.nc"
 
 
@@ -25,11 +32,14 @@ def gen_gcode(points):
     write_line("#2=-1.5\n")
     write_line("T1 M6\n")
     write_line("G0 Z5\n")  # 快速移动
-    write_line(" X67.4440 Y72.1867\n".format(points[0][0], points[0][1]))
+    write_line(" X{} Y{}\n".format(points[0][0], points[0][1]))
     write_line("G1 Z#2\n")
+    path = []
     for point in points:
         x, y = point
-        write_line(" X{} Y{}\n".format(x, y))
+        path.append(" X{} Y{}".format(x, y))
+
+    write_line("\n".join(path))
 
     write_line("G0 Z5\n")
     write_line("G0 Z5\n")

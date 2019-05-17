@@ -101,17 +101,15 @@ def draw_svg(params, points, insert_coordinate_list):
     :param insert_coordinate_list
     :return:
     """
-    profile_path = ""
-    for index, point in enumerate(points, start=1):
-        print(point)
+    polyline_path = []
+    for point in points:
         x, y = point
-        if index == 1:
-            profile_path += "M {} {}".format(x, y)
-        else:
-            profile_path += "L {} {}".format(x, y)
-    profile_path = """<path stroke="#000000" id="svg_3" stroke-width="1" fill="none" d="{}" />""".format(profile_path)
+        polyline_path.append("{},{} ".format(x, y))
+
+    polyline_path = " ".join(polyline_path)
+    polyline = """<polyline points="{}" style="fill:none;stroke:black;stroke-width:1"/>""".format(polyline_path)
 
     # 嵌件路径生成
     inserts_svg = gen_circle(insert_coordinate_list)
 
-    pack_svg(profile_path + init_svg(params) + inserts_svg)
+    pack_svg(polyline + init_svg(params) + inserts_svg)

@@ -7,10 +7,10 @@
 
 from arc import gen_arc
 from bezier import gen_bezier
+from gcode_export import gen_gcode
 from inserts import gen_inserts
 from pdf_export import draw_pdf
 from svg_export import draw_svg
-from gcode_export import gen_gcode
 
 if __name__ == "__main__":
     # 参数含义参考docs/Configuration.md

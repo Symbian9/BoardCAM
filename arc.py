@@ -31,7 +31,7 @@ def gen_arc(params):
             y = offset + y
         else:
             y += offset
-            top_list.append([x, y])
-            bottom_list.append([x, nose_width - y])
+        top_list.append([x, y])
+        bottom_list.append([x, nose_width - y])
 
     return top_list, bottom_list

@@ -104,8 +104,7 @@ def draw_svg(params, points, insert_coordinate_list):
     profile_path = ""
     for index, point in enumerate(points, start=1):
         print(point)
-        x = point[0]
-        y = point[1]
+        x, y = point
         if index == 1:
             profile_path += "M {} {}".format(x, y)
         else:

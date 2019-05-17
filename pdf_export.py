@@ -32,16 +32,14 @@ def draw_pdf(points, insert_coordinate_list):
 
     :param points:
     :param insert_coordinate_list:
-    :param insert_coordinate_list:
     :return:
     """
 
     buffer = io.BytesIO()
-    # Create the PDF object, using the buffer as its "file."
     canvas = c.Canvas(buffer, pagesize=(1520 * mm, 330 * mm))
     canvas.setLineWidth(4)
     canvas.setPageCompression(0)
-    canvas._filename = "board_profile.pdf"
+    canvas._filename = filename
     canvas.setDash(10, 3)
     canvas.setStrokeAlpha(0.3)
     canvas.setLineWidth(0.5)
@@ -61,7 +59,6 @@ def draw_pdf(points, insert_coordinate_list):
             path.moveTo(x * mm, y * mm)
         else:
             path.lineTo(x * mm, y * mm)
-            # path.close()
 
     canvas.setDash()
     canvas.setStrokeAlpha(1)
@@ -70,8 +67,7 @@ def draw_pdf(points, insert_coordinate_list):
 
     # 嵌件路径生成
     for insert in insert_coordinate_list:
-        x = insert[0]
-        y = insert[1]
+        x, y = insert
         draw_insert(canvas, x, y)
 
     canvas.showPage()

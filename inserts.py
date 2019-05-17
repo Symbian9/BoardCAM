@@ -13,26 +13,27 @@ def gen_circle(insert_coordinate_list):
     """
     content = """<g style="stroke-width:1;stroke:black;">"""
     for insert in insert_coordinate_list:
-        cx = insert[0]
-        cy = insert[1]
-        for r in ["1", "10", "18"]:
+        cx, cy = insert
+        for r in ["0.5", "10", "18"]:
             content += (
                 """<circle cx="{}" cy="{}" r="{}" style="fill:blue;fill-opacity:0.25" />""".format(cx, cy, r))
     content += "</g>"
     return content
 
 
-def gen_inserts(params, inserts_number, spacing):
+def gen_inserts(params):
     """
     从竖中线向左右两侧生成嵌件位置
     :param params:
-    :param inserts_number: 单侧单排嵌件个数
-    :param spacing: 上下左右相邻嵌件之间的间距
     :return: 每个嵌件的坐标List
     """
     stand_width = params.get("stand_width")
     half_stand_width = stand_width / 2
     stand_setback = params.get("stand_setback")
+    inserts_number = params.get("inserts_number")
+    spacing = params.get("spacing")
+    half_spacing = spacing / 2
+
     # 竖直中线
     vertical_mid_line = params.get("half_overall_length")
 
@@ -48,13 +49,13 @@ def gen_inserts(params, inserts_number, spacing):
         right_start = vertical_mid_line + half_stand_width - spacing * int(inserts_number / 2)
     elif inserts_number % 2 == 0:
         # 嵌件个数为偶数
-        left_start = vertical_mid_line - half_stand_width - spacing / 2 - spacing * (int(inserts_number / 2) - 1)
-        right_start = vertical_mid_line + half_stand_width - spacing / 2 - spacing * (int(inserts_number / 2) - 1)
+        left_start = vertical_mid_line - half_stand_width - half_spacing - spacing * (int(inserts_number / 2) - 1)
+        right_start = vertical_mid_line + half_stand_width - half_spacing - spacing * (int(inserts_number / 2) - 1)
 
     for i in range(inserts_number):
-        insert_coordinate_list.append([left_start + spacing * i + stand_setback, horizontal_mid_line - 20])
-        insert_coordinate_list.append([left_start + spacing * i + stand_setback, horizontal_mid_line + 20])
-        insert_coordinate_list.append([right_start + spacing * i + stand_setback, horizontal_mid_line - 20])
-        insert_coordinate_list.append([right_start + spacing * i + stand_setback, horizontal_mid_line + 20])
+        insert_coordinate_list.append([left_start + spacing * i + stand_setback, horizontal_mid_line - half_spacing])
+        insert_coordinate_list.append([left_start + spacing * i + stand_setback, horizontal_mid_line + half_spacing])
+        insert_coordinate_list.append([right_start + spacing * i + stand_setback, horizontal_mid_line - half_spacing])
+        insert_coordinate_list.append([right_start + spacing * i + stand_setback, horizontal_mid_line + half_spacing])
 
     return insert_coordinate_list

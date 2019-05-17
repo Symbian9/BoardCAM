@@ -10,6 +10,7 @@ from bezier import gen_bezier
 from inserts import gen_inserts
 from pdf_export import draw_pdf
 from svg_export import draw_svg
+from gcode_export import gen_gcode
 
 if __name__ == "__main__":
     # 参数含义参考docs/Configuration.md
@@ -69,7 +70,8 @@ if __name__ == "__main__":
     points.extend(upper_left_list[::-1])
 
     # 嵌件路径生成
-    insert_coordinate_list = gen_inserts(params, inserts_number, spacing)
+    insert_coordinate_list = gen_inserts(params)
     draw_pdf(points, insert_coordinate_list)
 
     draw_svg(params, points, insert_coordinate_list)
+    gen_gcode(points)

@@ -51,10 +51,19 @@ def init_svg(params):
     ElementTree.SubElement(frame, "line",
                            {"x1": str(half_overall_length), "y1": str(0 + 20),
                             "x2": str(half_overall_length), "y2": str(nose_width - 20)})
+
+    # logo info start
+    logo_tag = ElementTree.SubElement(root, "g")
     # 版权信息
-    copyright_tag = ElementTree.SubElement(root, "text",
+    copyright_tag = ElementTree.SubElement(logo_tag, "text",
                                            {"x": "800", "y": "200", "fill": "black", "fill-opacity": "0.6"})
     copyright_tag.text = COPYRIGHT
+
+    # Slogan
+    slogan_tag = ElementTree.SubElement(logo_tag, "text", {"x": "805", "y": "215", "fill": "black", "font-size": "9",
+                                                           "font-family": "Times-Italic"})
+    slogan_tag.text = SLOGAN
+    # end of logo
 
     # 比例尺
     scale = ElementTree.SubElement(root, "g", {"style": "stroke:black;stroke-width:0.3"})
@@ -65,11 +74,6 @@ def init_svg(params):
     ElementTree.SubElement(scale, "line", {"x1": "10", "y1": "10", "x2": "20", "y2": "10"})
     ElementTree.SubElement(scale, "line", {"x1": "20", "y1": "8", "x2": "20", "y2": "10"})
     ElementTree.SubElement(scale, "line", {"x1": "20", "y1": "12", "x2": "20", "y2": "10"})
-
-    # Slogan
-    slogan_tag = ElementTree.SubElement(root, "text", {"x": "805", "y": "215", "fill": "black", "font-size": "9",
-                                                       "font-family": "Times-Italic"})
-    slogan_tag.text = SLOGAN
 
     return root
 
@@ -82,15 +86,11 @@ def gen_circle(root, insert_coordinate_list):
     :return:
     """
     insert_group = ElementTree.SubElement(root, "g", {"style": "stroke-width:1;stroke:black;"})
-    content = """<g style="stroke-width:1;stroke:black;">"""
     for insert in insert_coordinate_list:
         cx, cy = insert
         for r in ["0.5", "10", "18"]:
             ElementTree.SubElement(insert_group, "circle",
                                    {"cx": str(cx), "cy": str(cy), "r": str(r), "style": "fill:blue;fill-opacity:0.25"})
-            content += (
-                """<circle cx="{}" cy="{}" r="{}" style="fill:blue;fill-opacity:0.25" />""".format(cx, cy, r))
-    content += "</g>"
     return root
 
 

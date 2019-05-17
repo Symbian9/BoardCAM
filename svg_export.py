@@ -4,8 +4,9 @@
 # Date: 2019-05-07
 # Desc: SVG生成
 
+from xml.etree import ElementTree
 
-from inserts import gen_circle
+from config import COPYRIGHT, SLOGAN
 
 
 def write_code(code):
@@ -19,6 +20,8 @@ def init_svg(params):
     :param params:
     :return:
     """
+    root = ElementTree.Element("svg")
+    root.attrib = {"width": "100%", "height": "100%", "version": "1.1", "xmlns": "http://www.w3.org/2000/svg"}
 
     half_nose_width = params.get("half_nose_width")
     half_overall_length = params.get("half_overall_length")
@@ -27,70 +30,68 @@ def init_svg(params):
     running_length = params.get("running_length")
     overall_length = params.get("overall_length")
     tail_width = params.get("tail_width")
-    init_content = """"""
 
-    # init_content += """<rect width="1600" height="350" style="fill:none;stroke-width:1;stroke:rgb(0,0,0)" />"""
+    frame = ElementTree.SubElement(root, "g", {"style": "stroke:#000000;stroke-width:1;", "stroke-dasharray": "5,5"})
 
     # 板头虚线
-    init_content += """<line x1="{}" y1="{}" x2="{}" y2="{}"
-                style="stroke:#000000;stroke-width:1" stroke-dasharray="5,5"/>""".format(nose_length, 0 + 5,
-                                                                                         nose_length,
-                                                                                         nose_width - 5)
+    ElementTree.SubElement(frame, "line", {"x1": str(nose_length), "y1": str(0 + 5), "x2": str(nose_length),
+                                           "y2": str(nose_width - 5)})
 
     # 板尾虚线
-    init_content += """<line x1="{}" y1="{}" x2="{}" y2="{}"
-                   style="stroke:#000000;stroke-width:1" stroke-dasharray="5,5"/>""".format(
-        nose_length + running_length, 0 + 5,
-        nose_length + running_length, tail_width - 5)
+    ElementTree.SubElement(frame, "line",
+                           {"x1": str(nose_length + running_length), "y1": str(0 + 5),
+                            "x2": str(nose_length + running_length), "y2": str(tail_width - 5)})
 
     # TODO 超过部分裁剪掉
     # 水平中线虚线
-    init_content += """<line x1="{}" y1="{}" x2="{}" y2="{}"
-                style="stroke:#000000;stroke-width:1"  stroke-dasharray="5,5"/>""".format(0, half_nose_width,
-                                                                                          overall_length,
-                                                                                          half_nose_width)
+    ElementTree.SubElement(frame, "line",
+                           {"x1": str(0), "y1": str(half_nose_width),
+                            "x2": str(overall_length), "y2": str(half_nose_width)})
     # 竖直中线虚线
-    init_content += """<line x1="{}" y1="{}" x2="{}" y2="{}"
-                       style="stroke:#000000;stroke-width:1" stroke-dasharray="5,5"/>""".format(half_overall_length,
-                                                                                                0 + 20,
-                                                                                                half_overall_length,
-                                                                                                nose_width - 20)
+    ElementTree.SubElement(frame, "line",
+                           {"x1": str(half_overall_length), "y1": str(0 + 20),
+                            "x2": str(half_overall_length), "y2": str(nose_width - 20)})
     # 版权信息
-    init_content += """
-    <text x="800" y="200" fill="black" fill-opacity="0.6">
-      <a href="https://BoardCAM.org" target="new">
-        © BoardCAM
-      </a>
-    </text>"""
+    copyright_tag = ElementTree.SubElement(root, "text",
+                                           {"x": "800", "y": "200", "fill": "black", "fill-opacity": "0.6"})
+    copyright_tag.text = COPYRIGHT
 
     # 比例尺
-    init_content += """
-    <g>
-        <text x="12" y="8" fill="black" font-size="3">1cm</text>
-        <line x1="10" y1="8" x2="10" y2="10" style="stroke:black;stroke-width:0.3"/>
-        <line x1="10" y1="12" x2="10" y2="10" style="stroke:black;stroke-width:0.3"/>
-        <line x1="10" y1="10" x2="20" y2="10" style="stroke:black;stroke-width:1"/>
-        <line x1="20" y1="8" x2="20" y2="10" style="stroke:black;stroke-width:0.3"/>
-        <line x1="20" y1="12" x2="20" y2="10" style="stroke:black;stroke-width:0.3"/>
-    </g>
-    
-    """
+    scale = ElementTree.SubElement(root, "g", {"style": "stroke:black;stroke-width:0.3"})
+    scale_text = ElementTree.SubElement(scale, "text", {"x": "12", "y": "8", "fill": "black", "font-size": "3"})
+    scale_text.text = "1cm"
+    ElementTree.SubElement(scale, "line", {"x1": "10", "y1": "8", "x2": "10", "y2": "10"})
+    ElementTree.SubElement(scale, "line", {"x1": "10", "y1": "12", "x2": "10", "y2": "10"})
+    ElementTree.SubElement(scale, "line", {"x1": "10", "y1": "10", "x2": "20", "y2": "10"})
+    ElementTree.SubElement(scale, "line", {"x1": "20", "y1": "8", "x2": "20", "y2": "10"})
+    ElementTree.SubElement(scale, "line", {"x1": "20", "y1": "12", "x2": "20", "y2": "10"})
 
     # Slogan
-    init_content += """
-    <text x="805" y="215" fill="black" font-size="9" font-family="Times-Italic">design it. build it. enjoy it</text>
+    slogan_tag = ElementTree.SubElement(root, "text", {"x": "805", "y": "215", "fill": "black", "font-size": "9",
+                                                       "font-family": "Times-Italic"})
+    slogan_tag.text = SLOGAN
+
+    return root
+
+
+def gen_circle(root, insert_coordinate_list):
     """
-    return init_content
 
-
-def pack_svg(content):
-    """
-
-    :param content: SVG code
+    :param root:
+    :param insert_coordinate_list: 每个嵌件位置的坐标
     :return:
     """
-    write_code("""<svg width="" height="" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
-    {}</svg>""".format(content))
+    insert_group = ElementTree.SubElement(root, "g", {"style": "stroke-width:1;stroke:black;"})
+    content = """<g style="stroke-width:1;stroke:black;">"""
+    for insert in insert_coordinate_list:
+        cx, cy = insert
+        for r in ["0.5", "10", "18"]:
+            ElementTree.SubElement(insert_group, "circle",
+                                   {"cx": str(cx), "cy": str(cy), "r": str(r), "style": "fill:blue;fill-opacity:0.25"})
+            content += (
+                """<circle cx="{}" cy="{}" r="{}" style="fill:blue;fill-opacity:0.25" />""".format(cx, cy, r))
+    content += "</g>"
+    return root
 
 
 def draw_svg(params, points, insert_coordinate_list):
@@ -104,12 +105,14 @@ def draw_svg(params, points, insert_coordinate_list):
     polyline_path = []
     for point in points:
         x, y = point
-        polyline_path.append("{},{} ".format(x, y))
+        polyline_path.append("{},{}".format(x, y))
+
+    root = init_svg(params)
 
     polyline_path = " ".join(polyline_path)
-    polyline = """<polyline points="{}" style="fill:none;stroke:black;stroke-width:1"/>""".format(polyline_path)
-
+    ElementTree.SubElement(root, "polyline",
+                           {"style": "fill:none;stroke:black;stroke-width:1", "points": polyline_path})
     # 嵌件路径生成
-    inserts_svg = gen_circle(insert_coordinate_list)
-
-    pack_svg(polyline + init_svg(params) + inserts_svg)
+    gen_circle(root, insert_coordinate_list)
+    tree = ElementTree.ElementTree(root)
+    tree.write("board_profile.svg", xml_declaration=True, encoding="UTF-8")

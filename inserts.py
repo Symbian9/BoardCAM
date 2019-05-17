@@ -5,22 +5,6 @@
 # Desc: 嵌件组生成
 
 
-def gen_circle(insert_coordinate_list):
-    """
-
-    :param insert_coordinate_list: 每个嵌件位置的坐标
-    :return:
-    """
-    content = """<g style="stroke-width:1;stroke:black;">"""
-    for insert in insert_coordinate_list:
-        cx, cy = insert
-        for r in ["0.5", "10", "18"]:
-            content += (
-                """<circle cx="{}" cy="{}" r="{}" style="fill:blue;fill-opacity:0.25" />""".format(cx, cy, r))
-    content += "</g>"
-    return content
-
-
 def gen_inserts(params):
     """
     从竖中线向左右两侧生成嵌件位置

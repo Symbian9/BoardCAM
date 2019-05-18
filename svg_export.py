@@ -9,11 +9,6 @@ from xml.etree import ElementTree
 from config import COPYRIGHT, SLOGAN
 
 
-def write_code(code):
-    with open("board_profile.svg", mode="a", encoding="utf-8") as file:
-        file.write(code)
-
-
 def init_svg(params):
     """
     生成辅助线 框架
@@ -66,14 +61,12 @@ def init_svg(params):
     # end of logo
 
     # 比例尺
-    scale = ElementTree.SubElement(root, "g", {"style": "stroke:black;stroke-width:0.3"})
-    scale_text = ElementTree.SubElement(scale, "text", {"x": "12", "y": "8", "fill": "black", "font-size": "3"})
+    scale_group = ElementTree.SubElement(root, "g", {"style": "stroke:black;stroke-width:0.3"})
+    scale_text = ElementTree.SubElement(scale_group, "text", {"x": "12", "y": "8", "fill": "black", "font-size": "3"})
     scale_text.text = "1cm"
-    ElementTree.SubElement(scale, "line", {"x1": "10", "y1": "8", "x2": "10", "y2": "10"})
-    ElementTree.SubElement(scale, "line", {"x1": "10", "y1": "12", "x2": "10", "y2": "10"})
-    ElementTree.SubElement(scale, "line", {"x1": "10", "y1": "10", "x2": "20", "y2": "10"})
-    ElementTree.SubElement(scale, "line", {"x1": "20", "y1": "8", "x2": "20", "y2": "10"})
-    ElementTree.SubElement(scale, "line", {"x1": "20", "y1": "12", "x2": "20", "y2": "10"})
+    ElementTree.SubElement(scale_group, "line", {"x1": "10", "y1": "8", "x2": "10", "y2": "12"})
+    ElementTree.SubElement(scale_group, "line", {"x1": "10", "y1": "10", "x2": "20", "y2": "10", "stroke-width": "0.8"})
+    ElementTree.SubElement(scale_group, "line", {"x1": "20", "y1": "8", "x2": "20", "y2": "12"})
 
     return root
 

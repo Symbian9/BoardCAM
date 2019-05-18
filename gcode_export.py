@@ -5,20 +5,31 @@
 # Desc: gcode
 # Preview: https://ncviewer.com/
 
-filename = "demo.nc"
+from datetime import datetime
+
+from config import WEBSITE, COPYRIGHT
+
+filename = "board_profile.nc"
 
 
 def write_line(line):
+    """
+
+    :param line:
+    :return:
+    """
     with open(filename, "a") as file:
         file.write(line)
 
 
 def gen_gcode(points):
     """
-
-    :param points:
+    生成G-code程序
+    :param points: 轮廓路径
     :return:
     """
+    write_line("( {} - {} )\n".format(COPYRIGHT, WEBSITE))
+    write_line("( Create Time: {} )\n".format(datetime.now().strftime("%Y-%m-%d %X")))
     write_line("G40\n")  # 关闭刀具补偿
     write_line("G49\n")  # 禁用刀具长度补偿
     write_line("G80\n")  # 取消模态动作
@@ -44,5 +55,3 @@ def gen_gcode(points):
     write_line("G0 Z5\n")
     write_line("G0 Z5\n")
     write_line("M2\n")  # 结束程序
-
-

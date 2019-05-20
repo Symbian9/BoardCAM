@@ -10,9 +10,9 @@
 * Tail Length: 板尾长度
 
 * Waist Width: 板腰宽度
-* Sidecut Radius: 侧切半径 此参数越小,转弯半径越小
-* Sidecut Depth: 侧切深度
+* Sidecut Radius: 侧切半径(此参数越小, 转弯半径越小)
+* Sidecut Depth: 侧切深度(侧切半径越小, 侧切深度越大)
 
 * Stand Setback: 站位偏移
-* Stand Width: 建议间距
-* Spacing: 相邻嵌件之间的间距
+* Stand Width: 建议间距(两脚之间的站距)
+* Spacing: 相邻嵌件之间的间距(包括相邻垂直和水平嵌件之间)

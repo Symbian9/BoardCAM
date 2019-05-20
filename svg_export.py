@@ -7,6 +7,7 @@
 from xml.etree import ElementTree
 
 from config import COPYRIGHT, SLOGAN
+from until import value_to_str
 
 
 def init_svg(params):
@@ -29,44 +30,49 @@ def init_svg(params):
     frame = ElementTree.SubElement(root, "g", {"style": "stroke:#000000;stroke-width:1;", "stroke-dasharray": "5,5"})
 
     # 板头虚线
-    ElementTree.SubElement(frame, "line", {"x1": str(nose_length), "y1": str(0 + 5), "x2": str(nose_length),
-                                           "y2": str(nose_width - 5)})
+    ElementTree.SubElement(frame, "line", value_to_str({"x1": nose_length, "y1": 0 + 5, "x2": nose_length,
+                                                        "y2": nose_width - 5}))
 
     # 板尾虚线
     ElementTree.SubElement(frame, "line",
-                           {"x1": str(nose_length + running_length), "y1": str(0 + 5),
-                            "x2": str(nose_length + running_length), "y2": str(tail_width - 5)})
+                           value_to_str({"x1": nose_length + running_length, "y1": 0 + 5,
+                                         "x2": nose_length + running_length, "y2": tail_width - 5}))
 
     # TODO 超过部分裁剪掉
     # 水平中线虚线
     ElementTree.SubElement(frame, "line",
-                           {"x1": str(0), "y1": str(half_nose_width),
-                            "x2": str(overall_length), "y2": str(half_nose_width)})
+                           value_to_str({"x1": 0, "y1": half_nose_width,
+                                         "x2": overall_length, "y2": half_nose_width}))
     # 竖直中线虚线
     ElementTree.SubElement(frame, "line",
-                           {"x1": str(half_overall_length), "y1": str(0 + 20),
-                            "x2": str(half_overall_length), "y2": str(nose_width - 20)})
+                           value_to_str({"x1": half_overall_length, "y1": 0 + 20,
+                                         "x2": half_overall_length, "y2": nose_width - 20}))
 
     # logo info start
     logo_tag = ElementTree.SubElement(root, "g")
     # 版权信息
     copyright_tag = ElementTree.SubElement(logo_tag, "text",
-                                           {"x": "800", "y": "200", "fill": "black", "fill-opacity": "0.6"})
+                                           value_to_str({"x": 800, "y": 200, "fill": "black", "fill-opacity": 0.6}))
     copyright_tag.text = COPYRIGHT
 
     # Slogan
-    slogan_tag = ElementTree.SubElement(logo_tag, "text", {"x": "805", "y": "215", "fill": "black", "font-size": "9",
-                                                           "font-family": "Times-Italic"})
+    slogan_tag = ElementTree.SubElement(logo_tag, "text",
+                                        value_to_str({"x": 805, "y": 215, "fill": "black", "font-size": 9,
+                                                      "font-family": "Times-Italic"}))
     slogan_tag.text = SLOGAN
     # end of logo
 
     # 比例尺
     scale_group = ElementTree.SubElement(root, "g", {"style": "stroke:black;stroke-width:0.3"})
-    scale_text = ElementTree.SubElement(scale_group, "text", {"x": "12", "y": "8", "fill": "black", "font-size": "3"})
+    scale_text = ElementTree.SubElement(scale_group, "text",
+                                        value_to_str({"x": 12, "y": 8, "fill": "black", "font-size": 3}))
     scale_text.text = "1cm"
-    ElementTree.SubElement(scale_group, "line", {"x1": "10", "y1": "8", "x2": "10", "y2": "12"})
-    ElementTree.SubElement(scale_group, "line", {"x1": "10", "y1": "10", "x2": "20", "y2": "10", "stroke-width": "0.8"})
-    ElementTree.SubElement(scale_group, "line", {"x1": "20", "y1": "8", "x2": "20", "y2": "12"})
+    ElementTree.SubElement(scale_group, "line",
+                           value_to_str({"x1": 10, "y1": 8, "x2": 10, "y2": 12}))
+    ElementTree.SubElement(scale_group, "line",
+                           value_to_str({"x1": 10, "y1": 10, "x2": 20, "y2": 10, "stroke-width": 0.8}))
+    ElementTree.SubElement(scale_group, "line",
+                           value_to_str({"x1": 20, "y1": 8, "x2": 20, "y2": 12}))
 
     return root
 
@@ -83,7 +89,7 @@ def gen_circle(root, insert_coordinate_list):
         cx, cy = insert
         for r in ["0.5", "10", "18"]:
             ElementTree.SubElement(insert_group, "circle",
-                                   {"cx": str(cx), "cy": str(cy), "r": str(r), "style": "fill:blue;fill-opacity:0.25"})
+                                   value_to_str({"cx": cx, "cy": cy, "r": r, "style": "fill:blue;fill-opacity:0.25"}))
     return root
 
 

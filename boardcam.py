@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Author: Zheng <me@BoardCAM.org>
 # Date: 2019-05-07
-# Desc: bezier curve -> SVG
+# Desc: 主程序
 
 
 from arc import gen_arc
@@ -24,7 +24,7 @@ if __name__ == "__main__":
     tail_length = 180
     running_length = overall_length - tail_length - nose_length
     sidecut_radius = 8000
-    stand_setback = 10
+    stand_setback = 0
     stand_width = 550
     inserts_number = 4
     half_overall_length = overall_length / 2
@@ -35,8 +35,8 @@ if __name__ == "__main__":
     camber = 15
     camber_setback = 0
     tail_tip_radius = 300
+    thickness = 7
 
-    # os.remove("board_profile.svg")
     params = {
         "overall_length": overall_length,
         "half_overall_length": overall_length / 2,

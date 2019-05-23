@@ -83,3 +83,27 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Hat tip to anyone whose code was used
 * Inspiration
 * etc
+
+## TODO-LIST
+- [x] SVG
+- [ ] PDF
+- [ ] Gcode
+- [ ] DXF
+
+- [ ] LinuxCNC
+- [ ] Grbl
+- [ ] mach3
+
+- [ ] 板头板尾垫片
+- [ ] 板芯
+- [ ] 底板
+- [ ] 模具
+
+
+- [ ] snowboard
+- [ ] ski
+- [ ] splitboard
+- [ ] skateboard
+- [ ] longboard
+- [ ] kiteboard
+- [ ] 漂移板

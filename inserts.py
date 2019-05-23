@@ -15,8 +15,10 @@ def gen_inserts(params):
     half_stand_width = stand_width / 2
     stand_setback = params.get("stand_setback")
     inserts_number = params.get("inserts_number")
-    spacing = params.get("spacing")
-    half_spacing = spacing / 2
+    horizontal_spacing = params.get("horizontal_spacing")
+    vertical_spacing = params.get("vertical_spacing")
+    half_vertical_spacing = vertical_spacing / 2
+    half_horizontal_spacing = horizontal_spacing / 2
 
     # 竖直中线
     vertical_mid_line = params.get("half_overall_length")
@@ -29,17 +31,23 @@ def gen_inserts(params):
     left_start, right_start = 0, 0
     if inserts_number % 2 == 1:
         # 嵌件个数为奇数
-        left_start = vertical_mid_line - half_stand_width - spacing * int(inserts_number / 2)
-        right_start = vertical_mid_line + half_stand_width - spacing * int(inserts_number / 2)
+        left_start = vertical_mid_line - half_stand_width - horizontal_spacing * int(inserts_number / 2)
+        right_start = vertical_mid_line + half_stand_width - horizontal_spacing * int(inserts_number / 2)
     elif inserts_number % 2 == 0:
         # 嵌件个数为偶数
-        left_start = vertical_mid_line - half_stand_width - half_spacing - spacing * (int(inserts_number / 2) - 1)
-        right_start = vertical_mid_line + half_stand_width - half_spacing - spacing * (int(inserts_number / 2) - 1)
+        left_start = vertical_mid_line - half_stand_width - half_horizontal_spacing - horizontal_spacing * (
+                    int(inserts_number / 2) - 1)
+        right_start = vertical_mid_line + half_stand_width - half_horizontal_spacing - horizontal_spacing * (
+                    int(inserts_number / 2) - 1)
 
     for i in range(inserts_number):
-        insert_coordinate_list.append([left_start + spacing * i + stand_setback, horizontal_mid_line - half_spacing])
-        insert_coordinate_list.append([left_start + spacing * i + stand_setback, horizontal_mid_line + half_spacing])
-        insert_coordinate_list.append([right_start + spacing * i + stand_setback, horizontal_mid_line - half_spacing])
-        insert_coordinate_list.append([right_start + spacing * i + stand_setback, horizontal_mid_line + half_spacing])
+        insert_coordinate_list.append(
+            [left_start + horizontal_spacing * i + stand_setback, horizontal_mid_line - half_vertical_spacing])
+        insert_coordinate_list.append(
+            [left_start + horizontal_spacing * i + stand_setback, horizontal_mid_line + half_vertical_spacing])
+        insert_coordinate_list.append(
+            [right_start + horizontal_spacing * i + stand_setback, horizontal_mid_line - half_vertical_spacing])
+        insert_coordinate_list.append(
+            [right_start + horizontal_spacing * i + stand_setback, horizontal_mid_line + half_vertical_spacing])
 
     return insert_coordinate_list

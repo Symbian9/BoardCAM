@@ -15,4 +15,5 @@
 
 * Stand Setback: 站位偏移
 * Stand Width: 建议间距(两脚之间的站距)
-* Spacing: 相邻嵌件之间的间距(包括相邻垂直和水平嵌件之间)
+* horizontal spacing: 相邻嵌件之间的水平间距
+* vertical spacing: 相邻嵌件之间的垂直间距

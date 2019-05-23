@@ -28,7 +28,8 @@ if __name__ == "__main__":
     stand_width = 550
     inserts_number = 4
     half_overall_length = overall_length / 2
-    spacing = 40
+    horizontal_spacing = 40
+    vertical_spacing = 40
 
     # profile
     nose_tip_radius = 300
@@ -50,7 +51,8 @@ if __name__ == "__main__":
         "sidecut_radius": sidecut_radius,
         "stand_width": stand_width,
         "stand_setback": stand_setback,
-        "spacing": spacing,
+        "horizontal_spacing": horizontal_spacing,
+        "vertical_spacing": vertical_spacing,
         "inserts_number": inserts_number,
         "bezier_points": ((0, half_nose_width), (10, 250), (50, 40), (nose_length, 0)),
     }

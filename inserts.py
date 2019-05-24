@@ -19,9 +19,11 @@ def gen_inserts(params):
     vertical_spacing = params.get("vertical_spacing")
     half_vertical_spacing = vertical_spacing / 2
     half_horizontal_spacing = horizontal_spacing / 2
+    nose_length = params.get("nose_length")
+    half_running_length = params.get("half_running_length")
 
     # 竖直中线
-    vertical_mid_line = params.get("half_overall_length")
+    vertical_mid_line = nose_length + half_running_length
 
     # 水平中线
     horizontal_mid_line = params.get("half_nose_width")
@@ -36,9 +38,9 @@ def gen_inserts(params):
     elif inserts_number % 2 == 0:
         # 嵌件个数为偶数
         left_start = vertical_mid_line - half_stand_width - half_horizontal_spacing - horizontal_spacing * (
-                    int(inserts_number / 2) - 1)
+                int(inserts_number / 2) - 1)
         right_start = vertical_mid_line + half_stand_width - half_horizontal_spacing - horizontal_spacing * (
-                    int(inserts_number / 2) - 1)
+                int(inserts_number / 2) - 1)
 
     for i in range(inserts_number):
         insert_coordinate_list.append(

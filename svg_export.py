@@ -20,7 +20,7 @@ def init_svg(params):
     root.attrib = {"width": "100%", "height": "100%", "version": "1.1", "xmlns": "http://www.w3.org/2000/svg"}
 
     half_nose_width = params.get("half_nose_width")
-    half_overall_length = params.get("half_overall_length")
+    half_running_length = params.get("half_running_length")
     nose_width = params.get("nose_width")
     nose_length = params.get("nose_length")
     running_length = params.get("running_length")
@@ -45,8 +45,8 @@ def init_svg(params):
                                          "x2": overall_length, "y2": half_nose_width}))
     # 板腰垂直虚线
     ElementTree.SubElement(frame, "line",
-                           value_to_str({"x1": half_overall_length, "y1": 0 + 20,
-                                         "x2": half_overall_length, "y2": nose_width - 20}))
+                           value_to_str({"x1": nose_length + half_running_length, "y1": 0 + 20,
+                                         "x2": nose_length + half_running_length, "y2": nose_width - 20}))
 
     # 版权信息
     logo_tag = ElementTree.SubElement(root, "g")

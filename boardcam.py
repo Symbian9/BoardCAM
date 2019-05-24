@@ -27,6 +27,7 @@ if __name__ == "__main__":
     tail_length = 180
 
     running_length = 1160
+    half_running_length = running_length / 2
     overall_length = nose_length + running_length + tail_length
     half_overall_length = overall_length / 2
     sidecut_radius = 8000
@@ -53,6 +54,7 @@ if __name__ == "__main__":
         "overall_length": overall_length,
         "half_overall_length": overall_length / 2,
         "running_length": running_length,
+        "half_running_length": half_running_length,
         "nose_width": nose_width,
         "half_nose_width": half_nose_width,
         "half_tail_width": half_tail_width,

@@ -33,7 +33,7 @@ def some_view():
     p = canvas.Canvas(buffer, pagesize=(1520 * mm, 300 * mm))
     # 不压缩
     p.setPageCompression(0)
-    p._filename = "board_profile.pdf"
+    p._filename = "demo.pdf"
     # p.setAuthor("ZhengXiang")
     p.bezier(0 * mm, 200 * mm, 50 * mm, 190 * mm, 10 * mm, 250 * mm, 180 * mm, 300 * mm)
     p.circle(100 * mm, 100 * mm, 18 * mm)
@@ -58,35 +58,35 @@ def some_view():
 def penciltip(canvas, debug=1):
     canvas.setLineWidth(4)
     canvas.setPageCompression(0)
-    canvas._filename = "board_profile.pdf"
+    canvas._filename = "demo.pdf"
     if debug:
         canvas.scale(2.8, 2.8)  # make it big
         canvas.setLineWidth(1)  # small lines
-    canvas.setDash(10, 3)
-    canvas.setStrokeAlpha(0.3)
-    canvas.setLineWidth(0.5)
+    # canvas.setDash(10, 3)
+    # canvas.setStrokeAlpha(0.3)
+    # canvas.setLineWidth(0.5)
 
     # 虚线辅助线
     canvas.line(0, 150 * mm, 1520 * mm, 150 * mm)
-    canvas.line(180 * mm, 0 * mm, 180 * mm, 300 * mm)
-    canvas.line(760 * mm, 0 * mm, 760 * mm, 300 * mm)
-    canvas.line(1340 * mm, 0 * mm, 1340 * mm, 300 * mm)
-
-    path = canvas.beginPath()
-    path.moveTo(0 * mm, 150 * mm)
-    path.lineTo(180*mm, 300 * mm)
-    path.lineTo(760 * mm, 290 * mm)
-    path.lineTo(1340 * mm, 300 * mm)
-    path.lineTo(1520 * mm, 150 * mm)
-    path.lineTo(1340 * mm, 0 * mm)
-    path.lineTo(760 * mm, 10 * mm)
-    path.lineTo(180 * mm, 0 * mm)
-    path.close()
-
-    canvas.setDash()
-    canvas.setStrokeAlpha(1)
-    canvas.setLineWidth(1)
-    canvas.drawPath(path, stroke=1, fill=0)
+    # canvas.line(180 * mm, 0 * mm, 180 * mm, 300 * mm)
+    # canvas.line(760 * mm, 0 * mm, 760 * mm, 300 * mm)
+    # canvas.line(1340 * mm, 0 * mm, 1340 * mm, 300 * mm)
+    #
+    # path = canvas.beginPath()
+    # path.moveTo(0 * mm, 150 * mm)
+    # path.lineTo(180*mm, 300 * mm)
+    # path.lineTo(760 * mm, 290 * mm)
+    # path.lineTo(1340 * mm, 300 * mm)
+    # path.lineTo(1520 * mm, 150 * mm)
+    # path.lineTo(1340 * mm, 0 * mm)
+    # path.lineTo(760 * mm, 10 * mm)
+    # path.lineTo(180 * mm, 0 * mm)
+    # path.close()
+    #
+    # canvas.setDash()
+    # canvas.setStrokeAlpha(1)
+    # canvas.setLineWidth(1)
+    # canvas.drawPath(path, stroke=1, fill=0)
 
     canvas.showPage()
     canvas.save()

@@ -61,8 +61,10 @@ if __name__ == "__main__":
         "vertical_spacing": vertical_spacing,
         "inserts_number": inserts_number,
         # 第一个越小越钝 第二个越大越尖锐
-        "a": 0.4,
-        "b": 2,
+
+        # 贝塞尔弧度控制
+        "end_handle": 0.4,
+        "transition_handle": 2,
     }
 
     # 板头&板尾曲线路径生成

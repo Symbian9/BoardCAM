@@ -17,3 +17,6 @@
 * Stand Width: 建议间距(两脚之间的站距)
 * horizontal spacing: 相邻嵌件之间的水平间距
 * vertical spacing: 相邻嵌件之间的垂直间距
+
+* end_handle: 板头板尾宽度百分比
+* "transition_handle: 板头板尾长度百分比,

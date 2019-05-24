@@ -38,15 +38,17 @@ def gen_bezier(params):
     :param params:
     :return:
     """
-    a = params.get("a")
-    b = params.get("b")
+    end_handle = params.get("end_handle")
+    transition_handle = params.get("transition_handle")
     nose_length = params.get("nose_length")
     tail_length = params.get("tail_length")
     half_nose_width = params.get("half_nose_width")
     half_tail_width = params.get("half_tail_width")
     running_length = params.get("running_length")
-    left_bezier_points = ((0, half_nose_width), (0, half_nose_width * a), (nose_length * b, 0), (nose_length, 0))
-    right_bezier_points = ((0, half_tail_width), (0, half_tail_width * a), (tail_length * b, 0), (tail_length, 0))
+    left_bezier_points = (
+        (0, half_nose_width), (0, half_nose_width * end_handle), (nose_length * transition_handle, 0), (nose_length, 0))
+    right_bezier_points = (
+        (0, half_tail_width), (0, half_tail_width * end_handle), (tail_length * transition_handle, 0), (tail_length, 0))
 
     upper_left_list = bezier(left_bezier_points)
     lower_left_list = mirror_path(0, half_nose_width, upper_left_list)

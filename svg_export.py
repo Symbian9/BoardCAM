@@ -29,40 +29,38 @@ def init_svg(params):
 
     frame = ElementTree.SubElement(root, "g", {"style": "stroke:#000000;stroke-width:1;", "stroke-dasharray": "5,5"})
 
-    # 板头虚线
-    ElementTree.SubElement(frame, "line", value_to_str({"x1": nose_length, "y1": 0 + 5, "x2": nose_length,
-                                                        "y2": nose_width - 5}))
+    # 板头垂直虚线
+    ElementTree.SubElement(frame, "line",
+                           value_to_str({"x1": nose_length, "y1": 0 + 5, "x2": nose_length,
+                                         "y2": nose_width - 5}))
 
-    # 板尾虚线
+    # 板尾垂直虚线
     ElementTree.SubElement(frame, "line",
                            value_to_str({"x1": nose_length + running_length, "y1": 0 + 5,
                                          "x2": nose_length + running_length, "y2": tail_width - 5}))
 
-    # TODO 超过部分裁剪掉
     # 水平中线虚线
     ElementTree.SubElement(frame, "line",
                            value_to_str({"x1": 0, "y1": half_nose_width,
                                          "x2": overall_length, "y2": half_nose_width}))
-    # 竖直中线虚线
+    # 板腰垂直虚线
     ElementTree.SubElement(frame, "line",
                            value_to_str({"x1": half_overall_length, "y1": 0 + 20,
                                          "x2": half_overall_length, "y2": nose_width - 20}))
 
-    # logo info start
-    logo_tag = ElementTree.SubElement(root, "g")
     # 版权信息
+    logo_tag = ElementTree.SubElement(root, "g")
     copyright_tag = ElementTree.SubElement(logo_tag, "text",
                                            value_to_str({"x": 800, "y": 200, "fill": "black", "fill-opacity": 0.6}))
     copyright_tag.text = COPYRIGHT
 
-    # Slogan
+    # slogan
     slogan_tag = ElementTree.SubElement(logo_tag, "text",
                                         value_to_str({"x": 805, "y": 215, "fill": "black", "font-size": 9,
                                                       "font-family": "Times-Italic"}))
     slogan_tag.text = SLOGAN
-    # end of logo
 
-    # 比例尺
+    # 比例尺 TODO 要找一个合适位置放置
     scale_group = ElementTree.SubElement(root, "g", {"style": "stroke:black;stroke-width:0.3"})
     scale_text = ElementTree.SubElement(scale_group, "text",
                                         value_to_str({"x": 12, "y": 8, "fill": "black", "font-size": 3}))
@@ -79,16 +77,16 @@ def init_svg(params):
 
 def gen_circle(root, insert_coordinate_list):
     """
-
-    :param root:
+    圆形生成
+    :param root: 根节点
     :param insert_coordinate_list: 每个嵌件位置的坐标
     :return:
     """
-    insert_group = ElementTree.SubElement(root, "g", {"style": "stroke-width:1;stroke:black;"})
+    inserts_group = ElementTree.SubElement(root, "g", {"style": "stroke-width:1;stroke:black"})
     for insert in insert_coordinate_list:
         cx, cy = insert
         for r in ["0.5", "10", "18"]:
-            ElementTree.SubElement(insert_group, "circle",
+            ElementTree.SubElement(inserts_group, "circle",
                                    value_to_str({"cx": cx, "cy": cy, "r": r, "style": "fill:blue;fill-opacity:0.25"}))
     return root
 
@@ -113,5 +111,7 @@ def draw_svg(params, points, insert_coordinate_list):
                            {"style": "fill:none;stroke:black;stroke-width:1", "points": polyline_path})
     # 嵌件路径生成
     gen_circle(root, insert_coordinate_list)
+
+    # 生成SVG
     tree = ElementTree.ElementTree(root)
     tree.write("board_profile.svg", xml_declaration=True, encoding="UTF-8")

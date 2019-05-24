@@ -106,4 +106,3 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 - [ ] skateboard
 - [ ] longboard
 - [ ] kiteboard
-- [ ] 漂移板

@@ -18,11 +18,12 @@ if __name__ == "__main__":
     nose_width = 300
     half_nose_width = nose_width / 2
     nose_length = 180
-    overall_length = 1520
+    tail_length = 180
+    running_length = 1160
+    overall_length = nose_length + running_length + tail_length
     tail_width = 300
     half_tail_width = tail_width / 2
-    tail_length = 180
-    running_length = overall_length - tail_length - nose_length
+
     sidecut_radius = 8000
     stand_setback = 0
     stand_width = 550
@@ -54,7 +55,9 @@ if __name__ == "__main__":
         "horizontal_spacing": horizontal_spacing,
         "vertical_spacing": vertical_spacing,
         "inserts_number": inserts_number,
-        "bezier_points": ((0, half_nose_width), (10, 250), (50, 40), (nose_length, 0)),
+        # 第一个越小越钝 第二个越大越尖锐
+        "a": 0.4,
+        "b": 2,
     }
 
     # 板头&板尾曲线路径生成
@@ -66,7 +69,7 @@ if __name__ == "__main__":
     points.extend(lower_left_list)
 
     points.extend(top_list)
-    points.extend(lower_right_list[::-1])
+    points.extend(lower_right_list)
     points.extend(upper_right_list)
     points.extend(bottom_list[::-1])
     points.extend(upper_left_list[::-1])

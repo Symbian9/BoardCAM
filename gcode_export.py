@@ -53,7 +53,7 @@ def write_line(line):
     :param line:
     :return:
     """
-    with open(filename, "a") as file:
+    with open(filename, "a", encoding="utf-8") as file:
         file.write(line)
 
 

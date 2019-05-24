@@ -5,7 +5,6 @@
 # Desc: PDF
 
 import io
-from math_tools import mm_to_dpi
 
 from reportlab.lib.units import mm
 from reportlab.pdfgen import canvas as c
@@ -28,16 +27,18 @@ def draw_insert(canvas, x, y):
     return canvas
 
 
-def draw_pdf(points, insert_coordinate_list):
+def draw_pdf(params, points, insert_coordinate_list):
     """
 
+    :param params:
     :param points:
     :param insert_coordinate_list:
     :return:
     """
+    overall_length = params.get("overall_length")
 
     buffer = io.BytesIO()
-    canvas = c.Canvas(buffer, pagesize=(1520 * mm, 330 * mm))
+    canvas = c.Canvas(buffer, pagesize=(overall_length * mm, 330 * mm))
     canvas.setLineWidth(4)
     canvas.setPageCompression(0)
     canvas._filename = filename
@@ -46,14 +47,13 @@ def draw_pdf(points, insert_coordinate_list):
     canvas.setLineWidth(0.5)
 
     # 虚线辅助线
-    canvas.line(0, 150 * mm, 1520 * mm, 150 * mm)
+    canvas.line(0, 150 * mm, overall_length * mm, 150 * mm)
     canvas.line(180 * mm, 0 * mm, 180 * mm, 300 * mm)
     canvas.line(760 * mm, 0 * mm, 760 * mm, 300 * mm)
     canvas.line(1340 * mm, 0 * mm, 1340 * mm, 300 * mm)
 
     path = canvas.beginPath()
     for index, point in enumerate(points, start=1):
-        print(point)
         x = point[0]
         y = point[1]
         if index == 1:

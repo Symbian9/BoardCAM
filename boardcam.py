@@ -15,14 +15,19 @@ from svg_export import draw_svg
 if __name__ == "__main__":
     # 参数含义参考docs/Configuration.md
     origin = (0, 0)
+
+    # Nose Shape
     nose_width = 300
     half_nose_width = nose_width / 2
     nose_length = 180
-    tail_length = 180
-    running_length = 1160
-    overall_length = nose_length + running_length + tail_length
+
+    # tail Shape
     tail_width = 300
     half_tail_width = tail_width / 2
+    tail_length = 180
+
+    running_length = 1160
+    overall_length = nose_length + running_length + tail_length
 
     sidecut_radius = 8000
     stand_setback = 0
@@ -76,7 +81,7 @@ if __name__ == "__main__":
 
     # 嵌件路径生成
     insert_coordinate_list = gen_inserts(params)
-    draw_pdf(points, insert_coordinate_list)
+    draw_pdf(params, points, insert_coordinate_list)
 
     draw_svg(params, points, insert_coordinate_list)
     gen_gcode(points)

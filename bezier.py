@@ -4,6 +4,8 @@
 # Date: 2019-05-07
 # Desc: 贝塞尔曲线
 
+from config import bezier_step
+
 
 def bezier(bezier_points):
     """
@@ -11,30 +13,26 @@ def bezier(bezier_points):
     :param bezier_points:
     :return:
     """
+    # P0和P3是endpoints, P1和P2是control points
     # 所有点的个数P0 P1... Pn
-    # 计算步骤
-    step = 0.01
     end = 1
-    step_count = int(end / step)
+    step_count = int(end / bezier_step)
     points_no = len(bezier_points) - 1
     temp = []
     for t in range(step_count + 1):
-        t *= step
+        t *= bezier_step
         x, y = 0, 0
         for index, point in enumerate(bezier_points):
-            x_value = point[0] * pow(1 - t, points_no - index) * pow(t, index)
-            x += x_value
-            y_value = point[1] * pow(1 - t, points_no - index) * pow(t, index)
-            y += y_value
+            x += point[0] * pow(1 - t, points_no - index) * pow(t, index)
+            y += point[1] * pow(1 - t, points_no - index) * pow(t, index)
 
         temp.append([x, y])
     return temp
 
 
-def gen_bezier(params):
+def gen_curve(params):
     """
-    P0和P3是endpoints, P1和P2是control points
-    参考通用贝塞尔通用计算公式
+    板头&板尾曲线生成
     :param params:
     :return:
     """
@@ -45,15 +43,16 @@ def gen_bezier(params):
     half_nose_width = params.get("half_nose_width")
     half_tail_width = params.get("half_tail_width")
     running_length = params.get("running_length")
+
     left_bezier_points = (
         (0, half_nose_width), (0, half_nose_width * end_handle), (nose_length * transition_handle, 0), (nose_length, 0))
     right_bezier_points = (
         (0, half_tail_width), (0, half_tail_width * end_handle), (tail_length * transition_handle, 0), (tail_length, 0))
 
     upper_left_list = bezier(left_bezier_points)
+    # X轴对称变换
     lower_left_list = mirror_path(0, half_nose_width, upper_left_list)
 
-    # 原始
     temp = bezier(right_bezier_points)
     # Y轴对称变换
     temp2 = mirror_path(tail_length, 0, temp)

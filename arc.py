@@ -6,6 +6,8 @@
 
 from math import sqrt
 
+from config import side_step
+
 
 def gen_arc(params):
     """
@@ -18,11 +20,10 @@ def gen_arc(params):
     running_length = params.get("running_length")
     nose_width = params.get("nose_width")
 
-    step = 10
     offset = 0
     top_list = []
     bottom_list = []
-    for i, x in enumerate(range(nose_length, running_length + nose_length + step, step), start=1):
+    for i, x in enumerate(range(nose_length, running_length + nose_length + side_step, side_step), start=1):
         y = sqrt(pow(sidecut_radius, 2) - pow(nose_length + running_length / 2 - x, 2))
         y = sidecut_radius - y
         if i == 1:

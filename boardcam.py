@@ -6,7 +6,7 @@
 
 
 from arc import gen_arc
-from bezier import gen_bezier
+from bezier import gen_curve
 from gcode_export import gen_gcode
 from inserts import gen_inserts
 from pdf_export import draw_pdf
@@ -72,7 +72,7 @@ if __name__ == "__main__":
     }
 
     # 板头&板尾曲线路径生成
-    upper_left_list, lower_left_list, upper_right_list, lower_right_list = gen_bezier(params)
+    upper_left_list, lower_left_list, upper_right_list, lower_right_list = gen_curve(params)
 
     # 有效边刃路径生成
     points = []

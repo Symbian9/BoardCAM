@@ -7,3 +7,7 @@
 COPYRIGHT = "© BoardCAM"
 WEBSITE = "https://BoardCAM.org"
 SLOGAN = "design it. build it. enjoy it."
+
+# 精细化调整
+bezier_step = 0.01
+side_step = 10

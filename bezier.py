@@ -51,38 +51,33 @@ def gen_curve(params):
 
     upper_left_list = bezier(left_bezier_points)
     # X轴对称变换
-    lower_left_list = mirror_path(0, half_nose_width, upper_left_list)
+    lower_left_list = mirror_path(upper_left_list, 0, half_nose_width)
 
     temp = bezier(right_bezier_points)
     # Y轴对称变换
-    temp2 = mirror_path(tail_length, 0, temp)
+    temp2 = mirror_path(temp, tail_length, 0)
 
     # 平移到对应位置
     offset = running_length + nose_length - tail_length
-    upper_right_list = move(temp2[::-1], offset, 0)
-    lower_right_list = mirror_path(0, half_tail_width, upper_right_list)
+    upper_right_list = move_path(temp2[::-1], offset, 0)
+    lower_right_list = mirror_path(upper_right_list, 0, half_tail_width)
     return upper_left_list, lower_left_list, upper_right_list[::-1], lower_right_list
 
 
-def mirror_path(width, length, points):
+def mirror_path(points, width, length):
     """
     生成镜像路径
-    :param width: 按Y轴进行轴对称变化 width置0
-    :param length: 按X轴进行轴对称变化, length置0
     :param points: 路径
+    :param width: 按Y轴进行轴对称变化, width置0
+    :param length: 按X轴进行轴对称变化, length置0
     :return:
     """
-    new_point = []
     width = int(width)
     length = int(length)
-    for point in points:
-        x, y = point
-        new_point.append([abs(width * 2 - x), abs(length * 2 - y)])
-
-    return new_point
+    return [[abs(width * 2 - point[0]), abs(length * 2 - point[1])] for point in points]
 
 
-def move(points, x_offset, y_offset):
+def move_path(points, x_offset, y_offset):
     """
     平移函数
     :param points:
@@ -90,9 +85,4 @@ def move(points, x_offset, y_offset):
     :param y_offset: Y坐标偏移量
     :return:
     """
-    new_point = []
-    for point in points:
-        x, y = point
-        new_point.append([x + x_offset, y + y_offset])
-
-    return new_point
+    return [[point[0] + x_offset, point[1] + y_offset] for point in points]

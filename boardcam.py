@@ -7,10 +7,10 @@
 
 from arc import gen_arc
 from bezier import gen_curve
-from gcode_export import gen_gcode
+from gcode_export import export_gcode
 from inserts import gen_inserts
-from pdf_export import draw_pdf
-from svg_export import draw_svg
+from pdf_export import export_pdf
+from svg_export import export_svg
 
 if __name__ == "__main__":
     # 参数含义参考docs/Configuration.md
@@ -86,7 +86,8 @@ if __name__ == "__main__":
 
     # 嵌件路径生成
     insert_coordinate_list = gen_inserts(params)
-    draw_pdf(params, points, insert_coordinate_list)
 
-    draw_svg(params, points, insert_coordinate_list)
-    gen_gcode(points)
+    # export
+    export_pdf(params, points, insert_coordinate_list)
+    export_svg(params, points, insert_coordinate_list)
+    export_gcode(points)

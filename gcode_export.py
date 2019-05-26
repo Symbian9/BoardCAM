@@ -57,7 +57,7 @@ def write_line(line):
         file.write(line)
 
 
-def gen_gcode(points):
+def export_gcode(points):
     """
     生成G-code程序
     :param points: 轮廓路径

@@ -90,7 +90,7 @@ def gen_circle(root, insert_coordinate_list):
     return root
 
 
-def draw_svg(params, points, insert_coordinate_list):
+def export_svg(params, points, insert_coordinate_list):
     """
 
     :param params:
@@ -98,14 +98,9 @@ def draw_svg(params, points, insert_coordinate_list):
     :param insert_coordinate_list
     :return:
     """
-    polyline_path = []
-    for point in points:
-        x, y = point
-        polyline_path.append("{},{}".format(x, y))
-
     root = init_svg(params)
 
-    polyline_path = " ".join(polyline_path)
+    polyline_path = " ".join(["{},{}".format(point[0], point[1]) for point in points])
     ElementTree.SubElement(root, "polyline",
                            {"style": "fill:none;stroke:black;stroke-width:1", "points": polyline_path})
     # 嵌件路径生成

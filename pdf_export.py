@@ -27,7 +27,7 @@ def draw_insert(canvas, x, y):
     return canvas
 
 
-def draw_pdf(params, points, insert_coordinate_list):
+def export_pdf(params, points, insert_coordinate_list):
     """
     绘制PDF
     :param params:

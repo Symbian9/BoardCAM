@@ -113,12 +113,12 @@ def export_svg(params, points, insert_coordinate_list):
     tree.write("board_profile.svg", xml_declaration=True, encoding="UTF-8")
 
 
-def gen_circle_path(r, cx, cy):
+def gen_circle_path(nose_tip_radius, cx, cy):
     """
-    形成圆弧方程
-    :param r: 半径
-    :param cx: 圆心X坐标
-    :param cy: 圆心Y坐标
+    生成圆弧方程
+    :param nose_tip_radius: 板头上翘半径
+    :param cx: 板头上翘弧线圆心X坐标
+    :param cy: 板头上翘弧线圆心Y坐标
     :return:
     """
     root = ElementTree.Element("svg")
@@ -126,34 +126,35 @@ def gen_circle_path(r, cx, cy):
 
     points = []
     for angle in range(45, 90 + 1):
-        x = cx + r * cos(angle * pi / 180)
-        y = cy + r * sin(angle * pi / 180)
+        x = cx + nose_tip_radius * cos(angle * pi / 180)
+        y = cy + nose_tip_radius * sin(angle * pi / 180)
         points.append([x, y])
 
     start = 180
     end = 1340
-    r1 = 6000
-    bottom_camber_list = []
+    camber_radius = 9000
+    camber_list = []
     for x1 in range(start, end + side_step, side_step):
-        y1 = sqrt(pow(r1, 2) - pow(180 + 1160 / 2 - x1, 2))
-        y1 = r1 - y1
-        bottom_camber_list.append([x1, y1 + 200])
+        y1 = sqrt(pow(camber_radius, 2) - pow(180 + 1160 / 2 - x1, 2))
+        y1 = camber_radius - y1
+        camber_list.append([x1, y1 + 200])
 
+    # 上翘弧线宽度
     width = abs(points[0][0] - points[-1][0])
     left_points = [[abs(point[0] - width), point[1]] for point in points]
-    left_points = move(bottom_camber_list[0][0], bottom_camber_list[0][1], left_points[::-1])
-    points = move(bottom_camber_list[-1][0], bottom_camber_list[-1][1], points[::-1])
+    left_points = move(camber_list[0][0], camber_list[0][1], left_points[::-1])
+    right_points = move(camber_list[-1][0], camber_list[-1][1], points[::-1])
 
-    polyline_path = " ".join(["{},{}".format(point[0], point[1]) for point in points])
-    left_points_path = " ".join(["{},{}".format(point[0], point[1]) for point in left_points])
-    bottom_camber_path = " ".join(["{},{}".format(point[0], point[1]) for point in bottom_camber_list])
+    tail_tip_path = " ".join(["{},{}".format(point[0], point[1]) for point in right_points])
+    nose_tip_path = " ".join(["{},{}".format(point[0], point[1]) for point in left_points])
+    bottom_camber_path = " ".join(["{},{}".format(point[0], point[1]) for point in camber_list])
 
     ElementTree.SubElement(root, "polyline",
-                           {"style": "fill:none;stroke:black;stroke-width:1", "points": polyline_path})
+                           {"style": "fill:none;stroke:black;stroke-width:1", "points": tail_tip_path})
     ElementTree.SubElement(root, "polyline",
                            {"style": "fill:none;stroke:black;stroke-width:1", "points": bottom_camber_path})
     ElementTree.SubElement(root, "polyline",
-                           {"style": "fill:none;stroke:black;stroke-width:1", "points": left_points_path})
+                           {"style": "fill:none;stroke:black;stroke-width:1", "points": nose_tip_path})
     tree = ElementTree.ElementTree(root)
     tree.write("flex.svg", xml_declaration=True, encoding="UTF-8")
 

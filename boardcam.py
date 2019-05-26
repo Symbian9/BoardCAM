@@ -26,7 +26,7 @@ if __name__ == "__main__":
     half_tail_width = tail_width / 2
     tail_length = 180
 
-    running_length = 1560
+    running_length = 1160
     half_running_length = running_length / 2
     overall_length = nose_length + running_length + tail_length
     half_overall_length = overall_length / 2

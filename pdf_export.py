@@ -48,10 +48,16 @@ def draw_pdf(params, points, insert_coordinate_list):
     buffer = io.BytesIO()
     canvas = c.Canvas(buffer, pagesize=(overall_length * mm, max_width * mm))
     canvas.setLineWidth(4)
+
+    # 设置不压缩PDF stream
     canvas.setPageCompression(0)
     canvas._filename = filename
+
+    # 设置辅助线 点距
     canvas.setDash(10, 3)
-    canvas.setStrokeAlpha(0.3)
+
+    # 设置辅助线透明度
+    canvas.setStrokeAlpha(0.4)
     canvas.setLineWidth(0.5)
 
     # 虚线辅助线
@@ -62,8 +68,7 @@ def draw_pdf(params, points, insert_coordinate_list):
 
     path = canvas.beginPath()
     for index, point in enumerate(points, start=1):
-        x = point[0]
-        y = point[1]
+        x, y = point
         if index == 1:
             path.moveTo(x * mm, y * mm)
         else:
@@ -101,19 +106,22 @@ def write_pdf(content):
 
 def cal_length(stream_data):
     """
-
+    计算PDF stream 字节长度
     :param stream_data:
     :return:
     """
-    offset1 = stream_data.find("stream\n")
-    offset2 = stream_data.find("\nendstream")
-    offset = offset2 - offset1 - 7
-    print(offset2 - offset1 - 7)
-    return offset
+    keyword_start = stream_data.find("stream\n")
+    keyword_end = stream_data.find("\nendstream")
+    stream_length = keyword_end - keyword_start - 7
+    return stream_length
 
 
 def cal_xref_trailer(objs):
-    # 开始写入交叉引用表
+    """
+    开始写入交叉引用表
+    :param objs:
+    :return:
+    """
     write_pdf("xref\n")
     obj_no = len(objs)
     write_pdf("0 {}\n".format(obj_no + 1))

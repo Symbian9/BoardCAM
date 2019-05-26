@@ -3,7 +3,6 @@
 # Author: Zheng <me@BoardCAM.org>
 # Date: 2019-05-07
 # Desc: SVG生成
-
 from xml.etree import ElementTree
 
 from config import COPYRIGHT, SLOGAN
@@ -82,7 +81,7 @@ def gen_circle(root, insert_coordinate_list):
     :param insert_coordinate_list: 每个嵌件位置的坐标
     :return:
     """
-    inserts_group = ElementTree.SubElement(root, "g", {"style": "stroke-width:1;stroke:black"})
+    inserts_group = ElementTree.SubElement(root, "g", {"style": "stroke-width:1;stroke:black", })
     for insert in insert_coordinate_list:
         cx, cy = insert
         for r in ["0.5", "10", "18"]:
@@ -115,3 +114,63 @@ def draw_svg(params, points, insert_coordinate_list):
     # 生成SVG
     tree = ElementTree.ElementTree(root)
     tree.write("board_profile.svg", xml_declaration=True, encoding="UTF-8")
+
+
+def draw_profile():
+    """
+
+    :return:
+    """
+    camber = 15
+    half_running_length = 580
+    nose_length = 180
+    root = ElementTree.Element("svg")
+    root.attrib = {"width": "100%", "height": "100%", "version": "1.1", "xmlns": "http://www.w3.org/2000/svg"}
+
+    ElementTree.SubElement(root, "line", value_to_str(
+        {"x1": 380, "y1": 600, "x2": 1540, "y2": 600, "style": "fill:none;stroke:black;stroke-width:1",
+         "stroke-dasharray": "5,5"}))
+
+    ElementTree.SubElement(root, "circle",
+                           value_to_str(
+                               {"cx": 380, "cy": 300, "r": 300, "style": "fill:none;stroke:black;stroke-width:2"}))
+    ElementTree.SubElement(root, "circle",
+                           value_to_str(
+                               {"cx": 1540, "cy": 300, "r": 300, "style": "fill:none;stroke:black;stroke-width:2"}))
+
+    ElementTree.SubElement(root, "circle",
+                           value_to_str(
+                               {"cx": 580 + 180 + 200, "cy": 11798, "r": 11213.33,
+                                "style": "fill:none;stroke:black;stroke-width:2"}))
+
+    r = (pow(580, 2) + 255) / 2 * camber
+    print(r)
+    # 生成SVG
+    tree = ElementTree.ElementTree(root)
+    tree.write("flex.svg", xml_declaration=True, encoding="UTF-8")
+
+
+def circle(cx, r, start, end):
+    root = ElementTree.Element("svg")
+    root.attrib = {"width": "100%", "height": "100%", "version": "1.1", "xmlns": "http://www.w3.org/2000/svg"}
+    import math
+    step = 10
+    # for x in range(start, end+step, step):
+    #     y = math.sqrt(pow(r, 2) - pow(cx-start, 2))
+    #     print(start, y)
+    polyline_path = ""
+    for x in range(start, end + step, step):
+        y = math.sqrt(pow(r, 2) - pow(180 + 1160 / 2 - x, 2))
+        y = r - y
+        print(x, y)
+        polyline_path += "{},{} ".format(x, y)
+    ElementTree.SubElement(root, "polyline",
+                           {"style": "fill:none;stroke:black;stroke-width:1", "points": polyline_path})
+    tree = ElementTree.ElementTree(root)
+    tree.write("flex.svg", xml_declaration=True, encoding="UTF-8")
+
+
+if __name__ == "__main__":
+    # draw_profile()
+
+    circle(760, 6000, 180, 1340)

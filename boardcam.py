@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Author: Zheng <me@BoardCAM.org>
 # Date: 2019-05-07
-# Desc: 主程序
+# Desc: BoardCAM主程序
 
 
 from arc import gen_arc
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     tail_tip_radius = 300
     thickness = 7
 
-    # bezier
+    # curve
     end_handle = 0.4
     transition_handle = 2
 
@@ -78,12 +78,11 @@ if __name__ == "__main__":
     points = []
     top_list, bottom_list = gen_arc(params)
     points.extend(lower_left_list)
-
     points.extend(top_list)
     points.extend(lower_right_list)
     points.extend(upper_right_list)
-    points.extend(bottom_list[::-1])
-    points.extend(upper_left_list[::-1])
+    points.extend(bottom_list)
+    points.extend(upper_left_list)
 
     # 嵌件路径生成
     insert_coordinate_list = gen_inserts(params)

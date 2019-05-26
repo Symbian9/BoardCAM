@@ -34,4 +34,4 @@ def gen_arc(params):
         top_list.append([x, y])
         bottom_list.append([x, nose_width - y])
 
-    return top_list, bottom_list
+    return top_list, bottom_list[::-1]

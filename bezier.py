@@ -61,7 +61,7 @@ def gen_curve(params):
     offset = running_length + nose_length - tail_length
     upper_right_list = move_path(temp2[::-1], offset, 0)
     lower_right_list = mirror_path(upper_right_list, 0, half_tail_width)
-    return upper_left_list, lower_left_list, upper_right_list[::-1], lower_right_list
+    return upper_left_list[::-1], lower_left_list, upper_right_list[::-1], lower_right_list
 
 
 def mirror_path(points, width, length):

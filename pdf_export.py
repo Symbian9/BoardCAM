@@ -29,16 +29,24 @@ def draw_insert(canvas, x, y):
 
 def draw_pdf(params, points, insert_coordinate_list):
     """
-
+    绘制PDF
     :param params:
     :param points:
     :param insert_coordinate_list:
     :return:
     """
     overall_length = params.get("overall_length")
+    nose_width = params.get("nose_width")
+    tail_width = params.get("tail_width")
+    max_width = max(nose_width, tail_width)
+    half_max_width = max_width / 2
+    nose_length = params.get("nose_length")
+    running_length = params.get("running_length")
+    waist_line = running_length / 2 + nose_length
+    tail_line = nose_length + running_length
 
     buffer = io.BytesIO()
-    canvas = c.Canvas(buffer, pagesize=(overall_length * mm, 330 * mm))
+    canvas = c.Canvas(buffer, pagesize=(overall_length * mm, max_width * mm))
     canvas.setLineWidth(4)
     canvas.setPageCompression(0)
     canvas._filename = filename
@@ -47,10 +55,10 @@ def draw_pdf(params, points, insert_coordinate_list):
     canvas.setLineWidth(0.5)
 
     # 虚线辅助线
-    canvas.line(0, 150 * mm, overall_length * mm, 150 * mm)
-    canvas.line(180 * mm, 0 * mm, 180 * mm, 300 * mm)
-    canvas.line(760 * mm, 0 * mm, 760 * mm, 300 * mm)
-    canvas.line(1340 * mm, 0 * mm, 1340 * mm, 300 * mm)
+    canvas.line(0, half_max_width * mm, overall_length * mm, half_max_width * mm)
+    canvas.line(nose_length * mm, 0 * mm, nose_length * mm, nose_width * mm)
+    canvas.line(waist_line * mm, 0 * mm, waist_line * mm, max_width * mm)
+    canvas.line(tail_line * mm, 0 * mm, tail_line * mm, tail_width * mm)
 
     path = canvas.beginPath()
     for index, point in enumerate(points, start=1):

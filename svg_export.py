@@ -3,9 +3,11 @@
 # Author: Zheng <me@BoardCAM.org>
 # Date: 2019-05-07
 # Desc: SVG生成
+
+from math import cos, sin, pi, sqrt
 from xml.etree import ElementTree
 
-from config import COPYRIGHT, SLOGAN
+from config import COPYRIGHT, SLOGAN, side_step
 from until import value_to_str
 
 
@@ -111,61 +113,64 @@ def export_svg(params, points, insert_coordinate_list):
     tree.write("board_profile.svg", xml_declaration=True, encoding="UTF-8")
 
 
-def draw_profile():
+def gen_circle_path(r, cx, cy):
     """
-
+    形成圆弧方程
+    :param r: 半径
+    :param cx: 圆心X坐标
+    :param cy: 圆心Y坐标
     :return:
     """
-    camber = 15
-    half_running_length = 580
-    nose_length = 180
     root = ElementTree.Element("svg")
     root.attrib = {"width": "100%", "height": "100%", "version": "1.1", "xmlns": "http://www.w3.org/2000/svg"}
 
-    ElementTree.SubElement(root, "line", value_to_str(
-        {"x1": 380, "y1": 600, "x2": 1540, "y2": 600, "style": "fill:none;stroke:black;stroke-width:1",
-         "stroke-dasharray": "5,5"}))
+    points = []
+    for angle in range(45, 90 + 1):
+        x = cx + r * cos(angle * pi / 180)
+        y = cy + r * sin(angle * pi / 180)
+        points.append([x, y])
 
-    ElementTree.SubElement(root, "circle",
-                           value_to_str(
-                               {"cx": 380, "cy": 300, "r": 300, "style": "fill:none;stroke:black;stroke-width:2"}))
-    ElementTree.SubElement(root, "circle",
-                           value_to_str(
-                               {"cx": 1540, "cy": 300, "r": 300, "style": "fill:none;stroke:black;stroke-width:2"}))
+    start = 180
+    end = 1340
+    r1 = 6000
+    bottom_camber_list = []
+    for x1 in range(start, end + side_step, side_step):
+        y1 = sqrt(pow(r1, 2) - pow(180 + 1160 / 2 - x1, 2))
+        y1 = r1 - y1
+        bottom_camber_list.append([x1, y1 + 200])
 
-    ElementTree.SubElement(root, "circle",
-                           value_to_str(
-                               {"cx": 580 + 180 + 200, "cy": 11798, "r": 11213.33,
-                                "style": "fill:none;stroke:black;stroke-width:2"}))
+    width = abs(points[0][0] - points[-1][0])
+    left_points = [[abs(point[0] - width), point[1]] for point in points]
+    left_points = move(bottom_camber_list[0][0], bottom_camber_list[0][1], left_points[::-1])
+    points = move(bottom_camber_list[-1][0], bottom_camber_list[-1][1], points[::-1])
 
-    r = (pow(580, 2) + 255) / 2 * camber
-    print(r)
-    # 生成SVG
-    tree = ElementTree.ElementTree(root)
-    tree.write("flex.svg", xml_declaration=True, encoding="UTF-8")
+    polyline_path = " ".join(["{},{}".format(point[0], point[1]) for point in points])
+    left_points_path = " ".join(["{},{}".format(point[0], point[1]) for point in left_points])
+    bottom_camber_path = " ".join(["{},{}".format(point[0], point[1]) for point in bottom_camber_list])
 
-
-def circle(cx, r, start, end):
-    root = ElementTree.Element("svg")
-    root.attrib = {"width": "100%", "height": "100%", "version": "1.1", "xmlns": "http://www.w3.org/2000/svg"}
-    import math
-    step = 10
-    # for x in range(start, end+step, step):
-    #     y = math.sqrt(pow(r, 2) - pow(cx-start, 2))
-    #     print(start, y)
-    polyline_path = ""
-    for x in range(start, end + step, step):
-        y = math.sqrt(pow(r, 2) - pow(180 + 1160 / 2 - x, 2))
-        y = r - y
-        print(x, y)
-        polyline_path += "{},{} ".format(x, y)
     ElementTree.SubElement(root, "polyline",
                            {"style": "fill:none;stroke:black;stroke-width:1", "points": polyline_path})
+    ElementTree.SubElement(root, "polyline",
+                           {"style": "fill:none;stroke:black;stroke-width:1", "points": bottom_camber_path})
+    ElementTree.SubElement(root, "polyline",
+                           {"style": "fill:none;stroke:black;stroke-width:1", "points": left_points_path})
     tree = ElementTree.ElementTree(root)
     tree.write("flex.svg", xml_declaration=True, encoding="UTF-8")
+
+
+def move(x, y, points):
+    """
+
+    :param x:
+    :param y:
+    :param points:
+    :return:
+    """
+    x_diff = points[0][0] - x
+    y_diff = points[0][1] - y
+
+    return [[point[0] - x_diff, point[1] - y_diff] for point in points]
 
 
 if __name__ == "__main__":
-    # draw_profile()
-
-    circle(760, 6000, 180, 1340)
+    gen_circle_path(300, 0, 0)

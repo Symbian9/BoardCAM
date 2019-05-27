@@ -124,7 +124,9 @@ def gen_circle_path(params):
     running_length = params.get("running_length")
     half_running_length = running_length / 2
     camber = params.get("camber")
-    camber_radius = (pow(half_running_length, 2) + pow(camber, 2))/30
+
+    # r^2 = (r-15)^2 + (half_running_length)^2
+    camber_radius = (pow(half_running_length, 2) + pow(camber, 2)) / camber * 2
 
     root = ElementTree.Element("svg")
     root.attrib = {"width": "100%", "height": "100%", "version": "1.1", "xmlns": "http://www.w3.org/2000/svg"}

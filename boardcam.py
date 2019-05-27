@@ -15,63 +15,41 @@ from svg_export import export_svg, gen_circle_path
 if __name__ == "__main__":
     # 参数含义参考docs/Configuration.md
     origin = (0, 0)
-
-    # Nose Shape
-    nose_width = 300
-    half_nose_width = nose_width / 2
-    nose_length = 180
-
-    # Tail Shape
-    tail_width = 300
-    half_tail_width = tail_width / 2
-    tail_length = 180
-
-    running_length = 1160
-    half_running_length = running_length / 2
-    overall_length = nose_length + running_length + tail_length
-    half_overall_length = overall_length / 2
-    sidecut_radius = 8000
-
-    # insert
-    inserts_number = 4
-    horizontal_spacing = 40
-    vertical_spacing = 40
-    stand_setback = 0
-    stand_width = 550
-
-    # profile
-    nose_tip_radius = 300
-    camber = 15
-    camber_setback = 0
-    tip_radius = 300
-    thickness = 7
-
-    # curve
-    end_handle = 0.4
-    transition_handle = 2
-
     params = {
-        "overall_length": overall_length,
-        "half_overall_length": overall_length / 2,
-        "running_length": running_length,
-        "half_running_length": half_running_length,
-        "nose_width": nose_width,
-        "half_nose_width": half_nose_width,
-        "half_tail_width": half_tail_width,
-        "tail_width": tail_width,
-        "nose_length": nose_length,
-        "tail_length": tail_length,
-        "sidecut_radius": sidecut_radius,
-        "stand_width": stand_width,
-        "stand_setback": stand_setback,
-        "horizontal_spacing": horizontal_spacing,
-        "vertical_spacing": vertical_spacing,
-        "inserts_number": inserts_number,
-        "end_handle": end_handle,
-        "transition_handle": transition_handle,
-        "tip_radius": tip_radius,
-        "camber": camber,
+        # Nose Shape
+        "nose_width": 300,
+        "nose_length": 180,
+
+        # Tail Shape
+        "tail_width": 300,
+        "tail_length": 180,
+
+        "running_length": 1160,
+        "sidecut_radius": 8000,
+
+        # insert
+        "stand_width": 550,
+        "stand_setback": 0,
+        "horizontal_spacing": 40,
+        "vertical_spacing": 40,
+        "inserts_number": 4,
+
+        # curve
+        "end_handle": 0.4,
+        "transition_handle": 2,
+
+        # profile
+        "tip_radius": 300,
+        "camber": 15,
+        "thickness":  7,
+        "camber_setback": 0,
     }
+    params.update({
+        "half_nose_width": params.get("nose_width") / 2,
+        "half_tail_width": params.get("tail_width") / 2,
+        "half_running_length": params.get("running_length") / 2,
+        "overall_length": params.get("nose_length") + params.get("running_length") + params.get("tail_length")
+    })
 
     # 板头&板尾曲线路径生成
     upper_left_list, lower_left_list, upper_right_list, lower_right_list = gen_curve(params)

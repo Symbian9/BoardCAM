@@ -9,6 +9,7 @@ from xml.etree import ElementTree
 
 from config import COPYRIGHT, SLOGAN, side_step
 from until import value_to_str
+from math_tools import cal_radius
 
 
 def init_svg(params):
@@ -122,11 +123,10 @@ def gen_circle_path(params):
     tip_radius = params.get("tip_radius")
     nose_length = params.get("nose_length")
     running_length = params.get("running_length")
-    half_running_length = running_length / 2
     camber = params.get("camber")
 
     # r^2 = (r-15)^2 + (half_running_length)^2
-    camber_radius = (pow(half_running_length, 2) + pow(camber, 2)) / camber * 2
+    camber_radius = cal_radius(running_length, camber)
 
     root = ElementTree.Element("svg")
     root.attrib = {"width": "100%", "height": "100%", "version": "1.1", "xmlns": "http://www.w3.org/2000/svg"}

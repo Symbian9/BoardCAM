@@ -8,8 +8,8 @@ from math import cos, sin, pi, sqrt
 from xml.etree import ElementTree
 
 from config import COPYRIGHT, SLOGAN, side_step
-from until import value_to_str
 from math_tools import cal_radius
+from until import value_to_str
 
 
 def init_svg(params):
@@ -21,13 +21,14 @@ def init_svg(params):
     root = ElementTree.Element("svg")
     root.attrib = {"width": "100%", "height": "100%", "version": "1.1", "xmlns": "http://www.w3.org/2000/svg"}
 
-    half_nose_width = params.get("half_nose_width")
-    half_running_length = params.get("half_running_length")
     nose_width = params.get("nose_width")
+    half_nose_width = nose_width / 2
     nose_length = params.get("nose_length")
-    running_length = params.get("running_length")
-    overall_length = params.get("overall_length")
     tail_width = params.get("tail_width")
+    tail_length = params.get("tail_length")
+    running_length = params.get("running_length")
+    half_running_length = running_length / 2
+    overall_length = nose_length + running_length + tail_length
 
     frame = ElementTree.SubElement(root, "g", {"style": "stroke:#000000;stroke-width:1;", "stroke-dasharray": "5,5"})
 

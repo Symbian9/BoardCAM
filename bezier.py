@@ -39,9 +39,11 @@ def gen_curve(params):
     end_handle = params.get("end_handle")
     transition_handle = params.get("transition_handle")
     nose_length = params.get("nose_length")
+    nose_width = params.get("nose_width")
     tail_length = params.get("tail_length")
-    half_nose_width = params.get("half_nose_width")
-    half_tail_width = params.get("half_tail_width")
+    tail_width = params.get("tail_width")
+    half_nose_width = nose_width / 2
+    half_tail_width = tail_width / 2
     running_length = params.get("running_length")
 
     left_bezier_points = (

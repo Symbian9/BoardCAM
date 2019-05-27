@@ -35,13 +35,14 @@ def export_pdf(params, points, insert_coordinate_list):
     :param insert_coordinate_list:
     :return:
     """
-    overall_length = params.get("overall_length")
     nose_width = params.get("nose_width")
     tail_width = params.get("tail_width")
     max_width = max(nose_width, tail_width)
     half_max_width = max_width / 2
     nose_length = params.get("nose_length")
+    tail_length = params.get("tail_length")
     running_length = params.get("running_length")
+    overall_length = nose_length + running_length + tail_length
     waist_line = running_length / 2 + nose_length
     tail_line = nose_length + running_length
 

@@ -44,12 +44,6 @@ if __name__ == "__main__":
         "thickness":  7,
         "camber_setback": 0,
     }
-    params.update({
-        "half_nose_width": params.get("nose_width") / 2,
-        "half_tail_width": params.get("tail_width") / 2,
-        "half_running_length": params.get("running_length") / 2,
-        "overall_length": params.get("nose_length") + params.get("running_length") + params.get("tail_length")
-    })
 
     # 板头&板尾曲线路径生成
     upper_left_list, lower_left_list, upper_right_list, lower_right_list = gen_curve(params)

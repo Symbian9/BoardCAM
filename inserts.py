@@ -20,13 +20,16 @@ def gen_inserts(params):
     half_vertical_spacing = vertical_spacing / 2
     half_horizontal_spacing = horizontal_spacing / 2
     nose_length = params.get("nose_length")
-    half_running_length = params.get("half_running_length")
+    nose_width = params.get("nose_width")
+    running_length = params.get("running_length")
+
+    half_running_length = running_length / 2
 
     # 竖直中线
     vertical_mid_line = nose_length + half_running_length
 
     # 水平中线
-    horizontal_mid_line = params.get("half_nose_width")
+    horizontal_mid_line = nose_width / 2
 
     insert_coordinate_list = []
 

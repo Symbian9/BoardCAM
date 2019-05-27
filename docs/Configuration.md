@@ -19,4 +19,7 @@
 * vertical spacing: 垂直相邻嵌件之间的间距
 
 * end_handle: 板头板尾宽度百分比
-* "transition_handle: 板头板尾长度百分比,
+* transition_handle: 板头板尾长度百分比
+
+* tip radius: 板头&板尾上翘弧度半径
+

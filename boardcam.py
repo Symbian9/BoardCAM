@@ -10,7 +10,7 @@ from bezier import gen_curve
 from gcode_export import export_gcode
 from inserts import gen_inserts
 from pdf_export import export_pdf
-from svg_export import export_svg
+from svg_export import export_svg, gen_circle_path
 
 if __name__ == "__main__":
     # 参数含义参考docs/Configuration.md
@@ -43,7 +43,7 @@ if __name__ == "__main__":
     nose_tip_radius = 300
     camber = 15
     camber_setback = 0
-    tail_tip_radius = 300
+    tip_radius = 300
     thickness = 7
 
     # curve
@@ -69,6 +69,8 @@ if __name__ == "__main__":
         "inserts_number": inserts_number,
         "end_handle": end_handle,
         "transition_handle": transition_handle,
+        "tip_radius": tip_radius,
+        "camber": camber,
     }
 
     # 板头&板尾曲线路径生成
@@ -91,3 +93,4 @@ if __name__ == "__main__":
     export_pdf(params, points, insert_coordinate_list)
     export_svg(params, points, insert_coordinate_list)
     export_gcode(points)
+    gen_circle_path(params)

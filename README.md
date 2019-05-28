@@ -6,8 +6,11 @@ A ski/snowboard [CAD](https://zh.wikipedia.org/zh-hans/%E8%AE%A1%E7%AE%97%E6%9C%
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
-
-Python 3.7.3
+* 数学知识: 勾股定理、各种曲线(抛物线 双曲线 贝塞尔曲线)、三角函数公式(sin cos tan)、圆和椭圆方程等
+* 机械加工的经验、CAD/CAM软件使用经验
+* PDF、SVG、DXF文件格式语法
+* 滑雪板制造
+* python3编程能力
 
 ```
 Give examples

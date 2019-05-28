@@ -153,16 +153,14 @@ def gen_circle_path(params):
     left_points = move(camber_list[0][0], camber_list[0][1], left_points[::-1])
     right_points = move(camber_list[-1][0], camber_list[-1][1], points[::-1])
 
-    tail_tip_path = " ".join(["{},{}".format(point[0], point[1]) for point in right_points])
-    nose_tip_path = " ".join(["{},{}".format(point[0], point[1]) for point in left_points])
-    bottom_camber_path = " ".join(["{},{}".format(point[0], point[1]) for point in camber_list])
+    new_points = []
+    new_points.extend(left_points[::-1])
+    new_points.extend(camber_list)
+    new_points.extend(right_points)
 
+    profile_path = " ".join(["{},{}".format(point[0], point[1]) for point in new_points])
     ElementTree.SubElement(root, "polyline",
-                           {"style": "fill:none;stroke:black;stroke-width:1", "points": nose_tip_path})
-    ElementTree.SubElement(root, "polyline",
-                           {"style": "fill:none;stroke:black;stroke-width:1", "points": bottom_camber_path})
-    ElementTree.SubElement(root, "polyline",
-                           {"style": "fill:none;stroke:black;stroke-width:1", "points": tail_tip_path})
+                           {"style": "fill:none;stroke:black;stroke-width:1", "points": profile_path})
 
     tree = ElementTree.ElementTree(root)
     tree.write("flex.svg", xml_declaration=True, encoding="UTF-8")

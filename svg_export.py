@@ -8,7 +8,7 @@ from math import cos, sin, pi, sqrt
 from xml.etree import ElementTree
 
 from config import COPYRIGHT, SLOGAN, side_step
-from math_tools import cal_radius
+from math_tools import cal_radius, arc_to_angle, RIGHT_ANGLE, FLAT_ANGLE
 from until import value_to_str
 
 
@@ -126,7 +126,6 @@ def gen_circle_path(params):
     running_length = params.get("running_length")
     camber = params.get("camber")
 
-    # r^2 = (r-15)^2 + (half_running_length)^2
     camber_radius = cal_radius(running_length, camber)
 
     root = ElementTree.Element("svg")
@@ -134,14 +133,17 @@ def gen_circle_path(params):
 
     points = []
     cx, cy = 0, 0
-    for angle in range(45, 90 + 1):
-        x = cx + tip_radius * cos(angle * pi / 180)
-        y = cy + tip_radius * sin(angle * pi / 180)
+    angle = int(arc_to_angle(nose_length, tip_radius))
+    angle_offset = 10
+    for angle in range(RIGHT_ANGLE - angle - angle_offset, RIGHT_ANGLE + 1):
+        x = cx + tip_radius * cos(angle * pi / FLAT_ANGLE)
+        y = cy + tip_radius * sin(angle * pi / FLAT_ANGLE)
         points.append([x, y])
 
+    offset = 200
     camber_list = []
-    for x1 in range(nose_length, nose_length + running_length + side_step, side_step):
-        y1 = sqrt(pow(camber_radius, 2) - pow(180 + 1160 / 2 - x1, 2))
+    for x1 in range(nose_length + offset, nose_length + running_length + side_step + offset, side_step):
+        y1 = sqrt(pow(camber_radius, 2) - pow(offset + nose_length + running_length / 2 - x1, 2))
         y1 = camber_radius - y1
         camber_list.append([x1, y1 + 200])
 

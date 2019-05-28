@@ -4,7 +4,11 @@
 # Date: 2019-05-07
 # Desc: 常用数学函数封装
 
-from math import sqrt, pow
+from math import sqrt, pow, pi
+
+RIGHT_ANGLE = 90
+FLAT_ANGLE = 180
+WEEK_ANGLE = 360
 
 
 def cal_waist_width(running_length, sidecut_radius):
@@ -23,7 +27,7 @@ def cal_waist_width(running_length, sidecut_radius):
 
 def cal_radius(running_length, camber):
     """
-
+    r^2 = (r-15)^2 + (half_running_length)^2
     :param running_length:
     :param camber:
     :return:
@@ -47,5 +51,11 @@ def mm_to_dpi(mm):
     return dpi
 
 
-if __name__ == "__main__":
-    r = cal_radius(1260, 12)
+def arc_to_angle(arc_length, radius):
+    """
+    将弧长转换为圆心角度数
+    :param arc_length: 圆心角弧长
+    :param radius: 半径
+    :return:
+    """
+    return arc_length / pi / (radius / FLAT_ANGLE)

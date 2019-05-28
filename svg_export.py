@@ -30,17 +30,17 @@ def init_svg(params):
     half_running_length = running_length / 2
     overall_length = nose_length + running_length + tail_length
 
-    frame = ElementTree.SubElement(root, "g", {"style": "stroke:#000000;stroke-width:1;", "stroke-dasharray": "5,5"})
+    frame = ElementTree.SubElement(root, "g", {"style": "stroke:#000000;stroke-width:1;", "stroke-dasharray": "1,1"})
 
     # 板头垂直虚线
     ElementTree.SubElement(frame, "line",
-                           value_to_str({"x1": nose_length, "y1": 0 + 5, "x2": nose_length,
-                                         "y2": nose_width - 5}))
+                           value_to_str({"x1": nose_length, "y1": 0 + 1, "x2": nose_length,
+                                         "y2": nose_width - 1}))
 
     # 板尾垂直虚线
     ElementTree.SubElement(frame, "line",
-                           value_to_str({"x1": nose_length + running_length, "y1": 0 + 5,
-                                         "x2": nose_length + running_length, "y2": tail_width - 5}))
+                           value_to_str({"x1": nose_length + running_length, "y1": 0 + 1,
+                                         "x2": nose_length + running_length, "y2": tail_width - 1}))
 
     # 水平中线虚线
     ElementTree.SubElement(frame, "line",

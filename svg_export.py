@@ -149,6 +149,7 @@ def gen_circle_path(params):
 
     # 上翘弧线宽度
     width = abs(points[0][0] - points[-1][0])
+    height = abs(points[0][1] - points[-1][1])
     left_points = [[abs(point[0] - width), point[1]] for point in points]
     left_points = move(camber_list[0][0], camber_list[0][1], left_points[::-1])
     right_points = move(camber_list[-1][0], camber_list[-1][1], points[::-1])
@@ -160,7 +161,9 @@ def gen_circle_path(params):
                            {"style": "fill:none;stroke:black;stroke-width:1", "points": profile_path})
 
     tree = ElementTree.ElementTree(root)
-    tree.write("flex.svg", xml_declaration=True, encoding="UTF-8")
+    tree.write("profile.svg", xml_declaration=True, encoding="UTF-8")
+
+    return profile_points, height
 
 
 def move(x, y, points):

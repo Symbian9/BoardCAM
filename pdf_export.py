@@ -27,6 +27,47 @@ def draw_insert(canvas, x, y):
     return canvas
 
 
+def draw_profile(points, height):
+    """
+    绘制模具轮廓
+    :param points: 轮廓的点
+    :param height: 上翘圆弧的高度
+    :return:
+    """
+    buffer = io.BytesIO()
+    canvas = c.Canvas(buffer, pagesize=(1800 * mm, 200 * mm))
+    canvas.setLineWidth(4)
+
+    # 设置不压缩PDF stream
+    canvas.setPageCompression(0)
+    canvas._filename = "profile.pdf"
+
+    # 设置辅助线 点距
+    canvas.setDash(10, 3)
+
+    # 设置辅助线透明度
+    canvas.setStrokeAlpha(0.4)
+    canvas.setLineWidth(0.5)
+
+    path = canvas.beginPath()
+    for index, point in enumerate(points, start=1):
+        x, y = point
+        x -= 50
+        y = height * 2 - y+100
+        if index == 1:
+            path.moveTo(x * mm, y * mm)
+        else:
+            path.lineTo(x * mm, y * mm)
+
+    canvas.setDash()
+    canvas.setStrokeAlpha(1)
+    canvas.setLineWidth(1)
+    canvas.drawPath(path, stroke=1, fill=0)
+
+    canvas.showPage()
+    canvas.save()
+
+
 def export_pdf(params, points, insert_coordinate_list):
     """
     绘制PDF

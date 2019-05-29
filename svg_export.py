@@ -153,12 +153,9 @@ def gen_circle_path(params):
     left_points = move(camber_list[0][0], camber_list[0][1], left_points[::-1])
     right_points = move(camber_list[-1][0], camber_list[-1][1], points[::-1])
 
-    new_points = []
-    new_points.extend(left_points[::-1])
-    new_points.extend(camber_list)
-    new_points.extend(right_points)
+    profile_points = left_points[::-1] + camber_list + right_points
 
-    profile_path = " ".join(["{},{}".format(point[0], point[1]) for point in new_points])
+    profile_path = " ".join(["{},{}".format(point[0], point[1]) for point in profile_points])
     ElementTree.SubElement(root, "polyline",
                            {"style": "fill:none;stroke:black;stroke-width:1", "points": profile_path})
 

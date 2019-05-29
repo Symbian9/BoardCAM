@@ -41,22 +41,16 @@ if __name__ == "__main__":
         # profile
         "tip_radius": 300,
         "camber": 15,
-        "thickness":  7,
+        "thickness": 7,
         "camber_setback": 0,
     }
 
     # 板头&板尾曲线路径生成
     upper_left_list, lower_left_list, upper_right_list, lower_right_list = gen_curve(params)
 
-    # 有效边刃路径生成
-    points = []
+    # 路径生成
     top_list, bottom_list = gen_arc(params)
-    points.extend(lower_left_list)
-    points.extend(top_list)
-    points.extend(lower_right_list)
-    points.extend(upper_right_list)
-    points.extend(bottom_list)
-    points.extend(upper_left_list)
+    points = lower_left_list + top_list + lower_right_list + upper_right_list + bottom_list + upper_left_list
 
     # 嵌件路径生成
     insert_coordinate_list = gen_inserts(params)

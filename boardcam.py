@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
         # profile
         "tip_radius": 300,
-        "camber": 15,
+        "camber": 0,
         "thickness": 7,
         "camber_setback": 0,
     }

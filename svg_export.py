@@ -9,7 +9,7 @@ from xml.etree import ElementTree
 
 from config import COPYRIGHT, SLOGAN, side_step
 from math_tools import cal_radius, arc_to_angle, RIGHT_ANGLE, FLAT_ANGLE
-from path import move
+from path import move, move_path
 from until import value_to_str
 
 
@@ -126,8 +126,8 @@ def gen_circle_path(params):
     nose_length = params.get("nose_length")
     running_length = params.get("running_length")
     camber = params.get("camber")
-
-    camber_radius = cal_radius(running_length, camber)
+    if camber == 0:
+        pass
 
     root = ElementTree.Element("svg")
     root.attrib = {"width": "100%", "height": "100%", "version": "1.1", "xmlns": "http://www.w3.org/2000/svg"}
@@ -143,10 +143,14 @@ def gen_circle_path(params):
 
     offset = 200
     camber_list = []
-    for x1 in range(nose_length + offset, nose_length + running_length + side_step + offset, side_step):
-        y1 = sqrt(pow(camber_radius, 2) - pow(offset + nose_length + running_length / 2 - x1, 2))
-        y1 = camber_radius - y1
-        camber_list.append([x1, y1 + 200])
+    if camber > 0:
+        camber_radius = cal_radius(running_length, camber)
+        for x1 in range(nose_length + offset, nose_length + running_length + side_step + offset, side_step):
+            y1 = sqrt(pow(camber_radius, 2) - pow(offset + nose_length + running_length / 2 - x1, 2))
+            y1 = camber_radius - y1
+            camber_list.append([x1, y1 + 200])
+    elif camber == 0:
+        camber_list = [[x, 0] for x in range(0, running_length, side_step)]
 
     # 上翘弧线宽度
     width = abs(points[0][0] - points[-1][0])
@@ -156,6 +160,7 @@ def gen_circle_path(params):
     right_points = move(camber_list[-1][0], camber_list[-1][1], points[::-1])
 
     profile_points = left_points[::-1] + camber_list + right_points
+    profile_points = move(0, 0, profile_points)
 
     profile_path = " ".join(["{},{}".format(point[0], point[1]) for point in profile_points])
     ElementTree.SubElement(root, "polyline",

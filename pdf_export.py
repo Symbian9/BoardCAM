@@ -10,7 +10,7 @@ import math
 from reportlab.lib.units import mm
 from reportlab.pdfgen import canvas as c
 
-from svg_export import move
+from path import move
 
 filename = "board_profile.pdf"
 

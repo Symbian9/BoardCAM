@@ -5,6 +5,7 @@
 # Desc: 贝塞尔曲线
 
 from config import bezier_step
+from path import mirror_path, move_path
 
 
 def bezier(bezier_points):
@@ -64,27 +65,3 @@ def gen_curve(params):
     upper_right_list = move_path(temp2[::-1], offset, 0)
     lower_right_list = mirror_path(upper_right_list, 0, half_tail_width)
     return upper_left_list[::-1], lower_left_list, upper_right_list[::-1], lower_right_list
-
-
-def mirror_path(points, width, length):
-    """
-    生成镜像路径
-    :param points: 路径
-    :param width: 按Y轴进行轴对称变化, width置0
-    :param length: 按X轴进行轴对称变化, length置0
-    :return:
-    """
-    width = int(width)
-    length = int(length)
-    return [[abs(width * 2 - point[0]), abs(length * 2 - point[1])] for point in points]
-
-
-def move_path(points, x_offset, y_offset):
-    """
-    平移函数
-    :param points:
-    :param x_offset: X坐标偏移量
-    :param y_offset: Y坐标偏移量
-    :return:
-    """
-    return [[point[0] + x_offset, point[1] + y_offset] for point in points]

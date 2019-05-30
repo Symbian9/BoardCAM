@@ -9,6 +9,7 @@ from xml.etree import ElementTree
 
 from config import COPYRIGHT, SLOGAN, side_step
 from math_tools import cal_radius, arc_to_angle, RIGHT_ANGLE, FLAT_ANGLE
+from path import move
 from until import value_to_str
 
 
@@ -164,17 +165,3 @@ def gen_circle_path(params):
     tree.write("profile.svg", xml_declaration=True, encoding="UTF-8")
 
     return profile_points, height
-
-
-def move(x, y, points):
-    """
-    将线段平移到某一点上
-    :param x:
-    :param y:
-    :param points:
-    :return:
-    """
-    x_diff = points[0][0] - x
-    y_diff = points[0][1] - y
-
-    return [[point[0] - x_diff, point[1] - y_diff] for point in points]

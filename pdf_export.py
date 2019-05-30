@@ -106,10 +106,10 @@ def export_pdf(params, points, insert_coordinate_list):
     canvas.setLineWidth(0.5)
 
     # 虚线辅助线
-    canvas.line(0, half_max_width * mm, overall_length * mm, half_max_width * mm)
-    canvas.line(nose_length * mm, 0 * mm, nose_length * mm, nose_width * mm)
-    canvas.line(waist_line * mm, 0 * mm, waist_line * mm, max_width * mm)
-    canvas.line(tail_line * mm, 0 * mm, tail_line * mm, tail_width * mm)
+    canvas.line(0, (half_max_width + border) * mm, (overall_length + 2 * border) * mm, (half_max_width + border) * mm)
+    canvas.line((nose_length + border) * mm, 0 * mm, (nose_length + border) * mm, (nose_width + 2 * border) * mm)
+    canvas.line((waist_line + border) * mm, 0 * mm, (waist_line + border) * mm, (max_width + 2 * border) * mm)
+    canvas.line((tail_line + border) * mm, 0 * mm, (tail_line + border) * mm, (tail_width + 2 * border) * mm)
 
     points = move_path(points, border, border)
     path = canvas.beginPath()

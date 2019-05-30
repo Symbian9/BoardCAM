@@ -14,3 +14,5 @@ bezier_step = 0.01
 side_step = 10
 angle_step = 1
 
+# pdf 边框
+border = 20

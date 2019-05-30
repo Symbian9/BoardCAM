@@ -10,7 +10,8 @@ import math
 from reportlab.lib.units import mm
 from reportlab.pdfgen import canvas as c
 
-from path import move
+from config import border
+from path import move, move_path
 
 filename = "board_profile.pdf"
 
@@ -37,7 +38,6 @@ def draw_profile(points, height):
     :param height: 上翘圆弧的高度
     :return:
     """
-    border = 20
     width = abs(points[0][0] - points[-1][0])
     height = math.ceil(height)
     width = math.ceil(width)
@@ -90,7 +90,8 @@ def export_pdf(params, points, insert_coordinate_list):
     tail_line = nose_length + running_length
 
     buffer = io.BytesIO()
-    canvas = c.Canvas(buffer, pagesize=(overall_length * mm, max_width * mm))
+    pagesize = [overall_length + border * 2, max_width + border * 2]
+    canvas = c.Canvas(buffer, pagesize=(pagesize[0] * mm, pagesize[1] * mm))
     canvas.setLineWidth(4)
 
     # 设置不压缩PDF stream
@@ -110,6 +111,7 @@ def export_pdf(params, points, insert_coordinate_list):
     canvas.line(waist_line * mm, 0 * mm, waist_line * mm, max_width * mm)
     canvas.line(tail_line * mm, 0 * mm, tail_line * mm, tail_width * mm)
 
+    points = move_path(points, border, border)
     path = canvas.beginPath()
     for index, point in enumerate(points, start=1):
         x, y = point

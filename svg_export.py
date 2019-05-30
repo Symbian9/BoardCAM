@@ -4,12 +4,13 @@
 # Date: 2019-05-07
 # Desc: SVG生成
 
-from math import cos, sin, pi, sqrt
+from math import sqrt
 from xml.etree import ElementTree
 
+from circle import gen_circle_path
 from config import COPYRIGHT, SLOGAN, side_step
-from math_tools import cal_radius, arc_to_angle, RIGHT_ANGLE, FLAT_ANGLE
-from path import move, move_path
+from math_tools import cal_radius, arc_to_angle, RIGHT_ANGLE
+from path import move
 from until import value_to_str
 
 
@@ -116,7 +117,7 @@ def export_svg(params, points, insert_coordinate_list):
     tree.write("board_profile.svg", xml_declaration=True, encoding="UTF-8")
 
 
-def gen_circle_path(params):
+def gen_profile_path(params):
     """
     生成圆弧方程
     :param params:
@@ -126,20 +127,14 @@ def gen_circle_path(params):
     nose_length = params.get("nose_length")
     running_length = params.get("running_length")
     camber = params.get("camber")
-    if camber == 0:
-        pass
 
     root = ElementTree.Element("svg")
     root.attrib = {"width": "100%", "height": "100%", "version": "1.1", "xmlns": "http://www.w3.org/2000/svg"}
 
-    points = []
     cx, cy = 0, 0
     angle = int(arc_to_angle(nose_length, tip_radius))
     angle_offset = 10
-    for angle in range(RIGHT_ANGLE - angle - angle_offset, RIGHT_ANGLE + 1):
-        x = cx + tip_radius * cos(angle * pi / FLAT_ANGLE)
-        y = cy + tip_radius * sin(angle * pi / FLAT_ANGLE)
-        points.append([x, y])
+    points = gen_circle_path(cx, cy, tip_radius, RIGHT_ANGLE - angle - angle_offset, RIGHT_ANGLE)
 
     offset = 200
     camber_list = []

@@ -10,7 +10,7 @@ from bezier import gen_curve
 from gcode_export import export_gcode
 from inserts import gen_inserts
 from pdf_export import export_pdf, draw_profile
-from svg_export import export_svg, gen_circle_path
+from svg_export import export_svg, gen_profile_path
 
 if __name__ == "__main__":
     # 参数含义参考docs/Configuration.md
@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
         # profile
         "tip_radius": 300,
-        "camber": 0,
+        "camber": 15,
         "thickness": 7,
         "camber_setback": 0,
     }
@@ -59,5 +59,5 @@ if __name__ == "__main__":
     export_pdf(params, points, insert_coordinate_list)
     export_svg(params, points, insert_coordinate_list)
     export_gcode(points)
-    profile_points, height = gen_circle_path(params)
+    profile_points, height = gen_profile_path(params)
     draw_profile(profile_points, height)

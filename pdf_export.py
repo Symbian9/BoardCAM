@@ -5,9 +5,12 @@
 # Desc: PDF
 
 import io
+import math
 
 from reportlab.lib.units import mm
 from reportlab.pdfgen import canvas as c
+
+from svg_export import move
 
 filename = "board_profile.pdf"
 
@@ -34,26 +37,25 @@ def draw_profile(points, height):
     :param height: 上翘圆弧的高度
     :return:
     """
+    border = 20
+    width = abs(points[0][0] - points[-1][0])
+    height = math.ceil(height)
+    width = math.ceil(width)
     buffer = io.BytesIO()
-    canvas = c.Canvas(buffer, pagesize=(1800 * mm, 200 * mm))
+    pagesize = [width + border * 2, height + border * 2]
+    canvas = c.Canvas(buffer, pagesize=(pagesize[0] * mm, pagesize[1] * mm))
     canvas.setLineWidth(4)
 
     # 设置不压缩PDF stream
     canvas.setPageCompression(0)
     canvas._filename = "profile.pdf"
 
-    # 设置辅助线 点距
-    canvas.setDash(10, 3)
-
-    # 设置辅助线透明度
-    canvas.setStrokeAlpha(0.4)
-    canvas.setLineWidth(0.5)
-
+    # 水平翻转
+    points = [[point[0], height * 2 - point[1]] for point in points]
+    points = move(border, height + border, points)
     path = canvas.beginPath()
     for index, point in enumerate(points, start=1):
         x, y = point
-        x -= 50
-        y = height * 2 - y+100
         if index == 1:
             path.moveTo(x * mm, y * mm)
         else:

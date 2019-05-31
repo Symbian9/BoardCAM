@@ -9,7 +9,7 @@ from math import cos, sin, pi
 from math_tools import STRAIGHT_ANGLE
 
 
-def draw_circle_path(cx, cy, r, start_angle, end_angle):
+def draw_circle_path(cx, cy, r, start_angle=0, end_angle=360):
     """
     生成指定圆心的圆路径点
     :param cx: 圆心X坐标

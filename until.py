@@ -12,8 +12,8 @@ def value_to_str(dict_obj):
     :return:
     """
     if not isinstance(dict_obj, dict):
-        return "1"
-    return {str(key): str(dict_obj.get(key)) for key in dict_obj}
+        return None
+    return {str(k): str(v) for k, v in dict_obj.items()}
 
 
 def list_to_str(list_obj):
@@ -23,6 +23,5 @@ def list_to_str(list_obj):
     :return:
     """
     list_obj = [str(i) for i in list_obj]
-    list_obj = " ".join(list_obj)
 
-    return "[{}]".format(list_obj)
+    return "[{}]".format(" ".join(list_obj))

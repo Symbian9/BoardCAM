@@ -6,9 +6,10 @@
 
 from math import sqrt, pow, pi
 
+ZERO_ANGLE = 0
 RIGHT_ANGLE = 90
-FLAT_ANGLE = 180
-WEEK_ANGLE = 360
+STRAIGHT_ANGLE = 180
+FULL_ANGLE = 360
 
 
 def cal_waist_width(running_length, sidecut_radius):
@@ -58,4 +59,4 @@ def arc_to_angle(arc_length, radius):
     :param radius: 半径
     :return:
     """
-    return arc_length / pi / (radius / FLAT_ANGLE)
+    return arc_length / pi / (radius / STRAIGHT_ANGLE)

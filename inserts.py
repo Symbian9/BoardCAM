@@ -22,7 +22,6 @@ def gen_inserts(params):
     nose_length = params.get("nose_length")
     nose_width = params.get("nose_width")
     running_length = params.get("running_length")
-
     half_running_length = running_length / 2
 
     # 竖直中线

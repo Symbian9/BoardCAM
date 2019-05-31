@@ -29,8 +29,8 @@ def cal_waist_width(running_length, sidecut_radius):
 def cal_radius(running_length, camber):
     """
     r^2 = (r-15)^2 + (half_running_length)^2
-    :param running_length:
-    :param camber:
+    :param running_length: 行程长度
+    :param camber: 拱起高度
     :return:
     """
     half_running_length = running_length / 2

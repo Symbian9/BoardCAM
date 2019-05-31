@@ -14,5 +14,12 @@ bezier_step = 0.01
 side_step = 10
 angle_step = 1
 
-# pdf 边框
+# pdf 四周留白宽度
 border = 20
+
+# 工程图纸宽度 (单位: mm)
+A0 = 914
+A1 = 620
+A2 = 440
+A3 = 310
+A4 = 297

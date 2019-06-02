@@ -5,8 +5,8 @@
 # Desc: BoardCAM主程序
 
 
-from arc import gen_arc
 from bezier import gen_curve
+from edge import arc_edge, flat_edge
 from gcode_export import export_gcode
 from inserts import gen_inserts
 from pdf_export import export_pdf, draw_profile
@@ -49,7 +49,7 @@ if __name__ == "__main__":
     upper_left_list, lower_left_list, upper_right_list, lower_right_list = gen_curve(params)
 
     # 路径生成
-    top_list, bottom_list = gen_arc(params)
+    top_list, bottom_list = arc_edge(params)
     points = lower_left_list + top_list + lower_right_list + upper_right_list + bottom_list + upper_left_list
 
     # 嵌件路径生成

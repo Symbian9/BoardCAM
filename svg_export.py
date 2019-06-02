@@ -32,7 +32,8 @@ def init_svg(params):
     half_running_length = running_length / 2
     overall_length = nose_length + running_length + tail_length
 
-    frame = ElementTree.SubElement(root, "g", {"style": "stroke:#000000;stroke-width:1;", "stroke-dasharray": "1,1"})
+    frame = ElementTree.SubElement(root, "g", {"style": "stroke:#000000;stroke-width:1;stroke-opacity:0.3",
+                                               "stroke-dasharray": "7,3"})
 
     # 板头垂直虚线
     ElementTree.SubElement(frame, "line",

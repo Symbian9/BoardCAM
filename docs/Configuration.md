@@ -22,4 +22,5 @@
 * transition_handle: 板头板尾长度百分比
 
 * tip radius: 板头&板尾上翘弧度半径
+* Effective Edge: 有效边刃
 

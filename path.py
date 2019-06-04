@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Author: Zheng <me@BoardCAM.org>
 # Date: 2019-05-07
-# Desc:
+# Desc: 路径处理
 
 
 def mirror_path(points, width, length):

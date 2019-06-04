@@ -7,7 +7,7 @@
 
 def gen_inserts(params):
     """
-    从竖中线向左右两侧生成嵌件位置
+    从竖中线向左右两侧生成每个嵌件的坐标
     :param params:
     :return: 每个嵌件的坐标List
     """

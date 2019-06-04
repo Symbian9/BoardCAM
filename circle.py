@@ -6,10 +6,10 @@
 
 from math import cos, sin, pi
 
-from math_tools import STRAIGHT_ANGLE
+from math_tools import STRAIGHT_ANGLE, FULL_ANGLE, ZERO_ANGLE
 
 
-def draw_circle_path(cx, cy, r, start_angle=0, end_angle=360):
+def draw_circle_path(cx, cy, r, start_angle=ZERO_ANGLE, end_angle=FULL_ANGLE):
     """
     生成指定圆心的圆路径点
     :param cx: 圆心X坐标
@@ -20,11 +20,12 @@ def draw_circle_path(cx, cy, r, start_angle=0, end_angle=360):
     :return:
     """
     points = []
-    points_path = ""
+    # points_path = ""
     for angle in range(start_angle, end_angle + 1):
         x = cx + r * cos(angle * pi / STRAIGHT_ANGLE)
         y = cy + r * sin(angle * pi / STRAIGHT_ANGLE)
         points.append([x, y])
         # points_path += "{},{} ".format(x, y)
 
+    # print("points_path: {}".format(points_path))
     return points

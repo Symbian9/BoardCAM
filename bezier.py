@@ -14,12 +14,11 @@ def bezier(bezier_points):
     :param bezier_points:
     :return:
     """
-    # P0和P3是endpoints, P1和P2是control points
-    # 所有点的个数P0 P1... Pn
+    # P0和Pn是endpoints, P1,P2...Pn-1是control points
     end = 1
     step_count = int(end / bezier_step)
     points_no = len(bezier_points) - 1
-    temp = []
+    curve_points = []
     for t in range(step_count + 1):
         t *= bezier_step
         x, y = 0, 0
@@ -27,8 +26,8 @@ def bezier(bezier_points):
             x += point[0] * pow(1 - t, points_no - index) * pow(t, index)
             y += point[1] * pow(1 - t, points_no - index) * pow(t, index)
 
-        temp.append([x, y])
-    return temp
+        curve_points.append([x, y])
+    return curve_points
 
 
 def gen_curve(params):

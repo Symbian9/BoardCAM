@@ -23,7 +23,7 @@ def cal_waist_width(running_length, sidecut_radius):
     # print(waist_remain)
     # waist_width = nose_width - waist_remain * 2
     # print(round(waist_width, 3))
-    return sqrt(pow(sidecut_radius, 2) - pow(running_length / 2, 2))
+    return sidecut_radius - sqrt(pow(sidecut_radius, 2) - pow(running_length / 2, 2))
 
 
 def cal_radius(running_length, camber):

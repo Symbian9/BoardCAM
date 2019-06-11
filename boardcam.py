@@ -6,11 +6,46 @@
 
 
 from bezier import gen_curve
-from edge import arc_edge, flat_edge
+from edge import arc_edge
 from gcode_export import export_gcode
 from inserts import gen_inserts
+from math_tools import cal_waist_width
 from pdf_export import export_pdf, draw_profile
+from points import Point
 from svg_export import export_svg, gen_profile_path
+
+
+def frame(params):
+    """
+
+    :param params:
+    :return:
+    """
+    nose_width = params.get("nose_width")
+    tail_width = params.get("tail_width")
+    nose_length = params.get("nose_length")
+    running_length = params.get("running_length")
+    tail_length = params.get("tail_length")
+    overall_length = nose_length + running_length + tail_length
+    sidecut_radius = params.get("sidecut_radius")
+
+    # FIXME 腰宽并不应该以板头宽为基准
+    waist_width = nose_width - cal_waist_width(running_length, sidecut_radius) * 2
+    max_width = max(nose_width, waist_width, tail_width)
+
+    params["nose_tip"] = Point(0, max_width / 2)
+    params["tail_tip"] = Point(overall_length, max_width / 2)
+
+    params["waist_top"] = Point(running_length / 2 + nose_length, 0)
+    params["waist_below"] = Point(running_length / 2 + nose_length, (max_width - waist_width) / 2 + waist_width)
+
+    params["nose_top"] = Point(nose_length, 0)
+    params["nose_below"] = Point(nose_length, (max_width - nose_width) / 2 + nose_width)
+
+    params["tail_top"] = Point(nose_length + running_length, 0)
+    params["tail_below"] = Point(nose_length + running_length, (max_width - tail_width) / 2 + tail_width)
+    return params
+
 
 if __name__ == "__main__":
     # 参数含义参考docs/Configuration.md
@@ -44,6 +79,8 @@ if __name__ == "__main__":
         "thickness": 7,
         "camber_setback": 0,
     }
+
+    params = frame(params)
 
     # 板头&板尾曲线路径生成
     upper_left_list, lower_left_list, upper_right_list, lower_right_list = gen_curve(params)

@@ -17,7 +17,7 @@ from svg_export import export_svg, gen_profile_path
 
 def frame(params):
     """
-
+    计算整块板的端点坐标
     :param params:
     :return:
     """
@@ -49,7 +49,6 @@ def frame(params):
 
 if __name__ == "__main__":
     # 参数含义参考docs/Configuration.md
-    origin = (0, 0)
     params = {
         # Nose Shape
         "nose_width": 300,
@@ -62,7 +61,7 @@ if __name__ == "__main__":
         "running_length": 1160,
         "sidecut_radius": 8000,
 
-        # insert
+        # inserts
         "stand_width": 550,
         "stand_setback": 0,
         "horizontal_spacing": 40,

@@ -78,12 +78,11 @@ def export_gcode(points):
     write_line("#2=-1.5\n")
     write_line("T1 M6\n")
     write_line("G0 Z5\n")  # 快速移动
-    write_line(" X{} Y{}\n".format(points[0][0], points[0][1]))
+    write_line(" X{} Y{}\n".format(points[0].x, points[0].y))
     write_line("G1 Z#2\n")
     path = []
     for point in points:
-        x, y = point
-        path.append(" X{} Y{}".format(x, y))
+        path.append(" X{} Y{}".format(point.x, point.y))
 
     write_line("\n".join(path))
 

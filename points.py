@@ -6,13 +6,16 @@
 
 
 class Point:
-    def __init__(self, x, y):
+    def __init__(self, x, y, z=0):
         self.x = x
         self.y = y
+        self.z = z
 
-    def offset(self, x, y):
+    def offset(self, x, y, z=0):
         self.x += x
         self.y += y
+        self.z += z
 
     def __str__(self):
-        return "Point({}, {})".format(self.x, self.y)
+        # return "Point({}, {})".format(self.x, self.y)
+        return "Point({}, {}, {})".format(self.x, self.y, self.z)

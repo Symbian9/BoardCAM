@@ -11,7 +11,10 @@ from reportlab.lib.units import mm
 from reportlab.pdfgen import canvas as c
 
 from config import border
+from math_tools import mm_to_dpi
 from path import move, move_path
+from points import Point
+from until import list_to_str
 
 filename = "board_profile.pdf"
 
@@ -38,7 +41,7 @@ def draw_profile(points, height):
     :param height: 上翘圆弧的高度
     :return:
     """
-    width = abs(points[0][0] - points[-1][0])
+    width = abs(points[0].x - points[-1].x)
     height = math.ceil(height)
     width = math.ceil(width)
     buffer = io.BytesIO()
@@ -51,15 +54,14 @@ def draw_profile(points, height):
     canvas._filename = "profile.pdf"
 
     # 水平翻转
-    points = [[point[0], height * 2 - point[1]] for point in points]
+    points = [Point(point.x, height * 2 - point.y) for point in points]
     points = move(border, height + border, points)
     path = canvas.beginPath()
     for index, point in enumerate(points, start=1):
-        x, y = point
         if index == 1:
-            path.moveTo(x * mm, y * mm)
+            path.moveTo(point.x * mm, point.y * mm)
         else:
-            path.lineTo(x * mm, y * mm)
+            path.lineTo(point.x * mm, point.y * mm)
 
     canvas.setDash()
     canvas.setStrokeAlpha(1)
@@ -112,13 +114,14 @@ def export_pdf(params, points, insert_coordinate_list):
     canvas.line((tail_line + border) * mm, 0 * mm, (tail_line + border) * mm, (tail_width + 2 * border) * mm)
 
     points = move_path(points, border, border)
+
     path = canvas.beginPath()
     for index, point in enumerate(points, start=1):
-        x, y = point
+        # x, y = point
         if index == 1:
-            path.moveTo(x * mm, y * mm)
+            path.moveTo(point.x * mm, point.y * mm)
         else:
-            path.lineTo(x * mm, y * mm)
+            path.lineTo(point.x * mm, point.y * mm)
 
     canvas.setDash()
     canvas.setStrokeAlpha(1)
@@ -221,6 +224,8 @@ def pack_objs(objects):
 
 if __name__ == "__main__":
     # step1: 写入文件头
+    pdf_version = "%PDF-1.1\n"
+
     header = """%PDF-1.1\n%âãÏÓ\n"""
     write_pdf(header)
     write_pdf("\n")
@@ -231,7 +236,11 @@ if __name__ == "__main__":
     obj1 = {"/Kids": "[2 0 R]", "/Count": "1", "/Type": "/Pages"}
     objects.append({"data": obj1})
 
-    obj2 = {"/Rotate": "0", "/Parent": "1 0 R", "/Resources": "3 0 R", "/MediaBox": "[0 0 792 612]",
+    width = 300
+    height = 250
+    media_box = [0, 0, mm_to_dpi(width), mm_to_dpi(height)]
+
+    obj2 = {"/Rotate": "0", "/Parent": "1 0 R", "/Resources": "3 0 R", "/MediaBox": list_to_str(media_box),
             "/Contents": "[4 0 R]", "/Type": "/Page"}
     objects.append({"data": obj2})
 

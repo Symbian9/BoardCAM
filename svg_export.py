@@ -11,6 +11,7 @@ from circle import draw_circle_path
 from config import COPYRIGHT, SLOGAN, side_step
 from math_tools import cal_radius, arc_to_angle, RIGHT_ANGLE
 from path import move
+from points import Point
 from until import value_to_str
 
 
@@ -107,7 +108,7 @@ def export_svg(params, points, insert_coordinate_list):
     """
     root = init_svg(params)
 
-    polyline_path = " ".join(["{},{}".format(point[0], point[1]) for point in points])
+    polyline_path = " ".join(["{},{}".format(point.x, point.y) for point in points])
     ElementTree.SubElement(root, "polyline",
                            {"style": "fill:none;stroke:black;stroke-width:1", "points": polyline_path})
     # 嵌件路径生成
@@ -144,21 +145,21 @@ def gen_profile_path(params):
         for x1 in range(nose_length + offset, nose_length + running_length + side_step + offset, side_step):
             y1 = sqrt(pow(camber_radius, 2) - pow(offset + nose_length + running_length / 2 - x1, 2))
             y1 = camber_radius - y1
-            camber_list.append([x1, y1 + 200])
+            camber_list.append(Point(x1, y1 + 200))
     elif camber == 0:
-        camber_list = [[x, 0] for x in range(0, running_length, side_step)]
+        camber_list = [Point(x, 0) for x in range(0, running_length, side_step)]
 
     # 上翘弧线宽度
-    width = abs(points[0][0] - points[-1][0])
-    height = abs(points[0][1] - points[-1][1])
-    left_points = [[abs(point[0] - width), point[1]] for point in points]
-    left_points = move(camber_list[0][0], camber_list[0][1], left_points[::-1])
-    right_points = move(camber_list[-1][0], camber_list[-1][1], points[::-1])
+    width = abs(points[0].x - points[-1].x)
+    height = abs(points[0].y - points[-1].y)
+    left_points = [Point(abs(point.x - width), point.y) for point in points]
+    left_points = move(camber_list[0].x, camber_list[0].y, left_points[::-1])
+    right_points = move(camber_list[-1].x, camber_list[-1].y, points[::-1])
 
     profile_points = left_points[::-1] + camber_list + right_points
     profile_points = move(0, 0, profile_points)
 
-    profile_path = " ".join(["{},{}".format(point[0], point[1]) for point in profile_points])
+    profile_path = " ".join(["{},{}".format(point.x, point.y) for point in profile_points])
     ElementTree.SubElement(root, "polyline",
                            {"style": "fill:none;stroke:black;stroke-width:1", "points": profile_path})
 

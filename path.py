@@ -4,6 +4,8 @@
 # Date: 2019-05-07
 # Desc: 路径处理
 
+from points import Point
+
 
 def mirror_path(points, width, length):
     """
@@ -15,7 +17,7 @@ def mirror_path(points, width, length):
     """
     width = int(width)
     length = int(length)
-    return [[abs(width * 2 - point[0]), abs(length * 2 - point[1])] for point in points]
+    return [Point(abs(width * 2 - point.x), abs(length * 2 - point.y)) for point in points]
 
 
 def move_path(points, x_offset, y_offset):
@@ -26,7 +28,7 @@ def move_path(points, x_offset, y_offset):
     :param y_offset: Y坐标偏移量
     :return:
     """
-    return [[point[0] + x_offset, point[1] + y_offset] for point in points]
+    return [Point(point.x + x_offset, point.y + y_offset) for point in points]
 
 
 def move(x, y, points):
@@ -37,7 +39,7 @@ def move(x, y, points):
     :param points:
     :return:
     """
-    x_diff = points[0][0] - x
-    y_diff = points[0][1] - y
+    x_diff = points[0].x - x
+    y_diff = points[0].y - y
 
-    return [[point[0] - x_diff, point[1] - y_diff] for point in points]
+    return [Point(point.x - x_diff, point.y - y_diff) for point in points]

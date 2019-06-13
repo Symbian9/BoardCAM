@@ -7,6 +7,7 @@
 from math import cos, sin, pi
 
 from math_tools import STRAIGHT_ANGLE, FULL_ANGLE, ZERO_ANGLE
+from points import Point
 
 
 def draw_circle_path(cx, cy, r, start_angle=ZERO_ANGLE, end_angle=FULL_ANGLE):
@@ -24,7 +25,7 @@ def draw_circle_path(cx, cy, r, start_angle=ZERO_ANGLE, end_angle=FULL_ANGLE):
     for angle in range(start_angle, end_angle + 1):
         x = cx + r * cos(angle * pi / STRAIGHT_ANGLE)
         y = cy + r * sin(angle * pi / STRAIGHT_ANGLE)
-        points.append([x, y])
+        points.append(Point(x, y))
         # points_path += "{},{} ".format(x, y)
 
     # print("points_path: {}".format(points_path))

@@ -6,6 +6,7 @@
 
 from config import bezier_step
 from path import mirror_path, move_path
+from points import Point
 
 
 def bezier(bezier_points):
@@ -19,14 +20,15 @@ def bezier(bezier_points):
     step_count = int(end / bezier_step)
     points_no = len(bezier_points) - 1
     curve_points = []
+
     for t in range(step_count + 1):
         t *= bezier_step
         x, y = 0, 0
         for index, point in enumerate(bezier_points):
-            x += point[0] * pow(1 - t, points_no - index) * pow(t, index)
-            y += point[1] * pow(1 - t, points_no - index) * pow(t, index)
+            x += point.x * pow(1 - t, points_no - index) * pow(t, index)
+            y += point.y * pow(1 - t, points_no - index) * pow(t, index)
 
-        curve_points.append([x, y])
+        curve_points.append(Point(x, y))
     return curve_points
 
 
@@ -46,10 +48,17 @@ def gen_curve(params):
     half_tail_width = tail_width / 2
     running_length = params.get("running_length")
 
+    nose_tip = params.get("nose_tip")
+    nose_top = params.get("nose_top")
+
     left_bezier_points = (
-        (0, half_nose_width), (0, half_nose_width * end_handle), (nose_length * transition_handle, 0), (nose_length, 0))
+        nose_tip, Point(0, half_nose_width * end_handle), Point(nose_length * transition_handle, 0), nose_top
+    )
+
     right_bezier_points = (
-        (0, half_tail_width), (0, half_tail_width * end_handle), (tail_length * transition_handle, 0), (tail_length, 0))
+        Point(0, half_tail_width), Point(0, half_tail_width * end_handle), Point(tail_length * transition_handle, 0),
+        Point(tail_length, 0)
+    )
 
     upper_left_list = bezier(left_bezier_points)
     # X轴对称变换

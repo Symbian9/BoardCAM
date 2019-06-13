@@ -7,6 +7,7 @@
 from math import sqrt
 
 from config import side_step
+from points import Point
 
 
 def flat_edge(params):
@@ -24,8 +25,8 @@ def flat_edge(params):
 
     for x in range(nose_length, running_length + nose_length + side_step, side_step):
         y = nose_width
-        top_list.append([x, y])
-        bottom_list.append([x, 0])
+        top_list.append(Point(x, y))
+        bottom_list.append(Point(x, 0))
     return top_list, bottom_list[::-1]
 
 
@@ -51,7 +52,7 @@ def arc_edge(params):
             y = offset + y
         else:
             y += offset
-        top_list.append([x, y])
-        bottom_list.append([x, nose_width - y])
+        top_list.append(Point(x, y))
+        bottom_list.append(Point(x, nose_width - y))
 
     return top_list, bottom_list[::-1]

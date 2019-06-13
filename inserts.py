@@ -4,6 +4,8 @@
 # Date: 2019-05-07
 # Desc: 嵌件组生成
 
+from points import Point
+
 
 def gen_inserts(params):
     """
@@ -30,8 +32,6 @@ def gen_inserts(params):
     # 水平中线
     horizontal_mid_line = nose_width / 2
 
-    insert_coordinate_list = []
-
     left_start, right_start = 0, 0
     if inserts_number % 2 == 1:
         # 嵌件个数为奇数
@@ -44,14 +44,15 @@ def gen_inserts(params):
         right_start = vertical_mid_line + half_stand_width - half_horizontal_spacing - horizontal_spacing * (
                 int(inserts_number / 2) - 1)
 
+    insert_coordinate_list = []
     for i in range(inserts_number):
         insert_coordinate_list.append(
-            [left_start + horizontal_spacing * i + stand_setback, horizontal_mid_line - half_vertical_spacing])
+            Point(left_start + horizontal_spacing * i + stand_setback, horizontal_mid_line - half_vertical_spacing))
         insert_coordinate_list.append(
-            [left_start + horizontal_spacing * i + stand_setback, horizontal_mid_line + half_vertical_spacing])
+            Point(left_start + horizontal_spacing * i + stand_setback, horizontal_mid_line + half_vertical_spacing))
         insert_coordinate_list.append(
-            [right_start + horizontal_spacing * i + stand_setback, horizontal_mid_line - half_vertical_spacing])
+            Point(right_start + horizontal_spacing * i + stand_setback, horizontal_mid_line - half_vertical_spacing))
         insert_coordinate_list.append(
-            [right_start + horizontal_spacing * i + stand_setback, horizontal_mid_line + half_vertical_spacing])
+            Point(right_start + horizontal_spacing * i + stand_setback, horizontal_mid_line + half_vertical_spacing))
 
     return insert_coordinate_list

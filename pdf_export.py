@@ -129,9 +129,8 @@ def export_pdf(params, points, insert_coordinate_list):
     canvas.drawPath(path, stroke=1, fill=0)
 
     # 嵌件路径生成
-    for insert in insert_coordinate_list:
-        x, y = insert
-        draw_insert(canvas, x + border, y + border)
+    for inserts in insert_coordinate_list:
+        draw_insert(canvas, inserts.x + border, inserts.y + border)
 
     canvas.showPage()
     canvas.save()

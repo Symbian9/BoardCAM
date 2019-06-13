@@ -58,21 +58,22 @@ if __name__ == "__main__":
         "tail_width": 300,
         "tail_length": 180,
 
+        # Body
         "running_length": 1160,
         "sidecut_radius": 8000,
 
-        # inserts
+        # Inserts
         "stand_width": 550,
         "stand_setback": 0,
         "horizontal_spacing": 40,
         "vertical_spacing": 40,
         "inserts_number": 4,
 
-        # curve
+        # Curve
         "end_handle": 0.4,
         "transition_handle": 2,
 
-        # profile
+        # Profile
         "tip_radius": 300,
         "camber": 15,
         "thickness": 7,

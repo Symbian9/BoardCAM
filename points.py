@@ -17,5 +17,4 @@ class Point:
         self.z += z
 
     def __str__(self):
-        # return "Point({}, {})".format(self.x, self.y)
         return "Point({}, {}, {})".format(self.x, self.y, self.z)

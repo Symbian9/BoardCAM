@@ -7,6 +7,18 @@
 from points import Point
 
 
+class Path:
+    # TODO 将以下方法添加到该类里
+    def __init__(self, points):
+        self.points = points
+
+    def push_path(self):
+        pass
+
+    def __add__(self, other):
+        pass
+
+
 def mirror_path(points, width, length):
     """
     生成镜像路径

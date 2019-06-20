@@ -22,6 +22,9 @@ class Point:
         :param other: 另一个对象
         :return:
         """
+        if not isinstance(other, Point):
+            raise TypeError('运算对象必须是Point')
+
         if self.x < other.x:
             return True
 
@@ -47,6 +50,9 @@ class Point:
         :param other: 另一个对象
         :return:
         """
+        if not isinstance(other, Point):
+            raise TypeError('运算对象必须是Point')
+
         if self.x > other.x:
             return True
         elif self.x == other.x:
@@ -70,6 +76,9 @@ class Point:
         :param other: 另一个对象
         :return:
         """
+        if not isinstance(other, Point):
+            raise TypeError('运算对象必须是Point')
+
         if self.x == other.x and self.y == other.y and self.z == other.z:
             return True
         else:

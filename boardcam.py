@@ -68,6 +68,11 @@ if __name__ == "__main__":
         "horizontal_spacing": 40,
         "vertical_spacing": 40,
         "inserts_number": 4,
+        "inserts_height": 7.6,
+
+        # TODO 使用类似M6参数代替
+        "inserts_outer_radius": 9,
+        "inserts_inner_radius": 5,
 
         # Curve
         "end_handle": 0.4,
@@ -95,6 +100,6 @@ if __name__ == "__main__":
     # export
     export_pdf(params, points, insert_coordinate_list)
     export_svg(params, points, insert_coordinate_list)
-    export_gcode(points)
+    export_gcode(points, insert_coordinate_list)
     profile_points, height = gen_profile_path(params)
     draw_profile(profile_points, height)

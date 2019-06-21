@@ -5,8 +5,10 @@
 # Desc: gcode
 # Preview: https://ncviewer.com/
 
+from datetime import datetime
 from io import StringIO
 
+from __version__ import __version__, __title__
 from circle import draw_circle_path
 
 
@@ -14,7 +16,6 @@ class Gcode:
     def __init__(self, _filename):
         self.filename = _filename
         self.buffer = StringIO()
-        self.start()
 
     def close(self):
         self.end()
@@ -55,30 +56,31 @@ def export_gcode(points, insert_coordinate_list):
     :return:
     """
     safety_height = 5
-    # write_line("({})\n".format(48 * "-"))
-    # write_line("(文件名··················· {})\n".format(filename))
-    # write_line("(最后修订日期··················· {})\n".format(datetime.now().strftime("%Y-%m-%d")))
-    # write_line("(最后修订时间··················· {})\n".format(datetime.now().strftime("%X")))
-    # write_line("(软件名称··················· {} v{})\n".format(__title__, __version__))
-    # write_line("(程序员··················· Zheng)\n")
-    # write_line("(机床··················· TigerCNC)\n")
-    # write_line("(控制器··················· arduino grbl)\n")
-    # write_line("(单位··················· 毫米)\n")
-    # write_line("(加工编号··················· 01)\n")
-    # write_line("(操作··················· 铣削-钻孔)\n")
-    # write_line("(毛坯材料··················· 杨木)\n")
-    # write_line("(材料尺寸··················· 165cm*40cm*1cm)\n")
-    # write_line("(程序原点··················· X0 -- 左边)\n")
-    # write_line("(                           Y0 -- 底边)\n")
-    # write_line("(                         Z0 -- 上表面)\n")
-    # write_line("(状态··················· 未校验)\n")
-    # write_line("(铣刀····················· 6mm螺旋向上双刃)\n")
-    # write_line("({})\n".format(48 * "-"))
-
     filename = "board_profile.gcode"
     g = Gcode(filename)
+    g.write("({})".format(50 * "-"))
+    g.write("(文件名··················· {})".format(filename))
+    g.write("(最后修订日期··················· {})".format(datetime.now().strftime("%Y-%m-%d")))
+    g.write("(最后修订时间··················· {})".format(datetime.now().strftime("%X")))
+    g.write("(软件名称··················· {} v{})".format(__title__, __version__))
+    g.write("(程序员··················· Zheng)")
+    g.write("(机床··················· TigerCNC)")
+    g.write("(控制器··················· arduino grbl)")
+    g.write("(单位··················· 毫米)")
+    g.write("(加工编号··················· 01)")
+    g.write("(操作··················· 铣削-钻孔)")
+    g.write("(毛坯材料··················· 杨木)")
+    g.write("(材料尺寸··················· 165cm*40cm*1cm)")
+    g.write("(程序原点··················· X0 -- 左边)")
+    g.write("(                           Y0 -- 底边)")
+    g.write("(                         Z0 -- 上表面)")
+    g.write("(状态··················· 未校验)")
+    g.write("(铣刀····················· 6mm螺旋向上双刃)")
+    g.write("({})".format(50 * "-"))
     g.write("G0 Z{}".format(safety_height))  # 快速移动 (Z轴抬升至安全加工距离)
     g.write("G0 X{} Y{}".format(points[0].y, points[0].x))
+
+    g.start()
 
     for i, point in enumerate(points):
         if i == 0:

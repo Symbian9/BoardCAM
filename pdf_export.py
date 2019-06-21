@@ -55,7 +55,7 @@ def draw_profile(points, height):
 
     # 水平翻转
     points = [Point(point.x, height * 2 - point.y) for point in points]
-    points = move(border, height + border, points)
+    points = move(points, border, height + border)
     path = canvas.beginPath()
     for index, point in enumerate(points, start=1):
         if index == 1:

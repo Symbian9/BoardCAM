@@ -43,7 +43,7 @@ def move_path(points, x_offset, y_offset):
     return [Point(point.x + x_offset, point.y + y_offset) for point in points]
 
 
-def move(x, y, points):
+def move(points, x, y):
     """
     将线段平移到某一点上
     :param x:

@@ -153,11 +153,11 @@ def gen_profile_path(params):
     width = abs(points[0].x - points[-1].x)
     height = abs(points[0].y - points[-1].y)
     left_points = [Point(abs(point.x - width), point.y) for point in points]
-    left_points = move(camber_list[0].x, camber_list[0].y, left_points[::-1])
-    right_points = move(camber_list[-1].x, camber_list[-1].y, points[::-1])
+    left_points = move(left_points[::-1], camber_list[0].x, camber_list[0].y)
+    right_points = move(points[::-1], camber_list[-1].x, camber_list[-1].y)
 
     profile_points = left_points[::-1] + camber_list + right_points
-    profile_points = move(0, 0, profile_points)
+    profile_points = move(profile_points, 0, 0)
 
     profile_path = " ".join(["{},{}".format(point.x, point.y) for point in profile_points])
     ElementTree.SubElement(root, "polyline",

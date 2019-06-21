@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Author: Zheng <me@BoardCAM.org>
 # Date: 2019-06-11
-# Desc: Point Class
+# Desc: 3D-Space point
 
 
 class Point:
@@ -11,7 +11,7 @@ class Point:
         self.y = y
         self.z = z
 
-    def offset(self, x, y, z=0):
+    def offset(self, x=0, y=0, z=0):
         self.x += x
         self.y += y
         self.z += z
@@ -27,22 +27,20 @@ class Point:
 
         if self.x < other.x:
             return True
-
-        elif self.x == other.x:
-            if self.y < other.y:
-                return True
-            elif self.y == other.y:
-                if self.z < other.z:
-                    return True
-                elif self.z == other.z:
-                    return False
-                else:
-                    return False
-            else:
-                return False
-
-        else:
+        if self.x > other.x:
             return False
+
+        if self.y < other.y:
+            return True
+        if self.y > other.y:
+            return False
+
+        if self.z < other.z:
+            return True
+        if self.z > other.z:
+            return False
+
+        return False
 
     def __gt__(self, other):
         """
@@ -55,20 +53,20 @@ class Point:
 
         if self.x > other.x:
             return True
-        elif self.x == other.x:
-            if self.y > other.y:
-                return True
-            elif self.y == other.y:
-                if self.z > other.z:
-                    return True
-                elif self.z == other.z:
-                    return False
-                else:
-                    return False
-            else:
-                return False
-        else:
+        if self.x < other.x:
             return False
+
+        if self.y > other.y:
+            return True
+        if self.y < other.y:
+            return False
+
+        if self.z > other.z:
+            return True
+        if self.z < other.z:
+            return False
+
+        return False
 
     def __eq__(self, other):
         """
@@ -92,7 +90,7 @@ class Point:
 
 
 if __name__ == '__main__':
-    p1 = Point(1, 1, 4)
+    p1 = Point(1, 1, 2)
     p2 = Point(1, 1, 2)
     print([p1, p2])
     print(p1 < p2)

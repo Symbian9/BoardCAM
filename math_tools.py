@@ -11,6 +11,9 @@ RIGHT_ANGLE = 90
 STRAIGHT_ANGLE = 180
 FULL_ANGLE = 360
 
+# 1inch = 25.4mm
+INCH = 25.4
+
 
 def cal_waist_width(running_length, sidecut_radius):
     """
@@ -19,6 +22,7 @@ def cal_waist_width(running_length, sidecut_radius):
     :param sidecut_radius: 侧切半径
     :return:
     """
+
     # TODO 增加板头板尾的宽度控制
     # print(waist_remain)
     # waist_width = nose_width - waist_remain * 2
@@ -33,6 +37,7 @@ def cal_radius(running_length, camber):
     :param camber: 拱起高度
     :return:
     """
+    # TODO 该函数不应该放在这里
     half_running_length = running_length / 2
 
     radius = (pow(half_running_length, 2) - pow(camber, 2)) / (2 * camber)

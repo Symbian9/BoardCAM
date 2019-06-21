@@ -19,16 +19,20 @@ from until import list_to_str
 filename = "board_profile.pdf"
 
 
-def draw_insert(canvas, x, y):
+def draw_insert(params, canvas, x, y):
     """
     绘制嵌件位置
+    :param params:
     :param canvas:
     :param x: 圆心X坐标
     :param y: 圆心Y坐标
     :return:
     """
     # r=0.5作为圆心
-    radius = [0.5, 10, 18]
+    inserts_outer_radius = params.get("inserts_outer_radius")
+    inserts_inner_radius = params.get("inserts_inner_radius")
+
+    radius = [0.2, inserts_inner_radius, inserts_outer_radius]
     for r in radius:
         canvas.circle(x * mm, y * mm, r * mm)
     return canvas
@@ -130,7 +134,7 @@ def export_pdf(params, points, insert_coordinate_list):
 
     # 嵌件路径生成
     for inserts in insert_coordinate_list:
-        draw_insert(canvas, inserts.x + border, inserts.y + border)
+        draw_insert(params, canvas, inserts.x + border, inserts.y + border)
 
     canvas.showPage()
     canvas.save()

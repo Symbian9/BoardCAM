@@ -7,6 +7,13 @@
 from points import Point
 
 
+class Inserts:
+    def __init__(self, height, inner_radius, outer_radius):
+        self.height = height
+        self.inner_radius = inner_radius
+        self.outer_radius = outer_radius
+
+
 def gen_inserts(params):
     """
     从竖中线向左右两侧生成每个嵌件的坐标

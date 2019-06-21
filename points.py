@@ -79,14 +79,14 @@ class Point:
 
         if self.x == other.x and self.y == other.y and self.z == other.z:
             return True
-        else:
-            return False
+
+        return False
 
     def __repr__(self):
         return self.__str__()
 
     def __str__(self):
-        return "Point({}, {}, {})".format(self.x, self.y, self.z)
+        return "{}({}, {}, {})".format(self.__class__.__name__, self.x, self.y, self.z)
 
 
 if __name__ == '__main__':

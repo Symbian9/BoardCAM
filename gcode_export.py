@@ -80,6 +80,7 @@ def export_gcode(points, insert_coordinate_list):
     :param insert_coordinate_list: 嵌件坐标
     :return:
     """
+    safety_height = 5
     write_line("({})\n".format(48 * "-"))
     write_line("(文件名··················· {})\n".format(filename))
     write_line("(最后修订日期··················· {})\n".format(datetime.now().strftime("%Y-%m-%d")))
@@ -102,7 +103,6 @@ def export_gcode(points, insert_coordinate_list):
 
     write_line("\n")
 
-    # TODO 增加快速移动到加工点
     write_line("G40\n")  # 关闭刀具补偿
     write_line("G49\n")  # 禁用刀具长度补偿
     write_line("G80\n")  # 取消模态动作
@@ -110,29 +110,34 @@ def export_gcode(points, insert_coordinate_list):
     write_line("G90\n")  # 禁用增量移动(绝对指令)
     write_line("G21\n")  # 使用毫米长度单位(公制)
     write_line("G61\n")  # 确切的路径模式
-    write_line("F2000.00000\n")  # 设定进给率
+    write_line("F1000.00000\n")  # 设定进给率
     write_line("S1000.00000\n")  # 设置主轴速度
 
-    write_line("#2=-1.5\n")
-    write_line("T1 M6\n")  # 刀具
-    # write_line("G0 Z5\n")  # 快速移动
-    write_line("G0 X{} Y{}\n".format(points[0].x, points[0].y))
-    # write_line("G1 Z#2\n")
+    write_line("G0 Z{}\n".format(safety_height))  # 快速移动 (Z轴抬升至安全加工距离)
+    write_line("G0 X{} Y{}\n".format(points[0].y, points[0].x))
+
     path = []
-    for point in points:
-        path.append("G01 X%.3f Y%.3f Z-1.5" % (point.y, point.x,))
+    for i, point in enumerate(points):
+        if i == 0:
+            path.append("G01 X%.3f Y%.3f Z-9" % (point.y, point.x,))
+        if i == len(points) - 1:
+            path.append(" X%.3f Y%.3f" % (point.y, point.x,))
+            path.append("G01 X%.3f Y%.3f Z%d" % (point.y, point.x, safety_height))
+        else:
+            path.append(" X%.3f Y%.3f" % (point.y, point.x,))
 
-    # inserts_path = []
-
-    for point in sorted(insert_coordinate_list):
+    for i, point in enumerate(sorted(insert_coordinate_list)):
         export_points = draw_circle_path(point.x, point.y, 9)
-        # TODO 每次抬起刀具 深度也得调整 另外一圈深度
-        for p in export_points:
-            path.append("G01 X%.3f Y%.3f" % (p.y, p.x))
+        for j, p in enumerate(export_points):
+            if j == 0:
+                path.append("G00 X%.3f Y%.3f Z%d" % (p.y, p.x, safety_height))
+                path.append("G01 X%.3f Y%.3f Z-9" % (p.y, p.x))
+            else:
+                path.append(" X%.3f Y%.3f" % (p.y, p.x))
 
-        path.append("G01 X%.3f Y%.3f Z 2.0" % (export_points[-1].y, export_points[-1].x))
+        path.append("G01 X%.3f Y%.3f Z%d" % (export_points[-1].y, export_points[-1].x, safety_height))
 
     write_line("\n".join(path))
     write_line("\n")
-    write_line("G0 X0 Y0 Z2.0\n".format(points[0].x, points[0].y))
+    write_line("G0 X0 Y0 Z{}\n".format(points[0].x, points[0].y, safety_height))
     write_line("M2\n")  # 结束程序

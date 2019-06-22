@@ -18,7 +18,7 @@ class Gcode:
         self.buffer = StringIO()
 
     def close(self):
-        self.end()
+        self.finish()
         with open(self.filename, mode="w", encoding="utf-8") as file:
             file.write(self.buffer.getvalue())
 
@@ -36,7 +36,7 @@ class Gcode:
         self.write("F1000.00000")  # 设定进给率
         self.write("S1000.00000")  # 设置主轴速度
 
-    def end(self):
+    def finish(self):
         self.write("M05 M09")      # 主轴停,冷却液泵马达停
         self.write("G0 X0 Y0 Z5")  # 快速回到坐标原点
         self.write("M2")           # 结束程序  # TODO 比较M2和M30区别

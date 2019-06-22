@@ -33,11 +33,11 @@ class Gcode:
         self.write("G90")  # 禁用增量移动
         self.write("G21")  # 使用毫米长度单位
         self.write("G61")  # 确切的路径模式
-        self.write("F2000.00000")  # 设定进给率
+        self.write("F1000.00000")  # 设定进给率
         self.write("S1000.00000")  # 设置主轴速度
 
     def end(self):
-        self.write("M05 M09")   # 主轴停 冷却液泵马达停
+        self.write("M05 M09")  # 主轴停 冷却液泵马达停
         self.write("G0 X0 Y0 Z5")  # 快速回到坐标原点
         self.write("M2")  # 结束程序  # TODO 比较M2和M30区别
 
@@ -47,6 +47,13 @@ class Gcode:
         :return:
         """
         self.write("G0 Z5")
+
+    # def __enter__(self):
+    #     print("enter")
+    #
+    # def __exit__(self, exc_type, exc_val, exc_tb):
+    #     if not exc_type and not exc_val and not exc_tb:
+    #         print("exit, end gcode")
 
 
 def export_gcode(points, insert_coordinate_list):
@@ -58,7 +65,7 @@ def export_gcode(points, insert_coordinate_list):
     """
 
     # TODO 连接桥的开发 和彻底钻孔
-    safety_height = 5
+    safety_height = 5.0
     filename = "board_profile.gcode"
     g = Gcode(filename)
     g.write("({})".format(50 * "-"))
@@ -80,20 +87,24 @@ def export_gcode(points, insert_coordinate_list):
     g.write("(状态··················· 未校验)")
     g.write("(铣刀····················· 6mm螺旋向上双刃)")
     g.write("({})".format(50 * "-"))
-    g.write("G0 Z{}".format(safety_height))  # 快速移动 (Z轴抬升至安全加工距离)
-    g.write("G0 X{} Y{}".format(points[0].y, points[0].x))
 
     g.start()
 
+    # 外轮廓铣削
+    # 快速移动 (Z轴抬升至安全加工距离)
+    g.write("G0 X{} Y{} Z{}".format(points[0].y, points[0].x, safety_height))
     for i, point in enumerate(points):
         if i == 0:
             g.write("G01 X%.3f Y%.3f Z-9" % (point.y, point.x,))
+
+        # 最后一个点
         if i == len(points) - 1:
             g.write(" X%.3f Y%.3f" % (point.y, point.x,))
             g.write("G01 X%.3f Y%.3f Z%d" % (point.y, point.x, safety_height))
         else:
             g.write(" X%.3f Y%.3f" % (point.y, point.x,))
 
+    # 嵌件铣削
     for i, point in enumerate(sorted(insert_coordinate_list)):
         export_points = draw_circle_path(point.x, point.y, 9)
         for j, p in enumerate(export_points):

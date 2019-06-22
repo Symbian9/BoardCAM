@@ -34,4 +34,12 @@ def draw_circle_path(cx, cy, r, start_angle=ZERO_ANGLE, end_angle=FULL_ANGLE):
 
 
 if __name__ == '__main__':
-    print(len(draw_circle_path(10, 10, 5)))
+    radius = 5
+    bit_radius = 3
+    from math import ceil
+
+    ha = ceil(radius / bit_radius)
+    print(ha)
+
+    for i in range(ha):
+        print(i)

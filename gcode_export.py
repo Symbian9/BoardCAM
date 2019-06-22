@@ -37,10 +37,11 @@ class Gcode:
         self.write("S1000.00000")  # 设置主轴速度
 
     def end(self):
-        self.write("G0 X0 Y0 Z5")
-        self.write("M2")  # 结束程序
+        self.write("M05 M09")   # 主轴停 冷却液泵马达停
+        self.write("G0 X0 Y0 Z5")  # 快速回到坐标原点
+        self.write("M2")  # 结束程序  # TODO 比较M2和M30区别
 
-    def lift_up(self):
+    def lift_bit(self):
         """
         抬起刀具
         :return:
@@ -55,6 +56,8 @@ def export_gcode(points, insert_coordinate_list):
     :param insert_coordinate_list: 嵌件坐标
     :return:
     """
+
+    # TODO 连接桥的开发 和彻底钻孔
     safety_height = 5
     filename = "board_profile.gcode"
     g = Gcode(filename)
@@ -96,7 +99,7 @@ def export_gcode(points, insert_coordinate_list):
         for j, p in enumerate(export_points):
             if j == 0:
                 g.write("G00 X%.3f Y%.3f Z%d" % (p.y, p.x, safety_height))
-                g.write("G01 X%.3f Y%.3f Z-9" % (p.y, p.x))
+                g.write("G01 X%.3f Y%.3f Z-1" % (p.y, p.x))
             else:
                 g.write(" X%.3f Y%.3f" % (p.y, p.x))
 

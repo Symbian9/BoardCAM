@@ -92,7 +92,7 @@ def gen_circle(root, insert_coordinate_list):
     inserts_group = ElementTree.SubElement(root, "g", {"style": "stroke-width:1;stroke:black", })
     for inserts in insert_coordinate_list:
         cx, cy = inserts.x, inserts.y
-        for r in ["0.5", "10", "18"]:
+        for r in ["0.2", "5", "9"]:
             ElementTree.SubElement(inserts_group, "circle",
                                    value_to_str({"cx": cx, "cy": cy, "r": r, "style": "fill:blue;fill-opacity:0.25"}))
     return root

@@ -100,6 +100,6 @@ if __name__ == "__main__":
     # export
     export_pdf(params, points, insert_coordinate_list)
     export_svg(params, points, insert_coordinate_list)
-    export_gcode(points, insert_coordinate_list)
     profile_points, height = gen_profile_path(params)
     draw_profile(profile_points, height)
+    export_gcode(points, insert_coordinate_list, profile_points)

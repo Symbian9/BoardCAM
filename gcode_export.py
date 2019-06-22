@@ -26,27 +26,27 @@ class Gcode:
         self.buffer.write("{}\n".format(line))
 
     def start(self):
-        self.write("G40")  # 关闭刀具补偿
-        self.write("G49")  # 禁用刀具长度补偿
-        self.write("G80")  # 取消模态动作
-        self.write("G54")  # 选择坐标系1
-        self.write("G90")  # 禁用增量移动
-        self.write("G21")  # 使用毫米长度单位
-        self.write("G61")  # 确切的路径模式
+        self.write("G40")          # 关闭刀具补偿
+        self.write("G49")          # 禁用刀具长度补偿
+        self.write("G80")          # 取消模态动作
+        self.write("G54")          # 选择坐标系1
+        self.write("G90")          # 禁用增量移动
+        self.write("G21")          # 使用毫米长度单位
+        self.write("G61")          # 确切的路径模式
         self.write("F1000.00000")  # 设定进给率
         self.write("S1000.00000")  # 设置主轴速度
 
     def end(self):
-        self.write("M05 M09")  # 主轴停 冷却液泵马达停
+        self.write("M05 M09")      # 主轴停,冷却液泵马达停
         self.write("G0 X0 Y0 Z5")  # 快速回到坐标原点
-        self.write("M2")  # 结束程序  # TODO 比较M2和M30区别
+        self.write("M2")           # 结束程序  # TODO 比较M2和M30区别
 
     def lift_bit(self):
         """
         抬起刀具
         :return:
         """
-        self.write("G0 Z5")
+        self.write("G0 Z5")        # Z轴抬升至安全加工距离
 
     # def __enter__(self):
     #     print("enter")
@@ -56,14 +56,16 @@ class Gcode:
     #         print("exit, end gcode")
 
 
-def export_gcode(points, insert_coordinate_list):
+def export_gcode(points, insert_coordinate_list, profile_points):
     """
     生成G-code程序
     :param points: 轮廓路径
     :param insert_coordinate_list: 嵌件坐标
+    :param profile_points:
     :return:
     """
 
+    export_profile(profile_points)
     # TODO 连接桥的开发 和彻底钻孔
     safety_height = 5.0
     filename = "board_profile.gcode"
@@ -115,5 +117,26 @@ def export_gcode(points, insert_coordinate_list):
                 g.write(" X%.3f Y%.3f" % (p.y, p.x))
 
         g.write("G01 X%.3f Y%.3f Z%d" % (export_points[-1].y, export_points[-1].x, safety_height))
+
+    g.close()
+
+
+def export_profile(profile_points):
+    """
+    模具gcode
+    :param profile_points:
+    :return:
+    """
+    # TODO 需要把模具切出边缘，过厚就需要重复步骤
+    filename = "profile.gcode"
+    g = Gcode(filename)
+    g.start()
+    safety_height = 5.0
+    g.write("G0 X{} Y{} Z{}".format(profile_points[0].y, profile_points[0].x, safety_height))
+    for i, p in enumerate(profile_points):
+        if i == 0:
+            g.write("G01 X%.3f Y%.3f Z-9" % (p.y, p.x))
+        else:
+            g.write(" X%.3f Y%.3f" % (p.y, p.x))
 
     g.close()

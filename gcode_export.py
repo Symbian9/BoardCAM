@@ -10,12 +10,15 @@ from io import StringIO
 
 from __version__ import __version__, __title__
 from circle import draw_circle_path
+from machine import CNCRouter, RouterBits
 
 
 class Gcode:
     def __init__(self, _filename):
         self.filename = _filename
         self.buffer = StringIO()
+        self.cnc = CNCRouter
+        self.bit = RouterBits
 
     def close(self):
         self.finish()
@@ -46,6 +49,7 @@ class Gcode:
         抬起刀具
         :return:
         """
+        # TODO 需要获取buffer里最后g代码
         self.write("G0 Z5")        # Z轴抬升至安全加工距离
 
     # def __enter__(self):
@@ -66,7 +70,7 @@ def export_gcode(points, insert_coordinate_list, profile_points):
     """
 
     export_profile(profile_points)
-    # TODO 连接桥的开发 和彻底钻孔
+    # TODO 连接桥的开发 和彻底钻孔算法
     safety_height = 5.0
     filename = "board_profile.gcode"
     g = Gcode(filename)
@@ -91,6 +95,7 @@ def export_gcode(points, insert_coordinate_list, profile_points):
     g.write("({})".format(50 * "-"))
 
     g.start()
+    g.lift_bit()
 
     # 外轮廓铣削
     # 快速移动 (Z轴抬升至安全加工距离)

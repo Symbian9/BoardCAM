@@ -11,11 +11,12 @@ class CNCRouter:
     def __init__(self, name, unit):
         self.name = name
         self.unit = unit
-        # 加工面积 (工件要小于)
-        # Spindle Speed
-        # Feed rate
-        # 安全加工距离
-        # Drilling speed
+        self.z_axis_safety_height = 5.0
+        self.max_x = None
+        self.max_y = None
+        self.spindle_speed = None
+        self.feed_rate = None
+        self.drilling_speed = None
         # 单层步距
 
 

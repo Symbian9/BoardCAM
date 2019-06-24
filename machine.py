@@ -19,14 +19,16 @@ class CNCRouter:
         self.drilling_speed = None
         # 单层步距
 
+    def __str__(self):
+        return "<CNCRouter>"
+
 
 class RouterBits:
-    def __init__(self, diameter, desc):
+    def __init__(self, diameter, desc=None):
         if diameter[-2:] == "in":
             self.diameter = self.inch_to_mm(float(eval(diameter[:-2])))
         elif diameter[-4:] == "inch":
             self.diameter = self.inch_to_mm(float(eval(diameter[:-4])))
-            print(self.diameter)
         elif diameter[-2:] == "mm":
             self.diameter = float(eval(diameter[:-2]))
         elif diameter[-2:] == "cm":
@@ -50,8 +52,11 @@ class RouterBits:
         """
         return inch_value * INCH
 
+    def __str__(self):
+        return "bit: ⌀{}mm.".format(self.diameter)
+
 
 if __name__ == '__main__':
     # cnc = CNCRouter("TigerCNC", "metric")
     bit = RouterBits("1/4inch", "1/4英寸螺旋向上双刃")
-    print(bit.radius)
+    print(bit)

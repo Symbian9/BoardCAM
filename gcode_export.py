@@ -113,7 +113,9 @@ def export_gcode(points, insert_coordinate_list, profile_points):
 
     # 嵌件铣削
     for i, point in enumerate(sorted(insert_coordinate_list)):
-        export_points = draw_circle_path(point.x, point.y, 9)
+        # TODO 嵌件的圆周偏置需要建立算法
+        export_points = draw_circle_path(point.x, point.y, 6)
+        export_points += draw_circle_path(point.x, point.y, 3)
         for j, p in enumerate(export_points):
             if j == 0:
                 g.write("G00 X%.3f Y%.3f Z%d" % (p.y, p.x, safety_height))

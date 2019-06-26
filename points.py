@@ -23,21 +23,8 @@ class Point:
         :return:
         """
         self._is_point(other)
-
-        if self.x < other.x:
+        if self.x < other.x or self.y < other.y or self.z < other.z:
             return True
-        if self.x > other.x:
-            return False
-
-        if self.y < other.y:
-            return True
-        if self.y > other.y:
-            return False
-
-        if self.z < other.z:
-            return True
-        if self.z > other.z:
-            return False
 
         return False
 
@@ -79,4 +66,4 @@ if __name__ == '__main__':
     p1 = Point(2, 5, 1)
     p2 = Point(2, 5, 1)
     print([p1, p2])
-    print(p1 > p2)
+    print(p1 < p2)

@@ -13,7 +13,7 @@ def bezier(bezier_points):
     """
     贝塞尔通用函数
     :param bezier_points:
-    :return:
+    :return: # TODO 考虑是否将返回值使用Path类
     """
     # P0和Pn是endpoints, P1,P2...Pn-1是control points
     end = 1
@@ -51,20 +51,20 @@ def gen_curve(params):
     nose_tip = params.get("nose_tip")
     nose_top = params.get("nose_top")
 
-    left_bezier_points = (
+    nose_bezier_points = (
         nose_tip, Point(0, half_nose_width * end_handle), Point(nose_length * transition_handle, 0), nose_top
     )
 
-    right_bezier_points = (
+    tail_bezier_points = (
         Point(0, half_tail_width), Point(0, half_tail_width * end_handle), Point(tail_length * transition_handle, 0),
         Point(tail_length, 0)
     )
 
-    upper_left_list = bezier(left_bezier_points)
+    upper_left_list = bezier(nose_bezier_points)
     # X轴对称变换
     lower_left_list = mirror_path(upper_left_list, 0, half_nose_width)
 
-    temp = bezier(right_bezier_points)
+    temp = bezier(tail_bezier_points)
     # Y轴对称变换
     temp2 = mirror_path(temp, tail_length, 0)
 

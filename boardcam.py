@@ -7,12 +7,14 @@
 
 from bezier import gen_curve
 from edge import arc_edge
-from gcode_export import export_gcode
+from gcode_export import export_gcode, Gcode
 from inserts import gen_inserts
 from math_tools import cal_waist_width
 from pdf_export import export_pdf, draw_profile
 from points import Point
 from svg_export import export_svg, gen_profile_path
+from material import Material
+from machine import CNCRouter, RouterBits
 
 
 def frame(params):
@@ -83,7 +85,15 @@ if __name__ == "__main__":
         "camber": 15,
         "thickness": 7,
         "camber_setback": 0,
+
+        # material (unit: mm)
+        "material_length": 1600,
+        "material_width": 400,
+        "material_thickness": 10,
+        "material_type": "Poplar",
     }
+
+    m = Material(**params)
 
     params = frame(params)
 
@@ -103,3 +113,4 @@ if __name__ == "__main__":
     profile_points, height = gen_profile_path(params)
     draw_profile(profile_points, height)
     export_gcode(points, insert_coordinate_list, profile_points)
+    # g = Gcode()

@@ -3,7 +3,8 @@
 # Author: Zheng <me@BoardCAM.org>
 # Desc: 根据身高、体重、滑行方式生成滑雪板参考参数
 
-# TODO 增加生成配置文件, 通过配置文件直接生成图形
+# TODO 增加该程序估算完成吼 直接生成配置文件, 通过配置文件直接生成对应的导出文件
+# TODO 该计算方法较为粗糙，需要进一步与骑手和厂商进行改进
 
 
 def find(weight, height):

@@ -17,6 +17,10 @@ class CNCRouter:
         self.spindle_speed = None
         self.feed_rate = None
         self.drilling_speed = None
+
+        # 单层铣削厚度
+        self.layer_thickness = 2
+
         # 单层步距
 
     def __str__(self):
@@ -58,5 +62,5 @@ class RouterBits:
 
 if __name__ == '__main__':
     # cnc = CNCRouter("TigerCNC", "metric")
-    bit = RouterBits("1/4inch", "1/4英寸螺旋向上双刃")
+    bit = RouterBits("1/4inch", "1/4英寸螺旋向上双刃铣刀")
     print(bit)

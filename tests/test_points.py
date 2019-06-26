@@ -22,6 +22,10 @@ def test_gt():
     p2 = Point(1, 2, 3)
     assert p1 > p2
 
+    p3 = Point(2, 4, 3)
+    p4 = Point(2, 2, 3)
+    assert p3 > p4
+
 
 def test_lt():
     p1 = Point(1, 2, 3)

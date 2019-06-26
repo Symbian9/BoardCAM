@@ -31,3 +31,7 @@ def test_lt():
     p1 = Point(1, 2, 3)
     p2 = Point(3, 4, 5)
     assert p1 < p2
+
+    p3 = Point(1, 2, 3)
+    p4 = Point(1, 4, 3)
+    assert p3 < p4

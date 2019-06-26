@@ -22,7 +22,7 @@ class Point:
         :param other:
         :return:
         """
-        self._check_other(other)
+        self._is_point(other)
 
         if self.x < other.x:
             return True
@@ -47,7 +47,7 @@ class Point:
         :param other:
         :return:
         """
-        self._check_other(other)
+        self._is_point(other)
         if self.__eq__(other):
             return False
 
@@ -59,14 +59,14 @@ class Point:
         :param other:
         :return:
         """
-        self._check_other(other)
+        self._is_point(other)
 
         return self.x == other.x and self.y == other.y and self.z == other.z
 
     @staticmethod
-    def _check_other(other):
+    def _is_point(other):
         if not isinstance(other, Point):
-            raise TypeError('Must be Point Class.')
+            raise TypeError('Must be Point class.')
 
     def __repr__(self):
         return self.__str__()

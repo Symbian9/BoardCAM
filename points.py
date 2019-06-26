@@ -77,10 +77,7 @@ class Point:
         if not isinstance(other, Point):
             raise TypeError('运算对象必须是Point')
 
-        if self.x == other.x and self.y == other.y and self.z == other.z:
-            return True
-
-        return False
+        return self.x == other.x and self.y == other.y and self.z == other.z
 
     def __repr__(self):
         return self.__str__()

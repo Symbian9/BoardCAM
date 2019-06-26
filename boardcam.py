@@ -5,16 +5,15 @@
 # Desc: BoardCAM主程序
 
 
-from bezier import gen_curve
+from curve import gen_curve
 from edge import arc_edge
-from gcode_export import export_gcode, Gcode
+from gcode_export import export_gcode
 from inserts import gen_inserts
+from material import Material
 from math_tools import cal_waist_width
 from pdf_export import export_pdf, draw_profile
 from points import Point
 from svg_export import export_svg, gen_profile_path
-from material import Material
-from machine import CNCRouter, RouterBits
 
 
 def frame(params):

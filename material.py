@@ -14,22 +14,22 @@ class Unit:
 
 
 class Material:
-    def __init__(self, length, width, thickness, material_type):
+    def __init__(self, **kwargs):
         # unit: mm
 
         # Length corresponds to the Y-axis
-        self.length = length
+        self.length = kwargs.get("material_length")
 
         # Width corresponds to the X-axis
-        self.width = width
+        self.width = kwargs.get("material_width")
 
         # Thickness corresponds to the Z-axis
-        self.thickness = thickness
+        self.thickness = kwargs.get("material_thickness")
 
-        self.material_type = material_type
-        self.check()
+        self.material_type = kwargs.get("material_type")
+        self._check()
 
-    def check(self):
+    def _check(self):
         # TODO 检查材料单位是否符合正常标准并且符合机床的加工区间
         pass
 
@@ -39,8 +39,4 @@ class Material:
 
 
 if __name__ == '__main__':
-    m = Material(1600, 400, 10, "Poplar")
-
-    a = Unit(5)
-    b = Unit(2)
-    print(a * b)
+    m = Material()

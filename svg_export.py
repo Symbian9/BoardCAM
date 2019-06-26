@@ -149,9 +149,15 @@ def gen_profile_path(params):
     elif camber == 0:
         camber_list = [Point(x, 0) for x in range(0, running_length, side_step)]
 
-    # 上翘弧线宽度
+    camber_length = abs(camber_list[0].x - camber_list[-1].x)
+
+    # TODO 最高点与最低点差的绝对值
+    camber_height = None
+
+    # 两端上翘弧线宽度和高端
     width = abs(points[0].x - points[-1].x)
     height = abs(points[0].y - points[-1].y)
+
     left_points = [Point(abs(point.x - width), point.y) for point in points]
     left_points = move(left_points[::-1], camber_list[0].x, camber_list[0].y)
     right_points = move(points[::-1], camber_list[-1].x, camber_list[-1].y)

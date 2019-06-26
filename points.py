@@ -18,12 +18,11 @@ class Point:
 
     def __lt__(self, other):
         """
-        小于比较操作
-        :param other: 另一个对象
+        `<` operator
+        :param other:
         :return:
         """
-        if not isinstance(other, Point):
-            raise TypeError('运算对象必须是Point')
+        self._check_other(other)
 
         if self.x < other.x:
             return True
@@ -44,40 +43,30 @@ class Point:
 
     def __gt__(self, other):
         """
-        大于比较操作
-        :param other: 另一个对象
+        `>` operator
+        :param other:
         :return:
         """
-        if not isinstance(other, Point):
-            raise TypeError('运算对象必须是Point')
-
-        if self.x > other.x:
-            return True
-        if self.x < other.x:
+        self._check_other(other)
+        if self.__eq__(other):
             return False
 
-        if self.y > other.y:
-            return True
-        if self.y < other.y:
-            return False
-
-        if self.z > other.z:
-            return True
-        if self.z < other.z:
-            return False
-
-        return False
+        return not self.__lt__(other)
 
     def __eq__(self, other):
         """
-        判断两个Point对象是否相等
-        :param other: 另一个对象
+        `==` operator
+        :param other:
         :return:
         """
-        if not isinstance(other, Point):
-            raise TypeError('运算对象必须是Point')
+        self._check_other(other)
 
         return self.x == other.x and self.y == other.y and self.z == other.z
+
+    @staticmethod
+    def _check_other(other):
+        if not isinstance(other, Point):
+            raise TypeError('Must be Point Class.')
 
     def __repr__(self):
         return self.__str__()
@@ -87,7 +76,7 @@ class Point:
 
 
 if __name__ == '__main__':
-    p1 = Point(1, 1, 2)
-    p2 = Point(1, 1, 2)
+    p1 = Point(2, 5, 1)
+    p2 = Point(2, 5, 1)
     print([p1, p2])
-    print(p1 < p2)
+    print(p1 > p2)

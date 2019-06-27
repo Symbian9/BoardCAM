@@ -55,6 +55,21 @@ class Gcode:
         # TODO 需要获取buffer(self.__last_line)里最后g代码
         self.write("G0 Z5")        # Z轴抬升至安全加工距离
 
+    def down_bit(self):
+        """
+        下刀
+        :return:
+        """
+        pass
+
+    def rapid_move(self, code):
+        # 快速移动 G0
+        self.write("G0 {}".format(code))
+
+    def linear_move(self, code):
+        # 线性移动 G1
+        self.write("G1 {}".format(code))
+
     def _comment(self):
         # TODO 还需要优化整齐注释的排版
         self.write("({})".format(50 * "-"))
@@ -106,18 +121,12 @@ def export_gcode(points, insert_coordinate_list, profile_points):
 
     # 外轮廓铣削
     # 快速移动 (Z轴抬升至安全加工距离)
-    g.write("G0 X{} Y{} Z{}".format(points[0].y, points[0].x, safety_height))
+    g.rapid_move("X{} Y{} Z{}".format(points[0].y, points[0].x, safety_height))
+    # g.down_bit()
     for i, point in enumerate(points):
-        if i == 0:
-            g.write("G01 X%.3f Y%.3f Z-9" % (point.y, point.x,))
+        g.linear_move("X%.3f Y%.3f Z-9" % (point.y, point.x))
 
-        # 最后一个点
-        if i == len(points) - 1:
-            g.write(" X%.3f Y%.3f" % (point.y, point.x,))
-            g.write("G01 X%.3f Y%.3f Z%d" % (point.y, point.x, safety_height))
-        else:
-            g.write(" X%.3f Y%.3f" % (point.y, point.x,))
-
+    g.lift_bit()
     # 嵌件铣削
     for i, point in enumerate(sorted(insert_coordinate_list)):
         # TODO 嵌件的圆周偏置需要建立算法
@@ -146,11 +155,8 @@ def export_profile(profile_points):
     g = Gcode(filename)
     g.start()
     safety_height = 5.0
-    g.write("G0 X{} Y{} Z{}".format(profile_points[0].y, profile_points[0].x, safety_height))
+    g.rapid_move("X{} Y{} Z{}".format(profile_points[0].y, profile_points[0].x, safety_height))
     for i, p in enumerate(profile_points):
-        if i == 0:
-            g.write("G01 X%.3f Y%.3f Z-9" % (p.y, p.x))
-        else:
-            g.write(" X%.3f Y%.3f" % (p.y, p.x))
-
+        g.linear_move("X%.3f Y%.3f Z-9" % (p.y, p.x))
+    g.lift_bit()
     g.close()

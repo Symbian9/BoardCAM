@@ -94,12 +94,12 @@ class Gcode:
         self.write()
 
     # TODO 使用with语句，前提代码不要超过3层缩进
-    # def __enter__(self):
-    #     print("enter")
-    #
-    # def __exit__(self, exc_type, exc_val, exc_tb):
-    #     if not exc_type and not exc_val and not exc_tb:
-    #         print("exit, end gcode")
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if not exc_type and not exc_val and not exc_tb:
+            self.close()
 
 
 def export_gcode(points, insert_coordinate_list, profile_points):
@@ -152,11 +152,10 @@ def export_profile(profile_points):
     """
     # TODO 需要把模具切出边缘，过厚就需要重复步骤
     filename = "profile.gcode"
-    g = Gcode(filename)
-    g.start()
-    safety_height = 5.0
-    g.rapid_move("X{} Y{} Z{}".format(profile_points[0].y, profile_points[0].x, safety_height))
-    for i, p in enumerate(profile_points):
-        g.linear_move("X%.3f Y%.3f Z-9" % (p.y, p.x))
-    g.lift_bit()
-    g.close()
+    with Gcode(filename) as g:
+        g.start()
+        safety_height = 5.0
+        g.rapid_move("X{} Y{} Z{}".format(profile_points[0].y, profile_points[0].x, safety_height))
+        for i, p in enumerate(profile_points):
+            g.linear_move("X%.3f Y%.3f Z-9" % (p.y, p.x))
+        g.lift_bit()

@@ -14,19 +14,19 @@ from machine import CNCRouter, RouterBits
 
 
 class Gcode:
-    def __init__(self, _filename):
-        self.filename = _filename
-        self.buffer = StringIO()
+    def __init__(self, filename):
+        self.filename = filename
+        self.__buffer = StringIO()
         self.cnc = CNCRouter
         self.bit = RouterBits
 
     def close(self):
         self._finish()
         with open(self.filename, mode="w", encoding="utf-8") as file:
-            file.write(self.buffer.getvalue())
+            file.write(self.__buffer.getvalue())
 
     def write(self, line):
-        self.buffer.write("{}\n".format(line))
+        self.__buffer.write("{}\n".format(line))
 
     def start(self):
         self.write("G40")          # 关闭刀具补偿

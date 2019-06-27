@@ -101,6 +101,12 @@ class Gcode:
         if not exc_type and not exc_val and not exc_tb:
             self.close()
 
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return "Gcode: {}".format(self.__filename)
+
 
 def export_gcode(points, insert_coordinate_list, profile_points):
     """

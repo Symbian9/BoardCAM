@@ -15,20 +15,23 @@ from machine import CNCRouter, RouterBits
 
 class Gcode:
     def __init__(self, filename):
-        self.filename = filename
+        self.__filename = filename
         self.__buffer = StringIO()
-        self.cnc = CNCRouter
+        self.cnc = CNCRouter(name="TigerCNC", unit="毫米")
         self.bit = RouterBits
+        self.__last_line = None
 
     def close(self):
         self._finish()
-        with open(self.filename, mode="w", encoding="utf-8") as file:
+        with open(self.__filename, mode="w", encoding="utf-8") as file:
             file.write(self.__buffer.getvalue())
 
-    def write(self, line):
+    def write(self, line=""):
+        self.__last_line = line
         self.__buffer.write("{}\n".format(line))
 
     def start(self):
+        self._comment()            # 写入程序注释
         self.write("G40")          # 关闭刀具补偿
         self.write("G49")          # 禁用刀具长度补偿
         self.write("G80")          # 取消模态动作
@@ -49,9 +52,33 @@ class Gcode:
         抬起刀具
         :return:
         """
-        # TODO 需要获取buffer里最后g代码
+        # TODO 需要获取buffer(self.__last_line)里最后g代码
         self.write("G0 Z5")        # Z轴抬升至安全加工距离
 
+    def _comment(self):
+        # TODO 还需要优化整齐注释的排版
+        self.write("({})".format(50 * "-"))
+        self.write("(文件名··················· {})".format(self.__filename))
+        self.write("(最后修订日期··················· {})".format(datetime.now().strftime("%Y-%m-%d")))
+        self.write("(最后修订时间··················· {})".format(datetime.now().strftime("%X")))
+        self.write("(软件名称··················· {} v{})".format(__title__, __version__))
+        self.write("(程序员··················· Zheng)")
+        self.write("(机床··················· {})".format(self.cnc.name))
+        self.write("(控制器··················· {})".format(self.cnc.control))
+        self.write("(单位··················· {})".format(self.cnc.unit))
+        self.write("(加工编号··················· 01)")
+        self.write("(操作··················· 铣削-钻孔)")
+        self.write("(毛坯材料··················· 杨木)")
+        self.write("(材料尺寸··················· 165cm*40cm*1cm)")
+        self.write("(程序原点··················· X0 -- 左边)")
+        self.write("(                           Y0 -- 底边)")
+        self.write("(                           Z0 --上表面)")
+        self.write("(状态··················· 未校验)")
+        self.write("(铣刀····················· 6mm螺旋向上双刃)")
+        self.write("({})".format(50 * "-"))
+        self.write()
+
+    # TODO 使用with语句，前提代码不要超过3层缩进
     # def __enter__(self):
     #     print("enter")
     #
@@ -74,26 +101,6 @@ def export_gcode(points, insert_coordinate_list, profile_points):
     safety_height = 5.0
     filename = "board_profile.gcode"
     g = Gcode(filename)
-    g.write("({})".format(50 * "-"))
-    g.write("(文件名··················· {})".format(filename))
-    g.write("(最后修订日期··················· {})".format(datetime.now().strftime("%Y-%m-%d")))
-    g.write("(最后修订时间··················· {})".format(datetime.now().strftime("%X")))
-    g.write("(软件名称··················· {} v{})".format(__title__, __version__))
-    g.write("(程序员··················· Zheng)")
-    g.write("(机床··················· TigerCNC)")
-    g.write("(控制器··················· arduino grbl)")
-    g.write("(单位··················· 毫米)")
-    g.write("(加工编号··················· 01)")
-    g.write("(操作··················· 铣削-钻孔)")
-    g.write("(毛坯材料··················· 杨木)")
-    g.write("(材料尺寸··················· 165cm*40cm*1cm)")
-    g.write("(程序原点··················· X0 -- 左边)")
-    g.write("(                           Y0 -- 底边)")
-    g.write("(                         Z0 -- 上表面)")
-    g.write("(状态··················· 未校验)")
-    g.write("(铣刀····················· 6mm螺旋向上双刃)")
-    g.write("({})".format(50 * "-"))
-
     g.start()
     g.lift_bit()
 

@@ -26,26 +26,26 @@ class Gcode:
         with open(self.__filename, mode="w", encoding="utf-8") as file:
             file.write(self.__buffer.getvalue())
 
-    def write(self, line=""):
+    def _write(self, line=""):
         self.__last_line = line
         self.__buffer.write("{}\n".format(line))
 
     def start(self):
-        self._comment()            # 写入程序注释
-        self.write("G40")          # 关闭刀具补偿
-        self.write("G49")          # 禁用刀具长度补偿
-        self.write("G80")          # 取消模态动作
-        self.write("G54")          # 选择坐标系1
-        self.write("G90")          # 禁用增量移动
-        self.write("G21")          # 使用毫米长度单位
-        self.write("G61")          # 确切的路径模式
-        self.write("F1000.00000")  # 设定进给率
-        self.write("S1000.00000")  # 设置主轴速度
+        self._comment()             # 写入程序注释
+        self._write("G40")          # 关闭刀具补偿
+        self._write("G49")          # 禁用刀具长度补偿
+        self._write("G80")          # 取消模态动作
+        self._write("G54")          # 选择坐标系1
+        self._write("G90")          # 禁用增量移动
+        self._write("G21")          # 使用毫米长度单位
+        self._write("G61")          # 确切的路径模式
+        self._write("F1000.00000")  # 设定进给率
+        self._write("S1000.00000")  # 设置主轴速度
 
     def _finish(self):
-        self.write("M05 M09")      # 主轴停,冷却液泵马达停
-        self.write("G0 X0 Y0 Z5")  # 快速回到坐标原点
-        self.write("M2")           # 结束程序  # TODO 比较M2和M30区别
+        self._write("M05 M09")      # 主轴停,冷却液泵马达停
+        self._write("G0 X0 Y0 Z5")  # 快速回到坐标原点
+        self._write("M2")           # 结束程序  # TODO 比较M2和M30区别
 
     def lift_bit(self):
         """
@@ -53,7 +53,7 @@ class Gcode:
         :return:
         """
         # TODO 需要获取buffer(self.__last_line)里最后g代码
-        self.write("G0 Z5")        # Z轴抬升至安全加工距离
+        self._write("G0 Z5")        # Z轴抬升至安全加工距离
 
     def down_bit(self):
         """
@@ -64,34 +64,34 @@ class Gcode:
 
     def rapid_move(self, code):
         # 快速移动 G0
-        self.write("G0 {}".format(code))
+        self._write("G0 {}".format(code))
 
     def linear_move(self, code):
         # 线性移动 G1
-        self.write("G1 {}".format(code))
+        self._write("G1 {}".format(code))
 
     def _comment(self):
         # TODO 还需要优化整齐注释的排版
-        self.write("({})".format(50 * "-"))
-        self.write("(文件名··················· {})".format(self.__filename))
-        self.write("(最后修订日期··················· {})".format(datetime.now().strftime("%Y-%m-%d")))
-        self.write("(最后修订时间··················· {})".format(datetime.now().strftime("%X")))
-        self.write("(软件名称··················· {} v{})".format(__title__, __version__))
-        self.write("(程序员··················· Zheng)")
-        self.write("(机床··················· {})".format(self.cnc.name))
-        self.write("(控制器··················· {})".format(self.cnc.control))
-        self.write("(单位··················· {})".format(self.cnc.unit))
-        self.write("(加工编号··················· 01)")
-        self.write("(操作··················· 铣削-钻孔)")
-        self.write("(毛坯材料··················· 杨木)")
-        self.write("(材料尺寸··················· 165cm*40cm*1cm)")
-        self.write("(程序原点··················· X0 -- 左边)")
-        self.write("(                           Y0 -- 底边)")
-        self.write("(                           Z0 --上表面)")
-        self.write("(状态··················· 未校验)")
-        self.write("(铣刀····················· 6mm螺旋向上双刃)")
-        self.write("({})".format(50 * "-"))
-        self.write()
+        self._write("({})".format(50 * "-"))
+        self._write("(文件名··················· {})".format(self.__filename))
+        self._write("(最后修订日期··················· {})".format(datetime.now().strftime("%Y-%m-%d")))
+        self._write("(最后修订时间··················· {})".format(datetime.now().strftime("%X")))
+        self._write("(软件名称··················· {} v{})".format(__title__, __version__))
+        self._write("(程序员··················· Zheng)")
+        self._write("(机床··················· {})".format(self.cnc.name))
+        self._write("(控制器··················· {})".format(self.cnc.control))
+        self._write("(单位··················· {})".format(self.cnc.unit))
+        self._write("(加工编号··················· 01)")
+        self._write("(操作··················· 铣削-钻孔)")
+        self._write("(毛坯材料··················· 杨木)")
+        self._write("(材料尺寸··················· 165cm*40cm*1cm)")
+        self._write("(程序原点··················· X0 -- 左边)")
+        self._write("(                           Y0 -- 底边)")
+        self._write("(                           Z0 --上表面)")
+        self._write("(状态··················· 未校验)")
+        self._write("(铣刀····················· 6mm螺旋向上双刃)")
+        self._write("({})".format(50 * "-"))
+        self._write()
 
     # TODO 使用with语句，前提代码不要超过3层缩进
     def __enter__(self):
@@ -140,12 +140,12 @@ def export_gcode(points, insert_coordinate_list, profile_points):
         export_points += draw_circle_path(point.x, point.y, 3)
         for j, p in enumerate(export_points):
             if j == 0:
-                g.write("G00 X%.3f Y%.3f Z%d" % (p.y, p.x, safety_height))
-                g.write("G01 X%.3f Y%.3f Z-1" % (p.y, p.x))
+                g.rapid_move("X%.3f Y%.3f Z%d" % (p.y, p.x, safety_height))
+                g.linear_move("X%.3f Y%.3f Z-1" % (p.y, p.x))
             else:
-                g.write(" X%.3f Y%.3f" % (p.y, p.x))
+                g.linear_move("X%.3f Y%.3f" % (p.y, p.x))
 
-        g.write("G01 X%.3f Y%.3f Z%d" % (export_points[-1].y, export_points[-1].x, safety_height))
+        g.linear_move("X%.3f Y%.3f Z%d" % (export_points[-1].y, export_points[-1].x, safety_height))
 
     g.close()
 

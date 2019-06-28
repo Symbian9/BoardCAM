@@ -12,6 +12,12 @@ from points import Point
 
 class Circle:
     def __init__(self, cx, cy, r):
+        """
+        :param cx: 圆心X坐标
+        :param cy: 圆心Y坐标
+        :param r: 该圆的半径
+        :return:
+        """
         self.cx = cx
         self.cy = cy
         self.r = r
@@ -20,44 +26,18 @@ class Circle:
         # S=πr²
         return pi * pow(self.r, 2)
 
-    def draw_path(self):
-        # TODO 将下面`draw_circle_path`函数移进来
-        pass
+    def draw_path(self, start_angle=ZERO_ANGLE, end_angle=FULL_ANGLE):
+        points = []
+        # points_path = ""
+        angle_step = 2
+        for angle in range(start_angle, end_angle + angle_step, angle_step):
+            x = self.cx + self.r * cos(angle * pi / STRAIGHT_ANGLE)
+            y = self.cy + self.r * sin(angle * pi / STRAIGHT_ANGLE)
+            points.append(Point(x, y))
+            # points_path += "{},{} ".format(x, y)
+
+        # print("points_path: {}".format(points_path))
+        return points
 
     def __str__(self):
         return "Circle O({},{})".format(self.cx, self.cy)
-
-
-def draw_circle_path(cx, cy, r, start_angle=ZERO_ANGLE, end_angle=FULL_ANGLE):
-    """
-    生成指定圆心的圆路径点
-    :param cx: 圆心X坐标
-    :param cy: 圆心Y坐标
-    :param r: 该圆的半径
-    :param start_angle:
-    :param end_angle:
-    :return:
-    """
-    points = []
-    # points_path = ""
-    angle_step = 2
-    for angle in range(start_angle, end_angle + angle_step, angle_step):
-        x = cx + r * cos(angle * pi / STRAIGHT_ANGLE)
-        y = cy + r * sin(angle * pi / STRAIGHT_ANGLE)
-        points.append(Point(x, y))
-        # points_path += "{},{} ".format(x, y)
-
-    # print("points_path: {}".format(points_path))
-    return points
-
-
-if __name__ == '__main__':
-    radius = 5
-    bit_radius = 3
-    from math import ceil
-
-    ha = ceil(radius / bit_radius)
-    print(ha)
-
-    for i in range(ha):
-        print(i)

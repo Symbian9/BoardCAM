@@ -7,7 +7,7 @@
 from math import sqrt
 from xml.etree import ElementTree
 
-from circle import draw_circle_path
+from circle import Circle
 from config import COPYRIGHT, SLOGAN, side_step
 from math_tools import cal_radius, arc_to_angle, RIGHT_ANGLE
 from path import move
@@ -136,7 +136,7 @@ def gen_profile_path(params):
     cx, cy = 0, 0
     angle = int(arc_to_angle(nose_length, tip_radius))
     angle_offset = 10
-    points = draw_circle_path(cx, cy, tip_radius, RIGHT_ANGLE - angle - angle_offset, RIGHT_ANGLE)
+    points = Circle(cx, cy, tip_radius).draw_path(RIGHT_ANGLE - angle - angle_offset, RIGHT_ANGLE)
 
     offset = 200
     camber_list = []

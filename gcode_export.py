@@ -9,7 +9,7 @@ from datetime import datetime
 from io import StringIO
 
 from __version__ import __version__, __title__
-from circle import draw_circle_path
+from circle import Circle
 from machine import CNCRouter, RouterBits
 
 
@@ -136,8 +136,8 @@ def export_gcode(points, insert_coordinate_list, profile_points):
     # 嵌件铣削
     for i, point in enumerate(sorted(insert_coordinate_list)):
         # TODO 嵌件的圆周偏置需要建立算法
-        export_points = draw_circle_path(point.x, point.y, 6)
-        export_points += draw_circle_path(point.x, point.y, 3)
+        export_points = Circle(point.x, point.y, 6).draw_path()
+        export_points += Circle(point.x, point.y, 3).draw_path()
         for j, p in enumerate(export_points):
             if j == 0:
                 g.rapid_move("X%.3f Y%.3f Z%d" % (p.y, p.x, safety_height))

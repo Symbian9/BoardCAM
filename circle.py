@@ -2,12 +2,30 @@
 # -*- coding: utf-8 -*-
 # Author: Zheng <me@BoardCAM.org>
 # Date: 2019-05-30
-# Desc: 圆有关函数
+# Desc: Circle class
 
-from math import cos, sin, pi
+from math import cos, sin, pi, pow
 
 from math_tools import STRAIGHT_ANGLE, FULL_ANGLE, ZERO_ANGLE
 from points import Point
+
+
+class Circle:
+    def __init__(self, cx, cy, r):
+        self.cx = cx
+        self.cy = cy
+        self.r = r
+
+    def area(self):
+        # S=πr²
+        return pi * pow(self.r, 2)
+
+    def draw_path(self):
+        # TODO 将下面`draw_circle_path`函数移进来
+        pass
+
+    def __str__(self):
+        return "Circle O({},{})".format(self.cx, self.cy)
 
 
 def draw_circle_path(cx, cy, r, start_angle=ZERO_ANGLE, end_angle=FULL_ANGLE):

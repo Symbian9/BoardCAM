@@ -19,6 +19,11 @@ from until import list_to_str
 filename = "board_profile.pdf"
 
 
+class PDF:
+    def __init__(self, fn):
+        self.fn = fn
+
+
 def draw_insert(params, canvas, x, y):
     """
     绘制嵌件位置
@@ -28,6 +33,7 @@ def draw_insert(params, canvas, x, y):
     :param y: 圆心Y坐标
     :return:
     """
+    # TODO 移至Insert类
     # r=0.5作为圆心
     inserts_outer_radius = params.get("inserts_outer_radius")
     inserts_inner_radius = params.get("inserts_inner_radius")

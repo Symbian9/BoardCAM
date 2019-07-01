@@ -4,6 +4,8 @@
 # Date: 2019-06-11
 # Desc: 3D-Space point
 
+from math import sqrt
+
 
 class Point:
     def __init__(self, x, y, z=0):
@@ -15,6 +17,10 @@ class Point:
         self.x += x
         self.y += y
         self.z += z
+
+    # TODO 使用__sub__ 用于两点计算距离可能并不合理
+    def __sub__(self, other):
+        return sqrt(pow(abs(self.x - other.x), 2) + pow(abs(self.y - other.y), 2) + pow(abs(self.z - other.z), 2))
 
     def __lt__(self, other):
         """
@@ -64,6 +70,7 @@ class Point:
 
 if __name__ == '__main__':
     p1 = Point(2, 5, 1)
-    p2 = Point(2, 5, 1)
-    print([p1, p2])
-    print(p1 < p2)
+    p2 = Point(2, 5, 4)
+    print(p2 - p1)
+    # print([p1, p2])
+    # print(p1 < p2)

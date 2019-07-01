@@ -10,6 +10,7 @@ from math_tools import INCH
 class CNCRouter:
     def __init__(self, name, unit):
         self.name = name
+        self.control = "arduino grbl"
         self.unit = unit
         self.z_axis_safety_height = 5.0
         self.max_x = None

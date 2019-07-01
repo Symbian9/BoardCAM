@@ -9,6 +9,7 @@ from points import Point
 
 class Path:
     # TODO 将以下方法添加到该类里
+    # TODO 解决需要反转points的问题
     def __init__(self, points):
         self.points = points
 
@@ -16,13 +17,31 @@ class Path:
         pass
 
     def __add__(self, other):
-        return Path(self.points + other.points)
+        # return Path(self.points + other.points)
+        # TODO 需要判断连接在最前面 还是最后面
+        print(self.points[-1] - other[0])
+        print(self.points[-1] - other[-1])
+        if (self.points[-1] - other[0]) < (self.points[-1] - other[-1]):
+            print("1")
+            return Path(self.points + other.points)
+        else:
+            return Path(self.points + other[::-1])
 
     def __repr__(self):
         return "Path: {} -> {}".format(self.points[0], self.points[-1])
 
     def __reversed__(self):
         return Path(self.points[::-1])
+
+    def __radd__(self, other):
+        # TODO 需要判断连接在最前面 还是最后面
+        print(self.points[-1] - other[0])
+        print(self.points[-1] - other[-1])
+        if (self.points[-1] - other[0]) < (self.points[-1] - other[-1]):
+            print("1")
+            return self.__add__(other)
+        else:
+            return self.__add__(other[::-1])
 
     # 排序函数
     # def __
@@ -68,10 +87,11 @@ def move(points, x, y):
 
 if __name__ == '__main__':
     a = Path([Point(1, 1), Point(2, 2)])
-    b = Path([Point(3, 3), Point(4, 4)])
-    print(a)
-    print(reversed(a))
-    # print(a + b)
-    d = [1, 3, 6, 2]
-    d.sort()
-    print(d)
+    b = Path([Point(4, 4), Point(3, 3)])
+    # print(a)
+    # print(reversed(a))
+    a += b
+    print(a.points)
+    # d = [1, 3, 6, 2]
+    # d.sort()
+    # print(d)

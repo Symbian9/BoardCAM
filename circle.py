@@ -25,7 +25,7 @@ class Circle:
     @property
     def diameter(self):
         """
-        d = 2r
+        d=2r
         :return:
         """
         return self.r * 2
@@ -33,11 +33,12 @@ class Circle:
     @property
     def perimeter(self):
         """
-        C = 2πr
+        C=2πr
         :return:
         """
         return 2 * pi * self.r
 
+    @property
     def area(self):
         """
         S=πr²

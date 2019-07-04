@@ -31,7 +31,7 @@ class TestCircle(unittest.TestCase):
 
     def test_area(self):
         """test area"""
-        self.assertEqual(self.c.area(), self.t_area)
+        self.assertEqual(self.c.area, self.t_area)
 
     def test_perimeter(self):
         """test perimeter"""

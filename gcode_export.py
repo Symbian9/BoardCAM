@@ -23,8 +23,8 @@ class Gcode:
 
     def close(self):
         self._finish()
-        with open(self.__filename, mode="w", encoding="utf-8") as file:
-            file.write(self.__buffer.getvalue())
+        with open(self.__filename, mode="w", encoding="utf-8") as f:
+            f.write(self.__buffer.getvalue())
 
     def _write(self, line=""):
         self.__last_line = line

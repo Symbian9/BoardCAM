@@ -152,14 +152,14 @@ def find_offset(mark):
     :param mark:
     :return:
     """
-    with open(filename, mode="rb") as file:
-        data = file.read()
+    with open(filename, mode="rb") as f:
+        data = f.read()
         return data.find(mark)
 
 
 def write_pdf(content):
-    with open(filename, mode="ab") as file:
-        file.write(content.encode())
+    with open(filename, mode="ab") as f:
+        f.write(content.encode())
 
 
 def cal_length(stream_data):

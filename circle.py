@@ -22,11 +22,36 @@ class Circle:
         self.cy = cy
         self.r = r
 
+    @property
+    def diameter(self):
+        """
+        d = 2r
+        :return:
+        """
+        return self.r * 2
+
+    @property
+    def perimeter(self):
+        """
+        C = 2πr
+        :return:
+        """
+        return 2 * pi * self.r
+
     def area(self):
-        # S=πr²
+        """
+        S=πr²
+        :return:
+        """
         return pi * pow(self.r, 2)
 
     def draw_path(self, start_angle=ZERO_ANGLE, end_angle=FULL_ANGLE):
+        """
+
+        :param start_angle:
+        :param end_angle:
+        :return:
+        """
         points = []
         # points_path = ""
         angle_step = 2

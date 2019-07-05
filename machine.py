@@ -29,24 +29,30 @@ class CNCRouter:
 
 
 class RouterBits:
-    def __init__(self, diameter, desc=None):
+    def __init__(self, diameter, desc=""):
         if diameter[-2:] == "in":
-            self.diameter = self.inch_to_mm(float(eval(diameter[:-2])))
+            self.diameter = self.inch_to_mm(self.to_float(diameter[:-2]))
         elif diameter[-4:] == "inch":
-            self.diameter = self.inch_to_mm(float(eval(diameter[:-4])))
+            self.diameter = self.inch_to_mm(self.to_float(diameter[:-4]))
         elif diameter[-2:] == "mm":
-            self.diameter = float(eval(diameter[:-2]))
+            self.diameter = self.to_float(diameter[:-2])
         elif diameter[-2:] == "cm":
-            self.diameter = float(eval(diameter[:-2])) * 10
+            self.diameter = self.to_float(diameter[:-2]) * 10
         else:
             raise ValueError("diameter variable must specify the unit. (support inch、in、cm、mm)")
-        self.radius = self.cal_radius()
         self.description = desc
+
+        # 刃有关
         self.blade_length = None
         self.blade_number = 1
 
-    def cal_radius(self):
+    @property
+    def radius(self):
         return self.diameter / 2
+
+    @staticmethod
+    def to_float(value):
+        return float(eval(value))
 
     @staticmethod
     def inch_to_mm(inch_value):
@@ -64,4 +70,4 @@ class RouterBits:
 if __name__ == '__main__':
     # cnc = CNCRouter("TigerCNC", "metric")
     bit = RouterBits("1/4inch", "1/4英寸螺旋向上双刃铣刀")
-    print(bit)
+    print(bit.radius)

@@ -11,7 +11,17 @@ from points import Point
 
 
 class Edge:
-    pass
+    def __init__(self):
+        pass
+
+    def flat(self):
+        pass
+
+    def arh(self):
+        pass
+
+    def __str__(self):
+        pass
 
 
 def flat_edge(params):

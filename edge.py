@@ -12,6 +12,7 @@ from points import Point
 
 class Edge:
     def __init__(self):
+        # TODO 开始点 结束点
         pass
 
     def flat(self):
@@ -21,7 +22,7 @@ class Edge:
         pass
 
     def __str__(self):
-        pass
+        return "Edge:"
 
 
 def flat_edge(params):

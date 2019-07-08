@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/boardcam/BoardCAM.svg?branch=master)](https://travis-ci.org/boardcam/BoardCAM)
 
 BoardCAM is a snowboard [CAD](https://zh.wikipedia.org/zh-hans/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BE%85%E5%8A%A9%E8%AE%BE%E8%AE%A1)/[CAM](https://zh.wikipedia.org/wiki/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BE%85%E5%8A%A9%E5%88%B6%E9%80%A0) software.
-It's Written by [Python](https://www.python.org/)
+It's written by [Python](https://www.python.org/).
 
 ### Prerequisites
 
@@ -12,6 +12,8 @@ It's Written by [Python](https://www.python.org/)
 * gcode、PDF、SVG、DXF文件格式语法;
 * 滑雪板制造经验;
 * python3编程能力;
+
+在[docs](./docs)目录包含一些我整理的参考资料。
 
 ## Contributing
 

@@ -12,7 +12,7 @@ from config import COPYRIGHT, SLOGAN, side_step
 from math_tools import cal_radius, arc_to_angle, RIGHT_ANGLE
 from path import move
 from points import Point
-from until import value_to_str
+from until import dict_to_str
 
 
 def init_svg(params):
@@ -38,46 +38,46 @@ def init_svg(params):
 
     # 板头垂直虚线
     ElementTree.SubElement(frame, "line",
-                           value_to_str({"x1": nose_length, "y1": 0 + 1, "x2": nose_length,
-                                         "y2": nose_width - 1}))
+                           dict_to_str({"x1": nose_length, "y1": 0 + 1, "x2": nose_length,
+                                        "y2": nose_width - 1}))
 
     # 板尾垂直虚线
     ElementTree.SubElement(frame, "line",
-                           value_to_str({"x1": nose_length + running_length, "y1": 0 + 1,
-                                         "x2": nose_length + running_length, "y2": tail_width - 1}))
+                           dict_to_str({"x1": nose_length + running_length, "y1": 0 + 1,
+                                        "x2": nose_length + running_length, "y2": tail_width - 1}))
 
     # 水平中线虚线
     ElementTree.SubElement(frame, "line",
-                           value_to_str({"x1": 0, "y1": half_nose_width,
-                                         "x2": overall_length, "y2": half_nose_width}))
+                           dict_to_str({"x1": 0, "y1": half_nose_width,
+                                        "x2": overall_length, "y2": half_nose_width}))
     # 板腰垂直虚线
     ElementTree.SubElement(frame, "line",
-                           value_to_str({"x1": nose_length + half_running_length, "y1": 0 + 20,
-                                         "x2": nose_length + half_running_length, "y2": nose_width - 20}))
+                           dict_to_str({"x1": nose_length + half_running_length, "y1": 0 + 20,
+                                        "x2": nose_length + half_running_length, "y2": nose_width - 20}))
 
     # 版权信息
     logo_tag = ElementTree.SubElement(root, "g")
     copyright_tag = ElementTree.SubElement(logo_tag, "text",
-                                           value_to_str({"x": 800, "y": 200, "fill": "black", "fill-opacity": 0.6}))
+                                           dict_to_str({"x": 800, "y": 200, "fill": "black", "fill-opacity": 0.6}))
     copyright_tag.text = COPYRIGHT
 
     # slogan
     slogan_tag = ElementTree.SubElement(logo_tag, "text",
-                                        value_to_str({"x": 805, "y": 215, "fill": "black", "font-size": 9,
-                                                      "font-family": "Times-Italic"}))
+                                        dict_to_str({"x": 805, "y": 215, "fill": "black", "font-size": 9,
+                                                     "font-family": "Times-Italic"}))
     slogan_tag.text = SLOGAN
 
     # 比例尺 TODO 要找一个合适位置放置
     scale_group = ElementTree.SubElement(root, "g", {"style": "stroke:black;stroke-width:0.3"})
     scale_text = ElementTree.SubElement(scale_group, "text",
-                                        value_to_str({"x": 12, "y": 8, "fill": "black", "font-size": 3}))
+                                        dict_to_str({"x": 12, "y": 8, "fill": "black", "font-size": 3}))
     scale_text.text = "1cm"
     ElementTree.SubElement(scale_group, "line",
-                           value_to_str({"x1": 10, "y1": 8, "x2": 10, "y2": 12}))
+                           dict_to_str({"x1": 10, "y1": 8, "x2": 10, "y2": 12}))
     ElementTree.SubElement(scale_group, "line",
-                           value_to_str({"x1": 10, "y1": 10, "x2": 20, "y2": 10, "stroke-width": 0.8}))
+                           dict_to_str({"x1": 10, "y1": 10, "x2": 20, "y2": 10, "stroke-width": 0.8}))
     ElementTree.SubElement(scale_group, "line",
-                           value_to_str({"x1": 20, "y1": 8, "x2": 20, "y2": 12}))
+                           dict_to_str({"x1": 20, "y1": 8, "x2": 20, "y2": 12}))
 
     return root
 
@@ -94,7 +94,7 @@ def gen_circle(root, insert_coordinate_list):
         cx, cy = inserts.x, inserts.y
         for r in ["0.2", "5", "9"]:
             ElementTree.SubElement(inserts_group, "circle",
-                                   value_to_str({"cx": cx, "cy": cy, "r": r, "style": "fill:blue;fill-opacity:0.25"}))
+                                   dict_to_str({"cx": cx, "cy": cy, "r": r, "style": "fill:blue;fill-opacity:0.25"}))
     return root
 
 

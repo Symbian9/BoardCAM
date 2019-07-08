@@ -15,6 +15,20 @@ from points import Point
 from until import dict_to_str
 
 
+class SVG:
+    def __init__(self, filename):
+        self._filename = filename
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        pass
+
+    def __str__(self):
+        pass
+
+
 def init_svg(params):
     """
     生成辅助线 框架

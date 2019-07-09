@@ -5,7 +5,7 @@
 # Desc: 对象操作函数库
 
 
-def value_to_str(dict_obj):
+def dict_to_str(dict_obj):
     """
     将字典的所有key, value转换成string类型并返回
     :param dict_obj: 字典对象

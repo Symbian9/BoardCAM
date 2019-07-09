@@ -10,6 +10,21 @@ from config import side_step
 from points import Point
 
 
+class Edge:
+    def __init__(self):
+        # TODO 开始点 结束点
+        pass
+
+    def flat(self):
+        pass
+
+    def arh(self):
+        pass
+
+    def __str__(self):
+        return "Edge:"
+
+
 def flat_edge(params):
     """
     平直有效边刃路径生成

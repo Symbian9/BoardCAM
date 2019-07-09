@@ -31,15 +31,15 @@ class TestCircle(unittest.TestCase):
 
     def test_area(self):
         """test area"""
-        self.assertEqual(self.c.area(), self.t_area)
+        self.assertEqual(self.c.area, self.t_area)
 
-    # def test_perimeter(self):
-    #     """test perimeter"""
-    #     self.assertEqual(self.c.perimeter, self.t_perimeter)
-    #
-    # def test_diameter(self):
-    #     """test diameter"""
-    #     self.assertEqual(self.c.diameter, self.t_diameter)
+    def test_perimeter(self):
+        """test perimeter"""
+        self.assertEqual(self.c.perimeter, self.t_perimeter)
+
+    def test_diameter(self):
+        """test diameter"""
+        self.assertEqual(self.c.diameter, self.t_diameter)
     #
     # def test_negative_radius_change(self):
     #     """Test the setting of a negative radius"""

@@ -13,6 +13,10 @@ class Inserts:
         self.inner_radius = inner_radius
         self.outer_radius = outer_radius
 
+    # TODO 计算嵌件铣削的刀具路径
+    def cal_path(self):
+        pass
+
 
 def gen_inserts(params):
     """

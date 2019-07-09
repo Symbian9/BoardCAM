@@ -21,6 +21,7 @@ def bezier(bezier_points):
     points_no = len(bezier_points) - 1
     curve_points = []
 
+    # TODO 此步需要考虑计算性能提升，和精度问题
     for t in range(step_count + 1):
         t *= bezier_step
         x, y = 0, 0

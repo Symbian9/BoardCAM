@@ -14,8 +14,8 @@ install:
   - pip install -r requirements-dev.txt
 script:
   - pytest
-  - coverage run tests/test_points.py
+#  - coverage run tests/test_points.py
 
 # Push the results back to codecov
-after_success:
-  - codecov
+#after_success:
+#  - codecov

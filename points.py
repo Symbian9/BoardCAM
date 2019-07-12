@@ -40,7 +40,6 @@ class Point:
         :param other:
         :return:
         """
-        self._is_point(other)
         if self.__eq__(other):
             return False
 
@@ -55,6 +54,9 @@ class Point:
         self._is_point(other)
 
         return self.x == other.x and self.y == other.y and self.z == other.z
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
     @staticmethod
     def _is_point(other):

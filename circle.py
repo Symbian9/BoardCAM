@@ -65,5 +65,52 @@ class Circle:
         # print("points_path: {}".format(points_path))
         return points
 
+    def belong(self, other):
+        """
+        判断某点是否在圆上
+        :param other: Point instance
+        :return:
+        """
+        return abs(self.cx - other.x) ** 2 + abs(self.cy - other.y) ** 2 == self.r ** 2
+
+    def __repr__(self):
+        """
+        standard equation of circle
+        :return:
+        """
+        x, y = str(self.cx), str(self.cy)
+        if self.cx > 0:
+            x = "+" + x
+
+        if self.cy > 0:
+            y = "+" + y
+
+        return "(x{})² + (y{})² = {}".format(x, y, self.r ** 2)
+
     def __str__(self):
         return "Circle O({},{})".format(self.cx, self.cy)
+
+
+class Ellipse:
+    # 椭圆
+    def __init__(self):
+        pass
+
+    def __str__(self):
+        pass
+
+    def __repr__(self):
+        pass
+
+    def draw(self):
+        pass
+
+
+class Hyperbola:
+    # 双曲线
+    pass
+
+
+class Parabola:
+    # 抛物线
+    pass

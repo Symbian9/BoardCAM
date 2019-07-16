@@ -4,7 +4,7 @@
 # Date: 2019-05-30
 # Desc: Circle class
 
-from math import cos, sin, pi, pow
+from math import cos, sin, pi
 
 from math_tools import STRAIGHT_ANGLE, FULL_ANGLE, ZERO_ANGLE
 from points import Point
@@ -13,9 +13,9 @@ from points import Point
 class Circle:
     def __init__(self, cx, cy, r):
         """
-        :param cx: 圆心X坐标
-        :param cy: 圆心Y坐标
-        :param r: 该圆的半径
+        :param cx: Center X coordinate
+        :param cy: Center Y coordinate
+        :param r: Radius
         :return:
         """
         self.cx = cx
@@ -44,7 +44,7 @@ class Circle:
         S=πr²
         :return:
         """
-        return pi * pow(self.r, 2)
+        return pi * self.r ** 2
 
     def draw_path(self, start_angle=ZERO_ANGLE, end_angle=FULL_ANGLE):
         """
@@ -67,28 +67,21 @@ class Circle:
 
     def belong(self, other):
         """
-        判断某点是否在圆上
+        Determine if a point is on the circle
         :param other: Point instance
         :return:
         """
-        return abs(self.cx - other.x) ** 2 + abs(self.cy - other.y) ** 2 == self.r ** 2
+        return (self.cx - other.x) ** 2 + (self.cy - other.y) ** 2 == self.r ** 2
 
     def __repr__(self):
         """
         standard equation of circle
         :return:
         """
-        x, y = str(self.cx), str(self.cy)
-        if self.cx > 0:
-            x = "+" + x
-
-        if self.cy > 0:
-            y = "+" + y
-
-        return "(x{})² + (y{})² = {}".format(x, y, self.r ** 2)
+        return "f(x,y) = (x%+-d)² + (y%+-d)² = %d" % (self.cx, self.cy, self.r ** 2)
 
     def __str__(self):
-        return "Circle O({},{})".format(self.cx, self.cy)
+        return self.__repr__()
 
 
 class Ellipse:

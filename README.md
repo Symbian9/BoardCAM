@@ -38,5 +38,7 @@ Please read [CONTRIBUTING.md](./docs/CONTRIBUTING.md) for details on our code of
 - [x] snowboard
 - [ ] ski
 
+- 将pdf_export svg_export gcode_export 移至export模块
+
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for more details.

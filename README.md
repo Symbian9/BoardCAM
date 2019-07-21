@@ -9,19 +9,14 @@ It is designed to provide engineering drawings and gcode support for handcrafted
 ![](https://cdnolympic.files.wordpress.com/2014/01/team-canada-sebastien-toutant-e1515511383315.jpg?quality=100&w=1000)
 
 ### Prerequisites
-
-* 高中数学知识: 勾股定理、笛卡尔坐标系、各种曲线(抛物线 双曲线 贝塞尔曲线)、三角函数公式(sin cos tan)、圆和椭圆标准方程等;
-* 机械加工的经验、对刀 夹持CAD/CAM软件使用经验 数控编程;
-* gcode、PDF、SVG、DXF文件格式语法;
-* 滑雪板制造经验;
-* python3编程能力;
+* 高中数学知识: 勾股定理、笛卡尔坐标系、各种曲线(抛物线 双曲线 贝塞尔曲线)、三角函数公式(sin cos tan)、圆和椭圆标准方程等
+* 机械加工的经验、对刀 夹持CAD/CAM软件使用经验 数控编程
+* gcode、PDF、SVG、DXF principle or grammar
+* 滑雪板制造经验
+* Python3 programming
 
 在[docs](./docs)目录包含一些我整理的参考资料。
 
-## Contributing
-
-Please read [CONTRIBUTING.md](./docs/CONTRIBUTING.md) for details on our code of conduct, 
-and the process for submitting pull requests to us.
 
 ## TODO-LIST
 ### Export format
@@ -29,25 +24,22 @@ and the process for submitting pull requests to us.
 - [x] PDF
 - [x] Gcode
 - [ ] DXF
-
-
 ### Control board
 - [ ] LinuxCNC
 - [x] Grbl
 - [ ] mach3
-
 ### Components
 - [ ] Nose&Tail tip
 - [x] Core
 - [ ] base
 - [x] mold
-
-
 ### Type
 - [x] snowboard
 - [ ] ski
 
-- 将pdf_export svg_export gcode_export 移至export模块
+## Contributing
+Please read [CONTRIBUTING.md](./docs/CONTRIBUTING.md) for details on our code of conduct, 
+and the process for submitting pull requests to us.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for more details.
+This project is licensed under the MIT License - see the [LICENSE.md](./LICENSE) file for more details.

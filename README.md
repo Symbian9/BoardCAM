@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/boardcam/BoardCAM.svg?branch=master)](https://travis-ci.org/boardcam/BoardCAM)
 [![CircleCI](https://circleci.com/gh/boardcam/BoardCAM.svg?style=svg)](https://circleci.com/gh/boardcam/BoardCAM)
 
-BoardCAM is a snowboard [CAD](https://zh.wikipedia.org/zh-hans/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BE%85%E5%8A%A9%E8%AE%BE%E8%AE%A1)/[CAM](https://zh.wikipedia.org/wiki/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BE%85%E5%8A%A9%E5%88%B6%E9%80%A0) software.
+BoardCAM is a snowboard [CAD](https://en.wikipedia.org/wiki/Computer-aided_design)/[CAM](https://en.wikipedia.org/wiki/Computer-aided_manufacturing) software.
 It's written by [Python](https://www.python.org/).
 
 ![](https://cdnolympic.files.wordpress.com/2014/01/team-canada-sebastien-toutant-e1515511383315.jpg?quality=100&w=1200)
@@ -20,23 +20,30 @@ It's written by [Python](https://www.python.org/).
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](./docs/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](./docs/CONTRIBUTING.md) for details on our code of conduct, 
+and the process for submitting pull requests to us.
 
 ## TODO-LIST
+### Export format
 - [x] SVG
 - [x] PDF
 - [x] Gcode
 - [ ] DXF
 
+
+### control board
 - [ ] LinuxCNC
 - [x] Grbl
 - [ ] mach3
 
-- [ ] 板头板尾垫片
-- [x] 板芯
-- [ ] 底板
-- [x] 模具
+### Components
+- [ ] Nose&Tail tip
+- [x] Core
+- [ ] base
+- [x] mold
 
+
+### Type
 - [x] snowboard
 - [ ] ski
 

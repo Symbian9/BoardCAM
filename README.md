@@ -3,8 +3,8 @@
 [![Build Status](https://travis-ci.org/boardcam/BoardCAM.svg?branch=master)](https://travis-ci.org/boardcam/BoardCAM)
 [![CircleCI](https://circleci.com/gh/boardcam/BoardCAM.svg?style=svg)](https://circleci.com/gh/boardcam/BoardCAM)
 
-BoardCAM is a snowboard [CAD](https://en.wikipedia.org/wiki/Computer-aided_design)/[CAM](https://en.wikipedia.org/wiki/Computer-aided_manufacturing) software.
-It's written by [Python](https://www.python.org/).
+BoardCAM is a [CAD](https://en.wikipedia.org/wiki/Computer-aided_design)/[CAM](https://en.wikipedia.org/wiki/Computer-aided_manufacturing) software.
+It is designed to hand make snowboard or ski. And it's written by [Python](https://www.python.org/).
 
 ![](https://cdnolympic.files.wordpress.com/2014/01/team-canada-sebastien-toutant-e1515511383315.jpg?quality=100&w=1200)
 
@@ -31,7 +31,7 @@ and the process for submitting pull requests to us.
 - [ ] DXF
 
 
-### control board
+### Control board
 - [ ] LinuxCNC
 - [x] Grbl
 - [ ] mach3

@@ -8,6 +8,11 @@ It is designed to provide engineering drawings and gcode support for handcrafted
 
 ![](https://cdnolympic.files.wordpress.com/2014/01/team-canada-sebastien-toutant-e1515511383315.jpg?quality=100&w=1000)
 
+## Quick Start
+```python
+>>>python boardcam.py
+```
+
 ### Prerequisites
 * 高中数学知识: 勾股定理、笛卡尔坐标系、各种曲线(抛物线 双曲线 贝塞尔曲线)、三角函数公式(sin cos tan)、圆和椭圆标准方程等
 * 机械加工的经验、对刀 夹持CAD/CAM软件使用经验 数控编程
@@ -47,4 +52,4 @@ Please read [CONTRIBUTING.md](./docs/CONTRIBUTING.md) for details on our code of
 and the process for submitting pull requests to us.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md](./LICENSE) file for more details.
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for more details.

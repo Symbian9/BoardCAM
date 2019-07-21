@@ -4,9 +4,9 @@
 [![CircleCI](https://circleci.com/gh/boardcam/BoardCAM.svg?style=svg)](https://circleci.com/gh/boardcam/BoardCAM)
 
 BoardCAM is a [CAD](https://en.wikipedia.org/wiki/Computer-aided_design)/[CAM](https://en.wikipedia.org/wiki/Computer-aided_manufacturing) software.
-It is designed to hand make snowboard or ski. And it's written by [Python](https://www.python.org/).
+It is designed to provide engineering drawings and gcode support for handcrafted snowboard. And it's written by [Python](https://www.python.org/).
 
-![](https://cdnolympic.files.wordpress.com/2014/01/team-canada-sebastien-toutant-e1515511383315.jpg?quality=100&w=1200)
+![](https://cdnolympic.files.wordpress.com/2014/01/team-canada-sebastien-toutant-e1515511383315.jpg?quality=100&w=1000)
 
 ### Prerequisites
 

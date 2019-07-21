@@ -22,7 +22,7 @@ class Gcode:
         self.__last_line = None
 
     def close(self):
-        self._finish()
+        self._finish_code()
         with open(self.__filename, mode="w", encoding="utf-8") as f:
             f.write(self.__buffer.getvalue())
 
@@ -30,7 +30,7 @@ class Gcode:
         self.__last_line = line
         self.__buffer.write("{}\n".format(line))
 
-    def start(self):
+    def start_code(self):
         self._comment()             # 写入程序注释
         self._write("G40")          # 关闭刀具补偿
         self._write("G49")          # 禁用刀具长度补偿
@@ -42,7 +42,7 @@ class Gcode:
         self._write("F1000.00000")  # 设定进给率
         self._write("S1000.00000")  # 设置主轴速度
 
-    def _finish(self):
+    def _finish_code(self):
         self._write("M05 M09")      # 主轴停,冷却液泵马达停
         self._write("G0 X0 Y0 Z5")  # 快速回到坐标原点
         self._write("M2")           # 结束程序  # TODO 比较M2和M30区别
@@ -89,7 +89,7 @@ class Gcode:
         self._write("(                           Y0 -- 底边)")
         self._write("(                           Z0 --上表面)")
         self._write("(状态··················· 未校验)")
-        self._write("(铣刀····················· 6mm螺旋向上双刃)")
+        self._write("(铣刀····················· 6mm螺旋向上双刃铣刀)")
         self._write("({})".format(50 * "-"))
         self._write()
 
@@ -122,7 +122,7 @@ def export_gcode(points, insert_coordinate_list, profile_points):
     safety_height = 5.0
     filename = "board_profile.gcode"
     g = Gcode(filename)
-    g.start()
+    g.start_code()
     g.lift_bit()
 
     # 外轮廓铣削
@@ -159,7 +159,7 @@ def export_profile(profile_points):
     # TODO 需要把模具切出边缘，过厚就需要重复步骤
     filename = "profile.gcode"
     with Gcode(filename) as g:
-        g.start()
+        g.start_code()
         safety_height = 5.0
         g.rapid_move("X{} Y{} Z{}".format(profile_points[0].y, profile_points[0].x, safety_height))
         for i, p in enumerate(profile_points):

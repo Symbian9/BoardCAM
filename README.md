@@ -37,7 +37,12 @@ It is designed to provide engineering drawings and gcode support for handcrafted
 - [x] snowboard
 - [ ] ski
 
-## Contributing
+## Links
+* Ski Builder: http://www.skibuilders.com/phpBB2/
+* Facebook group: https://www.facebook.com/groups/snowboardbuilders
+* 【滑雪板制造】QQ群: 632878898
+
+## How to Contribute
 Please read [CONTRIBUTING.md](./docs/CONTRIBUTING.md) for details on our code of conduct, 
 and the process for submitting pull requests to us.
 

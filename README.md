@@ -9,8 +9,9 @@ It is designed to provide engineering drawings and gcode support for handcrafted
 ![](https://cdnolympic.files.wordpress.com/2014/01/team-canada-sebastien-toutant-e1515511383315.jpg?quality=100&w=1000)
 
 ## Quick Start
-```python
->>>python boardcam.py
+generate snowboard manufacturing files for your specified parameters, first edit it. Then run it:
+```
+python boardcam.py
 ```
 
 ### Prerequisites

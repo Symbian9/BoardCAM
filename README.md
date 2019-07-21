@@ -6,7 +6,7 @@
 BoardCAM is a snowboard [CAD](https://zh.wikipedia.org/zh-hans/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BE%85%E5%8A%A9%E8%AE%BE%E8%AE%A1)/[CAM](https://zh.wikipedia.org/wiki/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BE%85%E5%8A%A9%E5%88%B6%E9%80%A0) software.
 It's written by [Python](https://www.python.org/).
 
-![](https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwi-nKzxgMbjAhXHr1QKHXnqAiEQjRx6BAgBEAU&url=https%3A%2F%2Folympic.ca%2Fteam-canada%2Fsebastien-toutant%2Fsebastien-toutant-5%2F&psig=AOvVaw0rXdNoC1v_On_VggFzNfVc&ust=1563798325500563)
+![](https://cdnolympic.files.wordpress.com/2014/01/team-canada-sebastien-toutant-e1515511383315.jpg?quality=100&w=1200)
 
 ### Prerequisites
 

@@ -13,6 +13,7 @@ generate snowboard manufacturing files for your specified parameters, first edit
 ```
 python boardcam.py
 ```
+See the [output](./output) folder
 
 ### Prerequisites
 * 高中数学知识: 勾股定理、笛卡尔坐标系、各种曲线(抛物线 双曲线 贝塞尔曲线)、三角函数公式(sin cos tan)、圆和椭圆标准方程等

@@ -74,14 +74,14 @@ class Circle:
         return (self.cx - other.x) ** 2 + (self.cy - other.y) ** 2 == self.r ** 2
 
     def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
         """
         standard equation of circle
         :return:
         """
         return "f(x,y) = (x%+-d)² + (y%+-d)² = %d" % (self.cx, self.cy, self.r ** 2)
-
-    def __str__(self):
-        return self.__repr__()
 
 
 class Ellipse:

@@ -17,6 +17,9 @@ class Inserts:
     def cal_path(self):
         pass
 
+    def __repr__(self):
+        pass
+
 
 def gen_inserts(params):
     """

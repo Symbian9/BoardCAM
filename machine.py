@@ -24,7 +24,7 @@ class CNCRouter:
 
         # 单层步距
 
-    def __str__(self):
+    def __repr__(self):
         return "<CNCRouter>"
 
 
@@ -63,7 +63,7 @@ class RouterBits:
         """
         return inch_value * INCH
 
-    def __str__(self):
+    def __repr__(self):
         return "bit: ⌀{}mm.".format(self.diameter)
 
 

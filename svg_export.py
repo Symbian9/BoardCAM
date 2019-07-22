@@ -25,7 +25,7 @@ class SVG:
     def __exit__(self, exc_type, exc_val, exc_tb):
         pass
 
-    def __str__(self):
+    def __repr__(self):
         pass
 
 

@@ -64,9 +64,6 @@ class Point:
             raise TypeError('Must be Point class.')
 
     def __repr__(self):
-        return self.__str__()
-
-    def __str__(self):
         return "{}({}, {}, {})".format(self.__class__.__name__, self.x, self.y, self.z)
 
 

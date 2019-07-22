@@ -12,6 +12,9 @@ class Unit:
     def __mul__(self, other):
         return self.value * other.value
 
+    def __repr__(self):
+        pass
+
 
 class Material:
     def __init__(self, **kwargs):
@@ -33,7 +36,7 @@ class Material:
         # TODO 检查材料单位是否符合正常标准并且符合机床的加工区间
         pass
 
-    def __str__(self):
+    def __repr__(self):
         return "Material({}): {}mm x {}mm x {}mm.".format(self.material_type, self.length,
                                                           self.width, self.thickness)
 

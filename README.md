@@ -10,8 +10,9 @@ It is designed to provide engineering drawings and gcode support for handcrafted
 
 ## Quick Start
 generate snowboard manufacturing files for your specified parameters, first edit it. Then run it:
-```
-python boardcam.py
+``` {.sourceCode .python}
+>>> pip install -r requirements.txt
+>>> python boardcam.py
 ```
 See the [output](./output) folder
 

@@ -24,26 +24,17 @@ class Circle:
 
     @property
     def diameter(self):
-        """
-        d=2r
-        :return:
-        """
+        """d=2r"""
         return self.r * 2
 
     @property
     def perimeter(self):
-        """
-        C=2πr
-        :return:
-        """
+        """C=2πr"""
         return 2 * pi * self.r
 
     @property
     def area(self):
-        """
-        S=πr²
-        :return:
-        """
+        """S=πr²"""
         return pi * self.r ** 2
 
     def draw_path(self, start_angle=ZERO_ANGLE, end_angle=FULL_ANGLE):
@@ -74,10 +65,7 @@ class Circle:
         return (self.cx - other.x) ** 2 + (self.cy - other.y) ** 2 == self.r ** 2
 
     def __repr__(self):
-        """
-        standard equation of circle
-        :return:
-        """
+        """standard equation of circle"""
         return "f(x,y) = (x%+-d)² + (y%+-d)² = %d" % (self.cx, self.cy, self.r ** 2)
 
 

@@ -16,7 +16,7 @@ generate snowboard manufacturing files for your specified parameters, first edit
 ```
 Then, see the [output](./output) folder.
 
-### Prerequisites
+## Prerequisites
 * mathematics: including but not limited to Pythagorean theorem, Cartesian coordinate system, various curves (parabolic hyperbolic Bezier curve), trigonometric function formula (sin cos tan), circular and elliptical standard equations, etc.
 * Experience in machining, experience in tool clamping CAD/CAM software, CNC programming
 * Gcode、PDF、SVG、DXF principle or grammar
@@ -25,12 +25,11 @@ Then, see the [output](./output) folder.
 
 The [docs](./docs) directory contains some of the references I have compiled.
 
-
 ## TODO-LIST
 ### Export format
 - [x] SVG
 - [x] PDF
-- [x] Gcode
+- [x] G-code
 - [ ] DXF
 ### Control board
 - [ ] LinuxCNC
@@ -39,8 +38,8 @@ The [docs](./docs) directory contains some of the references I have compiled.
 ### Components
 - [ ] Nose&Tail tip
 - [x] Core
-- [ ] base
-- [x] mold
+- [ ] Base
+- [x] Mold
 ### Type
 - [x] snowboard
 - [ ] ski

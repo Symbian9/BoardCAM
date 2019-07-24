@@ -4,9 +4,9 @@
 [![CircleCI](https://circleci.com/gh/boardcam/BoardCAM.svg?style=svg)](https://circleci.com/gh/boardcam/BoardCAM)
 
 BoardCAM is a [CAD](https://en.wikipedia.org/wiki/Computer-aided_design)/[CAM](https://en.wikipedia.org/wiki/Computer-aided_manufacturing) software.
-It is designed to provide engineering drawings and gcode support for handcrafted snowboard. And it's written by [Python](https://www.python.org/).
+It is designed to provide engineering drawings and gcode support for handcrafted snowboard. It's written by [Python](https://www.python.org/).
 
-![](https://zx-scenic.oss-cn-hangzhou.aliyuncs.com/ValerianDucourtil_Mayrhofen_2Z7A2508_MattGEORGES-featured.jpg)
+![Head Image](https://zx-scenic.oss-cn-hangzhou.aliyuncs.com/ValerianDucourtil_Mayrhofen_2Z7A2508_MattGEORGES-featured.jpg)
 
 ## Quick Start
 generate snowboard manufacturing files for your specified parameters, first edit it. Then run it:
@@ -14,16 +14,16 @@ generate snowboard manufacturing files for your specified parameters, first edit
 >>> pip install -r requirements.txt
 >>> python boardcam.py
 ```
-See the [output](./output) folder
+See the [output](./output) folder.
 
 ### Prerequisites
-* 高中数学知识: 勾股定理、笛卡尔坐标系、各种曲线(抛物线 双曲线 贝塞尔曲线)、三角函数公式(sin cos tan)、圆和椭圆标准方程等
-* 机械加工的经验、对刀 夹持CAD/CAM软件使用经验 数控编程
-* gcode、PDF、SVG、DXF principle or grammar
-* 滑雪板制造经验
+* mathematics: including but not limited to Pythagorean theorem, Cartesian coordinate system, various curves (parabolic hyperbolic Bezier curve), trigonometric function formula (sin cos tan), circular and elliptical standard equations, etc.
+* Experience in machining, experience in tool clamping CAD/CAM software, CNC programming
+* Gcode、PDF、SVG、DXF principle or grammar
+* Snowboard manufacturing experience
 * Python3 programming
 
-在[docs](./docs)目录包含一些我整理的参考资料。
+The [docs](./docs) directory contains some of the references I have compiled.
 
 
 ## TODO-LIST

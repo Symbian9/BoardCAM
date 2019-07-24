@@ -14,7 +14,7 @@ generate snowboard manufacturing files for your specified parameters, first edit
 >>> pip install -r requirements.txt
 >>> python boardcam.py
 ```
-See the [output](./output) folder.
+Then, see the [output](./output) folder.
 
 ### Prerequisites
 * mathematics: including but not limited to Pythagorean theorem, Cartesian coordinate system, various curves (parabolic hyperbolic Bezier curve), trigonometric function formula (sin cos tan), circular and elliptical standard equations, etc.

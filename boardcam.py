@@ -49,8 +49,9 @@ def frame(params):
 
 
 if __name__ == "__main__":
-    # 参数含义参考docs/Configuration.md
+    # Parameter meaning reference docs/Configuration.md
     params = {
+        #  all param use (unit: mm)
         # Nose Shape
         "nose_width": 300,
         "nose_length": 180,

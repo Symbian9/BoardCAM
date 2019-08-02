@@ -55,3 +55,6 @@ and the process for submitting pull requests to us.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for more details.
+
+## Sponsors
+* [JetBrains](https://www.jetbrains.com/) - Offer free JetBrains Open Source license.

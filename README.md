@@ -6,7 +6,7 @@
 BoardCAM is a [CAD](https://en.wikipedia.org/wiki/Computer-aided_design)/[CAM](https://en.wikipedia.org/wiki/Computer-aided_manufacturing) software.
 It is designed to provide engineering drawings and gcode support for handcrafted snowboard. It's written by [Python](https://www.python.org/).
 
-![Head Image](https://zx-scenic.oss-cn-hangzhou.aliyuncs.com/ValerianDucourtil_Mayrhofen_2Z7A2508_MattGEORGES-featured.jpg)
+![Head Image](./docs/background.jpg)
 
 ## Quick Start
 generate snowboard manufacturing files for your specified parameters, first edit it. Then run it:

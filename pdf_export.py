@@ -16,7 +16,7 @@ from path import move, move_path
 from points import Point
 from until import list_to_str
 
-filename = "board_profile.pdf"
+filename = "./output/board_profile.pdf"
 
 
 class PDF:
@@ -61,7 +61,7 @@ def draw_profile(points, height):
 
     # 设置不压缩PDF stream
     canvas.setPageCompression(0)
-    canvas._filename = "profile.pdf"
+    canvas._filename = "./output/profile.pdf"
 
     # 水平翻转
     points = [Point(point.x, height * 2 - point.y) for point in points]

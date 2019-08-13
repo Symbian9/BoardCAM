@@ -130,7 +130,8 @@ def export_svg(params, points, insert_coordinate_list):
 
     # 生成SVG
     tree = ElementTree.ElementTree(root)
-    tree.write("board_profile.svg", xml_declaration=True, encoding="UTF-8")
+    filename = "./output/board_profile.svg"
+    tree.write(filename, xml_declaration=True, encoding="UTF-8")
 
 
 def gen_profile_path(params):
@@ -184,6 +185,6 @@ def gen_profile_path(params):
                            {"style": "fill:none;stroke:black;stroke-width:1", "points": profile_path})
 
     tree = ElementTree.ElementTree(root)
-    tree.write("profile.svg", xml_declaration=True, encoding="UTF-8")
+    tree.write("./output/profile.svg", xml_declaration=True, encoding="UTF-8")
 
     return profile_points, height

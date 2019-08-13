@@ -117,7 +117,7 @@ def export_gcode(points, insert_coordinate_list, profile_points):
     export_profile(profile_points)
     # TODO 连接桥的开发 和彻底钻孔算法
     safety_height = 5.0
-    filename = "board_profile.gcode"
+    filename = "./output/board_profile.gcode"
     g = Gcode(filename)
     g.start_code()
     g.lift_bit()
@@ -154,7 +154,7 @@ def export_profile(profile_points):
     :return:
     """
     # TODO 需要把模具切出边缘，过厚就需要重复步骤
-    filename = "profile.gcode"
+    filename = "./output/profile.gcode"
     with Gcode(filename) as g:
         g.start_code()
         safety_height = 5.0

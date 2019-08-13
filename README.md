@@ -1,7 +1,7 @@
 # BoardCAM
 
 [![Build Status](https://travis-ci.org/boardcam/BoardCAM.svg?branch=master)](https://travis-ci.org/boardcam/BoardCAM)
-[![CircleCI](https://circleci.com/gh/boardcam/BoardCAM.svg?style=svg)](https://circleci.com/gh/boardcam/BoardCAM)
+[![CircleCI](https://circleci.com/gh/BoardCAM/BoardCAM.svg?style=svg)](https://circleci.com/gh/boardcam/BoardCAM)
 
 BoardCAM is a [CAD](https://en.wikipedia.org/wiki/Computer-aided_design)/[CAM](https://en.wikipedia.org/wiki/Computer-aided_manufacturing) software.
 It is designed to provide engineering drawings and gcode support for handcrafted snowboard. It's written by [Python](https://www.python.org/).

@@ -1,4 +1,5 @@
 # BoardCAM
+> *design it. build it. enjoy it*
 
 [![Build Status](https://travis-ci.org/boardcam/BoardCAM.svg?branch=master)](https://travis-ci.org/boardcam/BoardCAM)
 [![CircleCI](https://circleci.com/gh/BoardCAM/BoardCAM.svg?style=svg)](https://circleci.com/gh/boardcam/BoardCAM)

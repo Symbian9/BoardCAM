@@ -41,5 +41,5 @@ def find_length(feet, inch):
 
 
 if __name__ == "__main__":
-    find_length(5, 5)
-    find_stance_width(5, 5)
+    find_length(5, 8)
+    find_length(5, 8)

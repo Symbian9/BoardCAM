@@ -37,7 +37,7 @@ class Gcode:
         self._write("G80")          # 取消模态动作
         self._write("G54")          # 选择坐标系1
         self._write("G90")          # 禁用增量移动
-        self._write("G21")          # 使用毫米长度单位
+        self._write("G21")          # 使用公制长度单位
         self._write("G61")          # 确切的路径模式
         self._write("F1000.00000")  # 设定进给率
         self._write("S1000.00000")  # 设置主轴速度

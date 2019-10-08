@@ -40,7 +40,7 @@ class Gcode:
         self._write("G21")          # 使用公制长度单位
         self._write("G61")          # 确切的路径模式
         self._write("F1000.00000")  # 设定进给率
-        self._write("S1000.00000")  # 设置主轴速度
+        self._write("S1000.00000")  # 设置主轴转速
 
     def _finish_code(self):
         self._write("M05 M09")      # 主轴停,冷却液泵马达停

@@ -24,7 +24,7 @@ Then, see the [output](./output) folder.
 * Snowboard manufacturing experience
 * Python3 programming
 
-The [docs](./docs) directory contains some of the references I have compiled.
+The [docs](./docs) directory contains some of the references I have collected.
 
 ## TODO-LIST
 ### Export format
@@ -41,10 +41,10 @@ The [docs](./docs) directory contains some of the references I have compiled.
 - [x] Core
 - [ ] Base
 - [x] Mold
-### Type
+### Kinds
 - [x] snowboard
-- [ ] splitboard
 - [ ] ski
+- [ ] splitboard
 
 ## Links
 * Ski Builder: http://www.skibuilders.com/phpBB2/

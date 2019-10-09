@@ -5,6 +5,7 @@
 # Desc: gcode
 # Preview: https://ncviewer.com/
 
+import os
 from datetime import datetime
 from io import StringIO
 
@@ -73,7 +74,7 @@ class Gcode:
     def _comment(self):
         # TODO 还需要优化整齐注释的排版
         self._write("({})".format(50 * "-"))
-        self._write("(文件名··················· {})".format(self.__filename))
+        self._write("(文件名··················· {})".format(os.path.basename(self.__filename)))
         self._write("(最后修订日期··················· {})".format(datetime.now().strftime("%Y-%m-%d")))
         self._write("(最后修订时间··················· {})".format(datetime.now().strftime("%X")))
         self._write("(软件名称··················· {} v{})".format(__title__, __version__))

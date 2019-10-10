@@ -37,9 +37,8 @@ def find_length(feet, inch):
 
     # Big Mountain Riding Board Length
     c = 28 * feet + inch * 2
-    print(a, b, c)
+    print("Freestyle: {}cm, Free Ride: {}cm, Big Mountain: {}cm.".format(a, b, c))
 
 
 if __name__ == "__main__":
-    find_length(5, 8)
     find_length(5, 8)

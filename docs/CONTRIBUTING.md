@@ -1,4 +1,4 @@
 # CONTRIBUTING
 
-* travis-ci.org
+* https://travis-ci.org/
 * https://circleci.com/

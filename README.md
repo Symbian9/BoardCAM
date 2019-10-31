@@ -47,8 +47,8 @@ The [docs](./docs) directory contains some of the references I have collected.
 - [ ] splitboard
 
 ## Links
-* Ski Builder: http://www.skibuilders.com/phpBB2/
-* Facebook group: https://www.facebook.com/groups/snowboardbuilders
+* Ski Builder: http://www.skibuilders.com/phpBB2
+* Facebook group: https://www.fb.com/groups/snowboardbuilders
 * 【滑雪板制造交流群】QQ群: [632878898](https://jq.qq.com/?_wv=1027&k=56qxmgw)
 
 ## How to Contribute

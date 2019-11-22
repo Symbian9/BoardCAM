@@ -4,7 +4,7 @@
 # Date: 2019-06-25
 # Desc:
 
-from points import Point
+from geometry.points import Point
 
 
 def test_eq():

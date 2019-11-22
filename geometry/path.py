@@ -4,7 +4,7 @@
 # Date: 2019-05-07
 # Desc: 路径处理
 
-from points import Point
+from geometry.points import Point
 
 
 class Path:

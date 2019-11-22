@@ -6,8 +6,8 @@
 
 from math import sqrt
 
-from config import side_step
-from points import Point
+from until.config import side_step
+from geometry.points import Point
 
 
 class Edge:

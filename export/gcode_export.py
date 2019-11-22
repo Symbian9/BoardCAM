@@ -10,8 +10,8 @@ from datetime import datetime
 from io import StringIO
 
 from __version__ import __version__, __title__
-from circle import Circle
-from machine import CNCRouter, RouterBits
+from geometry.circle import Circle
+from until.machine import CNCRouter, RouterBits
 
 
 class Gcode:

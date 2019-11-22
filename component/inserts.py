@@ -4,7 +4,7 @@
 # Date: 2019-05-07
 # Desc: 嵌件组生成
 
-from points import Point
+from geometry.points import Point
 
 
 class Inserts:

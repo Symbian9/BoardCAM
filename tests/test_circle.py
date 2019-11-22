@@ -8,8 +8,8 @@
 import unittest
 from math import pi
 
-import circle
-from points import Point
+from geometry import circle
+from geometry.points import Point
 
 
 class TestCircle(unittest.TestCase):

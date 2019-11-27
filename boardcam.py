@@ -10,7 +10,7 @@ from component.edge import arc_edge
 from export.gcode_export import export_gcode
 from component.inserts import gen_inserts
 from component.material import Material
-from until.math_tools import cal_waist_width
+from util.math_tools import cal_waist_width
 from export.pdf_export import export_pdf, draw_profile
 from geometry.points import Point
 from export.svg_export import export_svg, gen_profile_path

@@ -10,11 +10,11 @@ import math
 from reportlab.lib.units import mm
 from reportlab.pdfgen import canvas as c
 
-from until.config import border
-from until.math_tools import mm_to_dpi
+from util.config import border
+from util.math_tools import mm_to_dpi
 from geometry.path import move, move_path
 from geometry.points import Point
-from until.obj import list_to_str
+from util.obj import list_to_str
 
 filename = "./output/board_profile.pdf"
 

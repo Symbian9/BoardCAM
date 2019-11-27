@@ -6,7 +6,7 @@
 
 from math import cos, sin, pi
 
-from until.math_tools import STRAIGHT_ANGLE, FULL_ANGLE, ZERO_ANGLE
+from util.math_tools import STRAIGHT_ANGLE, FULL_ANGLE, ZERO_ANGLE
 from geometry.points import Point
 
 

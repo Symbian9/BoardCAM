@@ -4,7 +4,7 @@
 # Date: 2019-06-13
 # Desc: 曲线有关
 
-from until.config import bezier_step
+from util.config import bezier_step
 from geometry.path import mirror_path, move_path
 from geometry.points import Point
 

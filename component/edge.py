@@ -6,7 +6,7 @@
 
 from math import sqrt
 
-from until.config import side_step
+from util.config import side_step
 from geometry.points import Point
 
 

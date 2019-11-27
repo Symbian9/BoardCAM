@@ -11,7 +11,7 @@ from io import StringIO
 
 from __version__ import __version__, __title__
 from geometry.circle import Circle
-from until.machine import CNCRouter, RouterBits
+from util.machine import CNCRouter, RouterBits
 
 
 class Gcode:

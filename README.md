@@ -1,9 +1,6 @@
 # BoardCAM
 > *design it. build it. enjoy it*
 
-[![Build Status](https://travis-ci.org/boardcam/BoardCAM.svg?branch=master)](https://travis-ci.org/boardcam/BoardCAM)
-[![CircleCI](https://circleci.com/gh/BoardCAM/BoardCAM.svg?style=svg)](https://circleci.com/gh/boardcam/BoardCAM)
-
 BoardCAM is a [CAD](https://en.wikipedia.org/wiki/Computer-aided_design)/[CAM](https://en.wikipedia.org/wiki/Computer-aided_manufacturing) software.
 It's designed to provide engineering drawings and gcode support for made snowboard. You can customize the running Length, nose width, sidecut radius and other parameters. It gives DIYer maximum freedom. Happy production!
 

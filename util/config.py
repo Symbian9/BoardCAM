@@ -23,3 +23,13 @@ A1 = 620
 A2 = 440
 A3 = 310
 A4 = 297
+
+
+__title__ = "BoardCAM"
+__description__ = "snowboard ski splitboard CAD/CAM software"
+__url__ = "https://BoardCAM.org"
+__version__ = "0.0.1"
+__author__ = "Zheng"
+__author_email__ = "me@BoardCAM.org"
+__license__ = "MIT"
+__copyright__ = "Copyright 2019 BoardCAM"

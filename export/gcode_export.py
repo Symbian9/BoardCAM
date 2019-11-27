@@ -9,8 +9,8 @@ import os
 from datetime import datetime
 from io import StringIO
 
-from __version__ import __version__, __title__
 from geometry.circle import Circle
+from util.config import __title__, __version__
 from util.machine import CNCRouter, RouterBits
 
 

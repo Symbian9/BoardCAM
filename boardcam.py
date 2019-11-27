@@ -5,15 +5,15 @@
 # Desc: BoardCAM主程序
 
 
-from geometry.curve import gen_curve
 from component.edge import arc_edge
-from export.gcode_export import export_gcode
 from component.inserts import gen_inserts
 from component.material import Material
-from util.math_tools import cal_waist_width
+from export.gcode_export import export_gcode
 from export.pdf_export import export_pdf, draw_profile
-from geometry.points import Point
 from export.svg_export import export_svg, gen_profile_path
+from geometry.curve import gen_curve
+from geometry.points import Point
+from util.math_tools import cal_waist_width
 
 
 def frame(params):

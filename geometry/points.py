@@ -33,8 +33,14 @@ class Point:
         :return:
         """
         self._is_point(other)
-        if self.x < other.x or self.y < other.y or self.z < other.z:
+        if self.x < other.x:
             return True
+        elif self.x == other.x:
+            if self.y < other.y:
+                return True
+            elif self.y == other.y:
+                if self.z < other.z:
+                    return True
 
         return False
 
@@ -68,4 +74,16 @@ class Point:
             raise TypeError('Must be Point instance.')
 
     def __repr__(self):
+        if self.z == 0:
+            return "Point({}, {})".format(self.x, self.y)
         return "Point({}, {}, {})".format(self.x, self.y, self.z)
+
+
+if __name__ == '__main__':
+    A = [Point(425.0, 130.0), Point(425.0, 170.0), Point(975.0, 130.0), Point(975.0, 170.0), Point(465.0, 130.0),
+         Point(465.0, 170.0), Point(1015.0, 130.0), Point(1015.0, 170.0), Point(505.0, 130.0), Point(505.0, 170.0),
+         Point(1055.0, 130.0), Point(1055.0, 170.0), Point(545.0, 130.0), Point(545.0, 170.0), Point(1095.0, 130.0),
+         Point(1095.0, 170.0)]
+    b = sorted(A)
+    print(A)
+    print(b)

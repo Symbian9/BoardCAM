@@ -65,11 +65,3 @@ class Point:
 
     def __repr__(self):
         return "{}({}, {}, {})".format(self.__class__.__name__, self.x, self.y, self.z)
-
-
-if __name__ == '__main__':
-    p1 = Point(2, 5, 1)
-    p2 = Point(2, 5, 4)
-    print(p2 - p1)
-    # print([p1, p2])
-    # print(p1 < p2)

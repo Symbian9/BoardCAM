@@ -18,9 +18,13 @@ class Point:
         self.y += y
         self.z += z
 
-    # TODO 使用__sub__ 用于两点计算距离可能并不合理
-    def __sub__(self, other):
-        return sqrt(pow(abs(self.x - other.x), 2) + pow(abs(self.y - other.y), 2) + pow(abs(self.z - other.z), 2))
+    def distance(self, other):
+        """
+        The Distance Formula in Three-Dimensional Space
+        """
+        return sqrt(
+            (self.x - other.x) ** 2 + (self.y - other.y) ** 2 + (self.z - other.z) ** 2
+        )
 
     def __lt__(self, other):
         """
@@ -61,7 +65,7 @@ class Point:
     @staticmethod
     def _is_point(other):
         if not isinstance(other, Point):
-            raise TypeError('Must be Point class.')
+            raise TypeError('Must be Point instance.')
 
     def __repr__(self):
-        return "{}({}, {}, {})".format(self.__class__.__name__, self.x, self.y, self.z)
+        return "Point({}, {}, {})".format(self.x, self.y, self.z)

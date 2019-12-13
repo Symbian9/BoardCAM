@@ -41,3 +41,9 @@ def test_ne():
     p1 = Point(1, 2, 3)
     p2 = Point(3, 4, 5)
     assert p1 != p2
+
+
+def test_distance():
+    p1 = Point(1, 1, 1)
+    p2 = Point(1, 1, 2)
+    assert int(p1.distance(p2)) == 1

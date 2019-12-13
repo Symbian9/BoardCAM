@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Author: Zheng <me@BoardCAM.org>
 # Date: 2019-06-13
-# Desc: 曲线有关
+# Desc: 各种曲线模块
 
 from util.config import bezier_step
 from geometry.path import mirror_path, move_path
@@ -11,18 +11,18 @@ from geometry.points import Point
 
 def bezier(bezier_points):
     """
-    贝塞尔通用函数
+    贝塞尔曲线通用函数
     :param bezier_points:
     :return: # TODO 考虑是否将返回值使用Path类
     """
     # P0和Pn是endpoints, P1,P2...Pn-1是control points
     end = 1
-    step_count = int(end / bezier_step)
+    steps = int(end / bezier_step)
     points_no = len(bezier_points) - 1
     curve_points = []
 
     # TODO 此步需要考虑计算性能提升，和精度问题
-    for t in range(step_count + 1):
+    for t in range(steps + 1):
         t *= bezier_step
         x, y = 0, 0
         for index, point in enumerate(bezier_points):

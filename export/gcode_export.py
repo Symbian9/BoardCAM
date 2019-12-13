@@ -78,6 +78,7 @@ class Gcode:
         self._write("(最后修订日期··················· {})".format(datetime.now().strftime("%Y-%m-%d")))
         self._write("(最后修订时间··················· {})".format(datetime.now().strftime("%X")))
         self._write("(软件名称··················· {} v{})".format(__title__, __version__))
+        self._write("(网址·················· https://BoardCAM.org)")
         self._write("(程序员··················· Zheng)")
         self._write("(机床··················· {})".format(self.cnc.name))
         self._write("(控制器··················· {})".format(self.cnc.control))

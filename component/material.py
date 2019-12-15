@@ -39,7 +39,3 @@ class Material:
     def __repr__(self):
         return "Material({}): {}mm x {}mm x {}mm.".format(self.material_type, self.length,
                                                           self.width, self.thickness)
-
-
-if __name__ == '__main__':
-    m = Material()

@@ -92,15 +92,3 @@ def move(points, x, y):
     y_diff = points[0].y - y
 
     return [Point(point.x - x_diff, point.y - y_diff) for point in points]
-
-
-if __name__ == '__main__':
-    a = Path([Point(1, 1), Point(2, 2)])
-    b = Path([Point(4, 4), Point(3, 3)])
-    # print(a)
-    # print(reversed(a))
-    a += b
-    print(a.points)
-    # d = [1, 3, 6, 2]
-    # d.sort()
-    # print(d)

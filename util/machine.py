@@ -65,9 +65,3 @@ class RouterBits:
 
     def __repr__(self):
         return "bit: ⌀{}mm.".format(self.diameter)
-
-
-if __name__ == '__main__':
-    # cnc = CNCRouter("TigerCNC", "metric")
-    bit = RouterBits("1/4inch", "1/4英寸螺旋向上双刃铣刀")
-    print(bit.radius)

@@ -44,13 +44,16 @@ class Path:
             return self.__add__(other[::-1])
 
     # 缩放
-    def scale(self): pass
+    def scale(self):
+        pass
 
     # 平移
-    def translate(self): pass
+    def translate(self):
+        pass
 
     # 翻转
-    def rotate(self): pass
+    def rotate(self):
+        pass
 
     # 排序函数
     # def __

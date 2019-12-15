@@ -6,8 +6,8 @@
 
 from math import cos, sin, pi
 
-from util.math_tools import STRAIGHT_ANGLE, FULL_ANGLE, ZERO_ANGLE
 from geometry.points import Point
+from util.math_tools import STRAIGHT_ANGLE, FULL_ANGLE, ZERO_ANGLE
 
 
 class Circle:

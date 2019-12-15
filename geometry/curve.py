@@ -4,9 +4,9 @@
 # Date: 2019-06-13
 # Desc: 各种曲线模块
 
-from util.config import bezier_step
 from geometry.path import mirror_path, move_path
 from geometry.points import Point
+from util.config import bezier_step
 
 
 def bezier(bezier_points):

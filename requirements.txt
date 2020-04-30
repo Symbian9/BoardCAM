@@ -1,5 +1,1 @@
-# Third-party libraries used by BoardCAM.
-# Thank you so much, your work is so excellent.
-# Please use "pip install -r requirements.txt" to install it.
-
 reportlab==3.5.21

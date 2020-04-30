@@ -28,6 +28,6 @@ jobs:
       run: |
         pip install pytest
         pytest
-    - name: Run demo
+    - name: Run main program
       run: |
-        python boardcam.py
+        python main.py

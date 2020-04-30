@@ -10,7 +10,7 @@ It's designed to provide engineering drawings and gcode support for made snowboa
 generate snowboard manufacturing files for your specified parameters, first edit it. Then run it:
 ``` {.sourceCode .python}
 >>> pip install -r requirements.txt
->>> python boardcam.py
+>>> python main.py
 ```
 Then, see the [output](./output) folder.
 

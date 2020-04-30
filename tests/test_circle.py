@@ -9,7 +9,7 @@ import unittest
 from math import pi
 
 from geometry import circle
-from geometry.points import Point
+from geometry.points import Point3D
 
 
 class TestCircle(unittest.TestCase):
@@ -43,8 +43,8 @@ class TestCircle(unittest.TestCase):
         self.assertEqual(self.c.diameter, self.t_diameter)
 
     def test_belong(self):
-        self.assertTrue(self.c.belong(Point(4, 8)))
-        self.assertFalse(self.c.belong(Point(4, 9)))
+        self.assertTrue(self.c.belong(Point3D(4, 8)))
+        self.assertFalse(self.c.belong(Point3D(4, 9)))
     #
     # def test_negative_radius_change(self):
     #     """Test the setting of a negative radius"""

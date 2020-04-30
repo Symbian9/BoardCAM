@@ -9,7 +9,7 @@ from xml.etree import ElementTree
 
 from geometry.circle import Circle
 from geometry.path import move
-from geometry.points import Point
+from geometry.points import Point3D
 from util.config import COPYRIGHT, SLOGAN, side_step
 from util.math_tools import cal_radius, arc_to_angle, RIGHT_ANGLE
 from util.obj import dict_to_str
@@ -160,9 +160,9 @@ def gen_profile_path(params):
         for x1 in range(nose_length + offset, nose_length + running_length + side_step + offset, side_step):
             y1 = sqrt(pow(camber_radius, 2) - pow(offset + nose_length + running_length / 2 - x1, 2))
             y1 = camber_radius - y1
-            camber_list.append(Point(x1, y1 + 200))
+            camber_list.append(Point3D(x1, y1 + 200))
     elif camber == 0:
-        camber_list = [Point(x, 0) for x in range(0, running_length, side_step)]
+        camber_list = [Point3D(x, 0) for x in range(0, running_length, side_step)]
 
     camber_length = abs(camber_list[0].x - camber_list[-1].x)
 
@@ -173,7 +173,7 @@ def gen_profile_path(params):
     width = abs(points[0].x - points[-1].x)
     height = abs(points[0].y - points[-1].y)
 
-    left_points = [Point(abs(point.x - width), point.y) for point in points]
+    left_points = [Point3D(abs(point.x - width), point.y) for point in points]
     left_points = move(left_points[::-1], camber_list[0].x, camber_list[0].y)
     right_points = move(points[::-1], camber_list[-1].x, camber_list[-1].y)
 

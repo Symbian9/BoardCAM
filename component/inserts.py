@@ -4,7 +4,7 @@
 # Date: 2019-05-07
 # Desc: 嵌件组生成
 
-from geometry.points import Point
+from geometry.points import Point3D
 
 
 class Inserts:
@@ -61,12 +61,12 @@ def gen_inserts(params):
     insert_coordinate_list = []
     for i in range(inserts_number):
         insert_coordinate_list.append(
-            Point(left_start + horizontal_spacing * i + stand_setback, horizontal_mid_line - half_vertical_spacing))
+            Point3D(left_start + horizontal_spacing * i + stand_setback, horizontal_mid_line - half_vertical_spacing))
         insert_coordinate_list.append(
-            Point(left_start + horizontal_spacing * i + stand_setback, horizontal_mid_line + half_vertical_spacing))
+            Point3D(left_start + horizontal_spacing * i + stand_setback, horizontal_mid_line + half_vertical_spacing))
         insert_coordinate_list.append(
-            Point(right_start + horizontal_spacing * i + stand_setback, horizontal_mid_line - half_vertical_spacing))
+            Point3D(right_start + horizontal_spacing * i + stand_setback, horizontal_mid_line - half_vertical_spacing))
         insert_coordinate_list.append(
-            Point(right_start + horizontal_spacing * i + stand_setback, horizontal_mid_line + half_vertical_spacing))
+            Point3D(right_start + horizontal_spacing * i + stand_setback, horizontal_mid_line + half_vertical_spacing))
 
     return insert_coordinate_list

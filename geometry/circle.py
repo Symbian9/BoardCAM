@@ -6,7 +6,7 @@
 
 from math import cos, sin, pi
 
-from geometry.points import Point
+from geometry.points import Point3D
 from util.math_tools import STRAIGHT_ANGLE, FULL_ANGLE, ZERO_ANGLE
 
 
@@ -50,7 +50,7 @@ class Circle:
         for angle in range(start_angle, end_angle + angle_step, angle_step):
             x = self.cx + self.r * cos(angle * pi / STRAIGHT_ANGLE)
             y = self.cy + self.r * sin(angle * pi / STRAIGHT_ANGLE)
-            points.append(Point(x, y))
+            points.append(Point3D(x, y))
             # points_path += "{},{} ".format(x, y)
 
         # print("points_path: {}".format(points_path))

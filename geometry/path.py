@@ -4,7 +4,7 @@
 # Date: 2019-05-07
 # Desc: 路径处理
 
-from geometry.points import Point
+from geometry.points import Point3D
 
 
 class Path:
@@ -69,7 +69,7 @@ def mirror_path(points, width, length):
     """
     width = int(width)
     length = int(length)
-    return [Point(abs(width * 2 - point.x), abs(length * 2 - point.y)) for point in points]
+    return [Point3D(abs(width * 2 - point.x), abs(length * 2 - point.y)) for point in points]
 
 
 def move_path(points, x_offset, y_offset):
@@ -80,7 +80,7 @@ def move_path(points, x_offset, y_offset):
     :param y_offset: Y坐标偏移量
     :return:
     """
-    return [Point(point.x + x_offset, point.y + y_offset) for point in points]
+    return [Point3D(point.x + x_offset, point.y + y_offset) for point in points]
 
 
 def move(points, x, y):
@@ -94,4 +94,4 @@ def move(points, x, y):
     x_diff = points[0].x - x
     y_diff = points[0].y - y
 
-    return [Point(point.x - x_diff, point.y - y_diff) for point in points]
+    return [Point3D(point.x - x_diff, point.y - y_diff) for point in points]

@@ -12,7 +12,7 @@ from export.gcode_export import export_gcode
 from export.pdf_export import export_pdf, draw_profile
 from export.svg_export import export_svg, gen_profile_path
 from geometry.curve import gen_curve
-from geometry.points import Point
+from geometry.points import Point3D
 from util.math_tools import cal_waist_width
 
 
@@ -34,17 +34,17 @@ def frame(params):
     waist_width = nose_width - cal_waist_width(running_length, sidecut_radius) * 2
     max_width = max(nose_width, waist_width, tail_width)
 
-    params["nose_tip"] = Point(0, max_width / 2)
-    params["tail_tip"] = Point(overall_length, max_width / 2)
+    params["nose_tip"] = Point3D(0, max_width / 2)
+    params["tail_tip"] = Point3D(overall_length, max_width / 2)
 
-    params["waist_top"] = Point(running_length / 2 + nose_length, 0)
-    params["waist_below"] = Point(running_length / 2 + nose_length, (max_width - waist_width) / 2 + waist_width)
+    params["waist_top"] = Point3D(running_length / 2 + nose_length, 0)
+    params["waist_below"] = Point3D(running_length / 2 + nose_length, (max_width - waist_width) / 2 + waist_width)
 
-    params["nose_top"] = Point(nose_length, 0)
-    params["nose_below"] = Point(nose_length, (max_width - nose_width) / 2 + nose_width)
+    params["nose_top"] = Point3D(nose_length, 0)
+    params["nose_below"] = Point3D(nose_length, (max_width - nose_width) / 2 + nose_width)
 
-    params["tail_top"] = Point(nose_length + running_length, 0)
-    params["tail_below"] = Point(nose_length + running_length, (max_width - tail_width) / 2 + tail_width)
+    params["tail_top"] = Point3D(nose_length + running_length, 0)
+    params["tail_below"] = Point3D(nose_length + running_length, (max_width - tail_width) / 2 + tail_width)
     return params
 
 

@@ -5,7 +5,7 @@
 # Desc: 各种曲线模块
 
 from geometry.path import mirror_path, move_path
-from geometry.points import Point
+from geometry.points import Point3D
 from util.config import bezier_step
 
 
@@ -29,7 +29,7 @@ def bezier(bezier_points):
             x += point.x * pow(1 - t, points_no - index) * pow(t, index)
             y += point.y * pow(1 - t, points_no - index) * pow(t, index)
 
-        curve_points.append(Point(x, y))
+        curve_points.append(Point3D(x, y))
     return curve_points
 
 
@@ -53,12 +53,12 @@ def gen_curve(params):
     nose_top = params.get("nose_top")
 
     nose_bezier_points = (
-        nose_tip, Point(0, half_nose_width * end_handle), Point(nose_length * transition_handle, 0), nose_top
+        nose_tip, Point3D(0, half_nose_width * end_handle), Point3D(nose_length * transition_handle, 0), nose_top
     )
 
     tail_bezier_points = (
-        Point(0, half_tail_width), Point(0, half_tail_width * end_handle), Point(tail_length * transition_handle, 0),
-        Point(tail_length, 0)
+        Point3D(0, half_tail_width), Point3D(0, half_tail_width * end_handle), Point3D(tail_length * transition_handle, 0),
+        Point3D(tail_length, 0)
     )
 
     upper_left_list = bezier(nose_bezier_points)

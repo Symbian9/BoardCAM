@@ -11,7 +11,7 @@ from reportlab.lib.units import mm
 from reportlab.pdfgen import canvas as c
 
 from geometry.path import move, move_path
-from geometry.points import Point
+from geometry.points import Point3D
 from util.config import border
 from util.math_tools import mm_to_dpi
 from util.obj import list_to_str
@@ -64,7 +64,7 @@ def draw_profile(points, height):
     canvas._filename = "./output/profile.pdf"
 
     # 水平翻转
-    points = [Point(point.x, height * 2 - point.y) for point in points]
+    points = [Point3D(point.x, height * 2 - point.y) for point in points]
     points = move(points, border, height + border)
     path = canvas.beginPath()
     for index, point in enumerate(points, start=1):

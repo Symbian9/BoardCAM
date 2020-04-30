@@ -7,10 +7,15 @@
 from math import sqrt
 
 
-class Point:
-    def __init__(self, x, y, z=0):
+class Point2D:
+    def __init__(self, x, y):
         self.x = x
         self.y = y
+
+
+class Point3D(Point2D):
+    def __init__(self, x, y, z=0):
+        super(Point3D, self).__init__(x, y)
         self.z = z
 
     def offset(self, x=0, y=0, z=0):
@@ -70,7 +75,7 @@ class Point:
 
     @staticmethod
     def _is_point(other):
-        if not isinstance(other, Point):
+        if not isinstance(other, Point3D):
             raise TypeError('Must be Point instance.')
 
     def __repr__(self):

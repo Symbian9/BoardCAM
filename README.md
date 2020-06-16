@@ -2,7 +2,7 @@
 > *design it. build it. enjoy it*
 
 BoardCAM is a [CAD](https://en.wikipedia.org/wiki/Computer-aided_design)/[CAM](https://en.wikipedia.org/wiki/Computer-aided_manufacturing) software.
-It's designed to provide engineering drawings and gcode support for made snowboard. You can customize the running Length, nose width, sidecut radius and other parameters. Happy production!
+It's designed to provide engineering drawings and [gcode](https://en.wikipedia.org/wiki/G-code) support for made snowboard. You can customize the running Length, nose width, sidecut radius and other parameters. Happy production!
 
 ![Head Image](./docs/background.jpg)
 

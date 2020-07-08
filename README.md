@@ -56,4 +56,5 @@ and the process for submitting pull requests to us.
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for more details.
 
 ## Sponsors
-* [JetBrains](https://www.jetbrains.com/) - Offer free Open Source License.
+<a href="https://www.jetbrains.com/?from=BoardCAM" target="_blank"><img src="./docs/jetbrains.png" 
+alt="JetBrains Open Source" width="100" border="10" /></a>

@@ -5,7 +5,7 @@
 # Desc:
 
 
-from util.machine import RouterBits
+from utils.machine import RouterBits
 
 
 def test_eq():

@@ -10,8 +10,8 @@ from datetime import datetime
 from io import StringIO
 
 from geometry.circle import Circle
-from util.config import __title__, __version__
-from util.machine import CNCRouter, RouterBits
+from utils.config import __title__, __version__
+from utils.machine import CNCRouter, RouterBits
 
 
 class Gcode:
@@ -32,21 +32,21 @@ class Gcode:
         self.__buffer.write("{}\n".format(line))
 
     def start_code(self):
-        self._comment()             # 写入程序注释
-        self._write("G40")          # 关闭刀具补偿
-        self._write("G49")          # 禁用刀具长度补偿
-        self._write("G80")          # 取消模态动作
-        self._write("G54")          # 选择坐标系1
-        self._write("G90")          # 禁用增量移动
-        self._write("G21")          # 使用公制长度单位
-        self._write("G61")          # 确切的路径模式
+        self._comment()  # 写入程序注释
+        self._write("G40")  # 关闭刀具补偿
+        self._write("G49")  # 禁用刀具长度补偿
+        self._write("G80")  # 取消模态动作
+        self._write("G54")  # 选择坐标系1
+        self._write("G90")  # 禁用增量移动
+        self._write("G21")  # 使用公制长度单位
+        self._write("G61")  # 确切的路径模式
         self._write("F1000.00000")  # 设定进给率
         self._write("S1000.00000")  # 设置主轴转速
 
     def _finish_code(self):
-        self._write("M05 M09")      # 主轴停,冷却液泵马达停
+        self._write("M05 M09")  # 主轴停,冷却液泵马达停
         self._write("G0 X0 Y0 Z5")  # 快速回到坐标原点
-        self._write("M2")           # 结束程序  # TODO 比较M2和M30区别
+        self._write("M2")  # 结束程序  # TODO 比较M2和M30区别
 
     def lift_bit(self):
         """
@@ -54,7 +54,7 @@ class Gcode:
         :return:
         """
         # TODO 需要获取buffer(self.__last_line)里最后g代码
-        self._write("G0 Z5")        # Z轴抬升至安全加工距离
+        self._write("G0 Z5")  # Z轴抬升至安全加工距离
 
     def down_bit(self):
         """

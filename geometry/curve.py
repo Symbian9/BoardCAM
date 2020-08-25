@@ -6,7 +6,7 @@
 
 from geometry.path import mirror_path, move_path
 from geometry.points import Point3D
-from util.config import bezier_step
+from utils.config import bezier_step
 
 
 def bezier(bezier_points):

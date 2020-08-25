@@ -7,7 +7,7 @@
 from math import sqrt
 
 from geometry.points import Point3D
-from util.config import side_step
+from utils.config import side_step
 
 
 class Edge:

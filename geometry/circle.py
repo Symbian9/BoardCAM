@@ -7,7 +7,7 @@
 from math import cos, sin, pi
 
 from geometry.points import Point3D
-from util.math_tools import STRAIGHT_ANGLE, FULL_ANGLE, ZERO_ANGLE
+from utils.math_tools import STRAIGHT_ANGLE, FULL_ANGLE, ZERO_ANGLE
 
 
 class Circle:

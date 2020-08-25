@@ -13,7 +13,7 @@ from export.pdf_export import export_pdf, draw_profile
 from export.svg_export import export_svg, gen_profile_path
 from geometry.curve import gen_curve
 from geometry.points import Point3D
-from util.math_tools import cal_waist_width
+from utils.math_tools import cal_waist_width
 
 
 def frame(params):

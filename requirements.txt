@@ -1,1 +1,1 @@
-reportlab==3.5.21
+reportlab==3.5.48
